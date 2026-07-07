@@ -49,41 +49,117 @@
 
 ---
 
-## 21 天总进度
+## 60 天总进度
+
+> v2.0.0 重构: 从"Python 零基→OOP"重构为"Python 零基→AI 就绪工程师"。
+> 课时分配按优先级: AI 应用(10d) > 爬虫(7d) > LLM(7d) > ML(8d) > DL(6d)。
+
+### Module 0: Python 核心 + 数据处理(Day 1-17)
 
 | Day | 主题 | 关键新增 | 当堂 / 课后 / 小项目 |
 |---|---|---|---|
-| 01 | Python 与开发环境 | `print` `input` `type` `id` 变量 | 4 / 2 / 🎯 自我介绍 |
-| 02 | 数据类型与运算 | `int/float/str/bool` 算术/比较/逻辑 | 5 / 2 / 🎯 简易收银台 |
-| 03 | 字符串(基础) | 切片 `format` f-string `isdigit/isalpha/isalnum` | 5 / 2 / 🎯 手机号脱敏 |
-| 04 | 列表(基础) | CRUD:S/app/ins/ext/pop/rem/del/sort/rev | 6 / 2 / 🎯 购物清单 |
-| 05 | 循环入门 | `while` `for` `range` 转义 `\t` `end=` | 6 / 3 / 🌟 每日记账本 |
-| 06 | 分支与嵌套 | `if/elif/else` 嵌套 | 6 / 3 /  |
-| 07 | **阶段复习①** | Day01-06 综合 | 6 / 3 / 🌟 阶段中型项目:购物车 |
-| 08 | 字符串(提升) | `find/index/rfind/endswith/starts/replace/split/join/title/strip` | 6 / 2 / 🎯 敏感词过滤器 |
-| 09 | 列表(进阶) | 切片进阶/列表生成式/二维/深浅拷贝 `*args` 引入 | 6 / 3 / 🌟 成绩统计表 |
-| 10 | 函数入门 | `def` 四种形式 `return` | 6 / 2 / 🎯 BMI 仪 |
-| 11 | 函数进阶 | 默认参数 `*args` `**kwargs` 混合顺序 组包/解包 `lambda` 入门 | 6 / 3 / 🌟 成语词典(函数版) |
-| 12 | 迭代 / 内置 / 递归 | `lambda` 进阶 `filter/map/sorted/max/min/sum/any/all` `global` `globals()` 递归 | 6 / 3 /  |
-| 13 | **阶段复习②** | Day08-12 综合 | 6 / 3 / 🌟 中型项目:控制台计算器(函数+异常) |
-| 14 | 文件操作(基础) | `open/read/readline/readlines` `with`  `'w/a/r/rb'` `print('…',!le=)` encoding | 5 / 2 / 🎯 日志写入器 |
-| 15 | 文件操作(进阶) + `os` | `os.getcwd/listdir/remove/makedirs/rename/path.exists` | 6 / 2 / 🌟 批量重命名工具 |
-| 16 | 异常处理 | `try/except/else/!nally` 常见异常类 `raise` 自定义异常 | 6 / 2 / 🎯 弹性输入助手 |
-| 17 | JSON 与 CSV | `json.load/loads/dump/dumps` `csv.reader/writer` + `with` | 5 / 2 / 🌟 个人账本(JSON 持久化) |
-| 18 | **阶段复习③** | Day14-17 综合 | 6 / 3 /  |
-| 19 | OOP(封装) | `class` `__init__(self,…)` 实例属性/方法 `_/__name` `@property` `__str__/__repr__` | 6 / 2 / 🎯 Student 类建模 |
-| 20 | OOP(继承 + 多态) | 单继承 `super().__init__()` 重写 多态 vs 实例属性 | 6 / 3 / 🎯 动物叫声 |
-| 21 | 期末总复习 + 作品展示 | Day01-20 错题串讲 + 学员秀 3 作品 + 查缺 | - / - / 🌟 图书管理系统 v2(中型项目答辩) |
+| 01 | Python 与开发环境 | `print` `input` `type` 变量 | 4 / 2 / 🎯 自我介绍 |
+| 02 | 字符串与格式化 | f-string/切片/`isdigit` | 5 / 2 / 🎯 手机号脱敏 |
+| 03 | 条件分支 | `if/elif/else` 嵌套、逻辑组合 | 6 / 3 / 🎯 BMI 计算器 |
+| 04 | 循环入门 | `while` `for` `range` 累加/累乘 | 6 / 3 / 🌟 每日记账本 |
+| 05 | 函数入门 | `def` 四种形式 `return` | 6 / 2 / 🎯 工具函数库 |
+| 06 | 列表与字典 | CRUD:`append`/`pop`/`items()` | 6 / 2 / 🎯 通讯录 v1 |
+| 07 | 文件 I/O + 异常 | `with`/`JSON`/`try`-`except` | 5 / 2 / 🎯 日记本持久化 |
+| 08 | OOP 基础 | `class`/`__init__`/`@property` | 6 / 2 / 🎯 Student 类 |
+| 09 | 模块与高级特性 | 包/生成器/装饰器/`import` | 6 / 3 /  |
+| 10 | **阶段复习①** | Day01-09 综合 | 综合 / 综合 / 🌟 购物车(函数+OOP 版) |
+| 11 | NumPy 基础 | 数组/广播/向量化 | 6 / 3 / 🎯 矩阵运算 |
+| 12 | NumPy 进阶 | 线性代数/随机数/统计 | 6 / 3 /  |
+| 13 | Pandas 基础 | Series/DataFrame/索引/过滤 | 6 / 3 / 🎯 数据探索 |
+| 14 | Pandas 进阶 | 分组/合并/透视/清洗 | 6 / 3 /  |
+| 15 | 数据可视化 | 折线/柱状/散点/热力图 | 6 / 2 / 🎯 数据报告配图 |
+| 16 | 数据摄取 | CSV/JSON/Excel/SQL/API | 5 / 2 / 🎯 多源数据整合 |
+| 17 | **阶段复习②(EDA 项目)** | Module 0 综合 | 综合 / 综合 / 🌟 EDA 分析报告 |
+
+### Module 1: 机器学习(Day 18-25)
+
+| Day | 主题 | 关键新增 | 项目 |
+|---|---|---|---|
+| 18 | ML 概念与工作流 | 监督/无监督/过拟合/`train_test_split` | 手写数字探索 |
+| 19 | 数据预处理 | 缩放/编码/缺失值/`ColumnTransformer` | 数据集清洗 |
+| 20 | 线性回归+梯度下降 | MSE/SGD 直觉 | 房价预测 |
+| 21 | 逻辑回归+树模型 | Sigmoid/决策树/随机森林 | 泰坦尼克预测 |
+| 22 | 梯度提升+SVM | XGBoost 残差拟合/核技巧直觉 | Kaggle 入门赛 |
+| 23 | 聚类+降维 | K-Means/PCA/t-SNE | 客户分群 |
+| 24 | 模型评估+流水线 | ROC-AUC/交叉验证/`Pipeline`/`GridSearchCV` | 多模型对比 |
+| 25 | **ML 项目日** | 模型持久化+端到端项目 | Kaggle 竞赛 |
+
+### Module 2: 深度学习(Day 26-31)
+
+| Day | 主题 | 关键新增 | 项目 |
+|---|---|---|---|
+| 26 | 神经网络基础 | 感知机/激活函数/前向传播 | 手写感知机 |
+| 27 | **反向传播⚡深入** | 链式法则/SGD/Adam | 手动 BP 实现 |
+| 28 | PyTorch 基础 | tensor/autograd/`nn.Module`/`DataLoader` | NumPy→PyTorch |
+| 29 | 训练循环 | optimizer/loss/epoch/验证 | MNIST 训练 |
+| 30 | CNN+RNN+正则化 | 卷积/池化/LSTM/Dropout | 图像分类器 |
+| 31 | 迁移学习+DL 项目 | 预训练/冻结/微调 | CIFAR-10 |
+
+### Module 3: NLP 与 Transformer(Day 32-36)
+
+| Day | 主题 | 关键新增 | 项目 |
+|---|---|---|---|
+| 32 | 文本预处理+表示 | 分词/BoW/TF-IDF/词嵌入 | 文档相似度 |
+| 33 | 序列模型 for text | RNN/LSTM | 字符级文本生成 |
+| 34 | **注意力机制⚡深入** | Q/K/V/缩放点积/多头注意力 | 手动 attention |
+| 35 | Transformer+预训练模型 | BERT/GPT/T5 架构选型 | Transformer 解剖 |
+| 36 | Hugging Face 实战 | `pipeline`/`AutoModel`/`Tokenizer` | 情感分析 |
+
+### Module 4: LLM 微调(Day 37-43)
+
+| Day | 主题 | 关键新增 | 项目 |
+|---|---|---|---|
+| 37 | LLM 生态+HF 工具链 | 模型谱系/transformers/peft | 模型选型 |
+| 38 | 分词与数据准备 | chat template/指令格式 | 构建微调数据集 |
+| 39 | LoRA/QLoRA | 低秩分解/`LoraConfig` | LoRA 入门 |
+| 40 | 训练实操 | `Trainer`/`TrainingArguments` | 微调对话模型 |
+| 41 | RLHF/DPO 基础 | 奖励模型/PPO/DPO 概念 | 对齐论文精读 |
+| 42 | 评测 | 困惑度/人工评测/`evaluate` | 模型评测 |
+| 43 | 部署 | 量化/GGUF/Ollama 推理 | Ollama 部署 |
+
+### Module 5: Web 爬虫(Day 44-50)
+
+| Day | 主题 | 关键新增 | 项目 |
+|---|---|---|---|
+| 44 | HTTP+requests | 方法/头/状态码/`Session` | 基础爬虫 |
+| 45 | HTML 解析+正则 | BeautifulSoup/CSS 选择器/`re` | 结构化数据提取 |
+| 46 | 动态页面 | Playwright 无头浏览器 | 动态网站爬取 |
+| 47 | Scrapy | spider/item/pipeline | 全站爬取 |
+| 48 | API+反爬 | REST API/认证/限速/代理 | 大规模数据采集 |
+| 49 | 数据存储+并发 | SQLite/`asyncio`/`aiohttp` | 万级数据采集 |
+| 50 | **爬虫项目日** | 综合 | 为 AI 应用构建数据集 |
+
+### Module 6: AI 应用开发(Day 51-60)
+
+| Day | 主题 | 关键新增 | 项目 |
+|---|---|---|---|
+| 51 | 环境管理+FastAPI | venv/`requirements`/`FastAPI` 路由 | API 服务骨架 |
+| 52 | LLM API+Prompt 工程 | OpenAI SDK/流式调用/CoT | AI 对话 API |
+| 53 | Embedding+向量检索 | 嵌入模型/FAISS/Chroma | 向量知识库 |
+| 54 | RAG 全流程 | 分块/检索/重排序/生成 | 文档问答系统 |
+| 55 | Agent 框架 | LangChain/LlamaIndex 工具调用 | Agent 实战 |
+| 56 | UI+Docker | Streamlit/`Dockerfile` | 应用容器化 |
+| 57 | 部署+监控 | 云平台/健康检查 | 上线部署 |
+| 58 | **选题+开发启动** | 4 方向选 1 | 作品开发 |
+| 59 | **作品冲刺** | 开发+文档 | 作品开发 |
+| 60 | **期末答辩** | Demo+问答+互评 | 答辩评审 |
 
 ---
 
-## 三年段"知识闭环图" (需要逐 Day 形成笔记)
+## 六年段"知识闭环图"(需要逐 Day 形成笔记)
 
 ```
-Day01-07       原子层:量数串列循分       ← 重点:每种结构 CRUD 必须会写
-Day08-13       函数层:封装/作用域/内置工具  ← 重点:函数签名设计
-Day14-17       持久层:文件/异常/JSON/CSV   ← 重点:容错 + 实际场景
-Day18-21       抽象层:OOP/多态/项目       ← 重点:类拆分
+Module 0 (Day 1-17)    Python 核心 + 数据基础: 变量/函数/OOP/NumPy/Pandas
+Module 1 (Day 18-25)   机器学习: 监督/无监督/评估/流水线
+Module 2 (Day 26-31)   深度学习: NN/BP⚡/PyTorch/CNN/RNN
+Module 3 (Day 32-43)   NLP+LLM: Attention⚡/Transformer/LoRA 微调
+Module 4 (Day 44-50)   爬虫: HTTP/解析/Scrapy/反爬/并发
+Module 5 (Day 51-60)   AI 应用: FastAPI/RAG/Agent/部署 ★重点
 ```
 
 ---
