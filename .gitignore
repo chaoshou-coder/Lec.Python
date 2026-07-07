@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+
+# 开发备份(可在本地保留,但不用推 GitHub)
+.versions/
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
