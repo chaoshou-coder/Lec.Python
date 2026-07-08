@@ -168,6 +168,28 @@ M = Mini Project(单点综合)  W = Weekly Project(模块综合)  ┌─ = Capst
 
 ## 快速启动清单
 
+### 学生自学路径(Student Notebooks)
+
+**完全零基础?** `student-notebooks/` 文件夹提供了 Day 1-17 的交互式学习笔记:
+
+| 项 | 说明 |
+|---|---|
+| **内容** | 17 个 Jupyter Notebook(Day 01-17,Python 核心 + 数据处理) |
+| **格式** | 每个知识点后紧跟练习,章节末尾附试题集链接 |
+| **练习** | 83 个交互式练习(学员代码区 + 参考答案) |
+| **链接** | 每章末尾指向 `course/lessonXX/in_class/` + `homework/` 的完整习题 |
+
+**使用方式**:
+1. 安装 Jupyter:`pip install jupyter numpy pandas matplotlib seaborn`
+2. 启动:`cd student-notebooks && jupyter notebook`
+3. 先打开 `00_JupyterNotebook使用教程.ipynb`(30 分钟上手)
+4. 按 Day 01 → Day 17 顺序学习,每天约 6 小时
+5. 每个 notebook 内:阅读 → 看示例 → 做练习 → 对答案
+
+> 📖 Day 18-60(ML/DL/NLP/LLM/爬虫/AI 应用)暂未制作 Jupyter 版,使用 `course/lessonXX/` 的 slides + 习题自学。
+
+---
+
 - [ ] 阅读 `PREREQUISITES.md` → 确认前置数学/网络知识已具备
 - [ ] 逐课看 `slides.md` + `lessonXX/README.md` → 确认当堂练选题
 - [ ] 为每个 weekly_project 准备验收脚本(`test_week_N.py`)
