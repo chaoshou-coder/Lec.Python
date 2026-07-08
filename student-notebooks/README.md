@@ -1,7 +1,7 @@
 # 学生版 Jupyter Notebook
 
 > 为零基础成年学员编写的交互式学习笔记
-> 内容基于 `lesson01/` ~ `lesson21/` 的 slides.md
+> 内容基于 `course/lesson01/` ~ `course/lesson21/` 的 slides.md
 
 ---
 
@@ -109,7 +109,7 @@
 
 ## 配套资源
 
-- 课程 slides: `lesson01/slides.md` ~ `lesson05/slides.md`
+- 课程 slides: `course/lesson01/slides.md` ~ `course/lesson05/slides.md`
 - 练习文件: `lessonXX/in_class/practiceNN.py`
 - 作业文件: `lessonXX/homework/taskNN.py`
 - 教师笔记: `lessonXX/teacher_notes.md`
