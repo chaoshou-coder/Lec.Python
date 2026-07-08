@@ -1,34 +1,40 @@
-# Day04 · 列表基础
+# Day04 · 循环入门
 
 ## 关键知识点
-- 列表创建与索引（正索引、负索引）
-- 列表 CRUD：`append()`、`insert()`、`extend()`
-- 删除元素：`pop()`、`remove()`、`del`
-- 列表排序：`sort()`、`reverse()`
-- 成员判断：`in` 运算符
-- 嵌套列表与 f-string 格式化输出
+- `while` 循环：起始值、终止条件、递增步进（死循环风险）
+- `break` 与 `continue`：彻底跳出 vs 跳过本次
+- `for item in 序列`：遍历字符串、列表
+- `range(start, stop, step)`：生成整数数列（左闭右开）
+- 累加器与累乘器：初始值（加 0 乘 1）
+- `end=''` 参数控制输出不换行
+- 嵌套循环：九九乘法表、图形打印
+- 鸡兔同笼：循环 + 条件合作
+- 菜单循环：`while True + break` 骨架
+- 字符串重复：`*` 运算符
 
 ## 当堂练习
 
 | # | 文件 | 难度 | 预计时间 | 验收 |
 |---|---|---|---|---|
-| 1 | `in_class/practice01.py` | ⭐ | 10 分钟 | 列表创建与索引访问 |
-| 2 | `in_class/practice02.py` | ⭐⭐ | 15 分钟 | `append()` 与 `while` 循环 |
-| 3 | `in_class/practice03.py` | ⭐⭐⭐ | 15 分钟 | 循环累加、求最高/最低分 |
-| 4 | `in_class/practice04.py` | ⭐⭐⭐ | 15 分钟 | `in` 运算符判断用户名存在 |
-| 5 | `in_class/practice05.py` | ⭐⭐⭐⭐ | 20 分钟 | 简易购物车（`append`/`remove`） |
-| 6 | `in_class/practice06.py` | ⭐⭐⭐⭐ | 20 分钟 | 嵌套列表 + f-string 格式化 |
+| 1 | `in_class/practice01.py` | ⭐ | 10 分钟 | `while` 循环打印 1~10 |
+| 2 | `in_class/practice02.py` | ⭐ | 10 分钟 | `range` 步长：从 100 到 1 打印偶数 |
+| 3 | `in_class/practice03.py` | ⭐⭐⭐ | 20 分钟 | 嵌套 for 打印九九乘法表 |
+| 4 | `in_class/practice04.py` | ⭐⭐⭐ | 15 分钟 | `while + //` 计算整数位数 |
+| 5 | `in_class/practice05.py` | ⭐⭐⭐⭐ | 20 分钟 | 循环输入直到 0，统计奇数均值与偶积 |
+| 6 | `in_class/practice06.py` | ⭐⭐⭐⭐ | 20 分钟 | 打印星号三角形和 20 个星号 |
 
 ## 课后作业
 
 | # | 文件 | 难度 | 预计时间 | 验收 |
 |---|---|---|---|---|
-| 1 | `homework/task01.py` | ⭐⭐⭐⭐ | 20 分钟 | 切片 + 循环转二维列表 |
-| 2 | `homework/task02.py` | ⭐⭐⭐⭐ | 20 分钟 | 循环 + `in` 去重 |
+| 1 | `homework/task01.py` | ⭐⭐⭐⭐ | 20 分钟 | 火箭发射倒计时 `time.sleep` |
+| 2 | `homework/task02.py` | ⭐⭐⭐⭐ | 20 分钟 | 猴子吃桃逆推问题 |
 
 ## 小 / 中型项目
 
-本节无小项目
+| # | 文件 | 难度 | 预计时间 | 验收 |
+|---|---|---|---|---|
+| 1 | `mini_project/triangle_draw.py` | ⭐⭐⭐⭐ | 45 分钟 | 绘制等腰三角形 |
 
 ## 阶段复习要点
 

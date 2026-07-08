@@ -1,34 +1,40 @@
-# Day08 · 字符串提升
+# Day08 · OOP 基础
 
 ## 关键知识点
-- 字符串查找：`find()`、`index()`、`rfind()`
-- 字符串判断：`endswith()`、`startswith()`
-- 字符串替换：`replace()`
-- 字符串拆分与拼接：`split()`、`join()`
-- 字符串格式化：`title()`、`strip()`、`lstrip()`、`rstrip()`
-- 循环 + 字符串综合处理
+- `class` 定义类（大驼峰命名）
+- `__init__` 构造函数：`self` 代表当前对象，实例化时自动调用
+- 实例方法：第一个参数写 `self`
+- 实例属性 vs 类属性（`self.name` vs `类名.school`）
+- `@property`：把方法变成"属性"（getter / setter 校验）
+- `__str__` 与 `__repr__` 魔术方法
+- 继承：`class 子类(父类)`，复用 + 扩展 + 覆盖
+- `super()` 调用父类方法
+- 类属性统计实例数
 
 ## 当堂练习
 
 | # | 文件 | 难度 | 预计时间 | 验收 |
 |---|---|---|---|---|
-| 1 | `in_class/practice01.py` | ⭐⭐ | 10 分钟 | `find()` 查找关键词位置 |
-| 2 | `in_class/practice02.py` | ⭐⭐ | 10 分钟 | `replace()` 替换敏感词 |
-| 3 | `in_class/practice03.py` | ⭐⭐⭐ | 15 分钟 | `split()` 拆分 CSV 数据 |
-| 4 | `in_class/practice04.py` | ⭐⭐⭐ | 15 分钟 | `join()` 拼接字符串 |
-| 5 | `in_class/practice05.py` | ⭐⭐⭐⭐ | 20 分钟 | `title()` 格式化英文名字 |
-| 6 | `in_class/practice06.py` | ⭐⭐⭐⭐ | 20 分钟 | `strip()`/`lstrip()`/`rstrip()` |
+| 1 | `in_class/practice01.py` | ⭐⭐ | 8 分钟 | 定义 `Book` 类，实例化并打印属性 |
+| 2 | `in_class/practice02.py` | ⭐⭐⭐ | 12 分钟 | 给 `Book` 加 `info()` 方法，返回格式化字符串 |
+| 3 | `in_class/practice03.py` | ⭐⭐⭐ | 12 分钟 | `Student` 类 `@property` 校验成绩 0-100 |
+| 4 | `in_class/practice04.py` | ⭐⭐⭐ | 13 分钟 | `Book` 类加 `__str__`，`print(book)` 输出格式化 |
+| 5 | `in_class/practice05.py` | ⭐⭐⭐ | 12 分钟 | `Vehicle` 父类 + `Car`/`Bike` 子类，覆盖 `move()` |
+| 6 | `in_class/practice06.py` | ⭐⭐⭐⭐ | 13 分钟 | 类属性实现"统计共创建了多少个实例" |
 
 ## 课后作业
 
 | # | 文件 | 难度 | 预计时间 | 验收 |
 |---|---|---|---|---|
-| 1 | `homework/task01.py` | ⭐⭐⭐ | 15 分钟 | `find()` + 切片解析 URL |
-| 2 | `homework/task02.py` | ⭐⭐⭐⭐ | 20 分钟 | 循环 + `replace()` 过滤敏感词 |
+| 1 | `homework/task01.py` | ⭐⭐⭐⭐ | 20 分钟 | BankAccount 类 + 余额校验 |
+| 2 | `homework/task02.py` | ⭐⭐⭐⭐ | 20 分钟 | Animal 继承体系 |
+| 3 | `homework/task03.py` | ⭐⭐⭐⭐ | 25 分钟 | 类属性统计实例数 + 文件持久化 |
 
 ## 小 / 中型项目
 
-本节无小项目
+| # | 文件 | 难度 | 预计时间 | 验收 |
+|---|---|---|---|---|
+| 1 | `mini_project/student.py` | ⭐⭐⭐⭐ | 45 分钟 | `Student` 类综合（`@property average` + `__str__` + 成绩校验 + 异常处理） |
 
 ## 阶段复习要点
 

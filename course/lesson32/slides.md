@@ -283,7 +283,7 @@ def cosine_sim(a, b):
 
 ## 延伸题
 
-> 以下素材来自外部课程(references.md §3.2),教师可按需选用或替换当堂练。
+> 以下素材来自外部课程(references.md),教师可按需选用或替换当堂练。
 
 - **(Bag of Words Lab, 斯坦福 CS224N 简化版, ⭐⭐)**: 给 20 条影评人工统计 TF-IDF,输出"最能区分正负面的 5 个词" —— 巩固 TF-IDF 意义。
 - **(Word2Vec Visualization, Stanford CS224N, ⭐⭐⭐)**: 用 t-SNE 把 1000 个词的 300 维向量降到 2 维画图,直观看到"动物聚一堆、国家聚一堆" —— 感受词嵌入的空间结构。

@@ -1,40 +1,41 @@
-# Day07 · 阶段复习①（Day01–Day06 综合）
+# Day07 · 文件 I/O + 异常
 
 ## 关键知识点
-- Day01–Day06 全部知识点综合应用
-- f-string 对齐与格式化输出
-- 字符串 `split()` 与字典推导
-- 嵌套列表操作（购物车）
-- 循环 + 分支 + 列表 + 字符串大综合
-- 函数封装与模块化设计
-- 文件写入（`with open`）
+- `open()` 与文件模式：`'r'` 读、`'w'` 写（覆盖）、`'a'` 追加
+- `read()` / `readline()` / `readlines()` 三种读取方式
+- `with` 上下文管理：自动 `close()`，永不漏写
+- `encoding="utf-8"` 显式指定（跨平台中文乱码问题）
+- JSON 读写：`json.dump` / `json.load`（文件）、`json.dumps` / `json.loads`（字符串）
+- `ensure_ascii=False` 与 `indent=2`
+- 异常处理：`try` / `except` / `else` / `finally`
+- 常见异常速查：`FileNotFoundError`、`ValueError`、`TypeError`、`KeyError`、`IndexError`、`json.JSONDecodeError`
+- 异常类型分流 vs 裸 `except:`
 
 ## 当堂练习
 
 | # | 文件 | 难度 | 预计时间 | 验收 |
 |---|---|---|---|---|
-| 1 | `in_class/practice01.py` | ⭐⭐ | 15 分钟 | f-string 对齐打印购物明细表 |
-| 2 | `in_class/practice02.py` | ⭐⭐⭐ | 15 分钟 | CSV 字符串解析为字典 |
-| 3 | `in_class/practice03.py` | ⭐⭐⭐ | 20 分钟 | 列表版购物车（增删查） |
-| 4 | `in_class/practice04.py` | ⭐⭐⭐⭐ | 20 分钟 | 嵌套列表购物车（数量累加） |
-| 5 | `in_class/practice05.py` | ⭐⭐⭐⭐ | 20 分钟 | 购物车结算 + 会员折扣 |
-| 6 | `in_class/practice06.py` | ⭐⭐⭐⭐⭐ | 30 分钟 | 完整购物系统（含历史记录） |
+| 1 | `in_class/practice01.py` | ⭐⭐ | 8 分钟 | 写 3 行日记再读出来 |
+| 2 | `in_class/practice02.py` | ⭐⭐⭐ | 12 分钟 | `readlines()` 逐行打印课表 |
+| 3 | `in_class/practice03.py` | ⭐⭐⭐ | 12 分钟 | 通讯录字典写 JSON 再读回 |
+| 4 | `in_class/practice04.py` | ⭐⭐⭐ | 13 分钟 | `json.loads()` 解析 API 返回的 JSON 字符串 |
+| 5 | `in_class/practice05.py` | ⭐⭐⭐ | 12 分钟 | 除法器加异常防护，输错 3 次退出 |
+| 6 | `in_class/practice06.py` | ⭐⭐⭐⭐ | 13 分钟 | 读 JSON 文件，处理 `FileNotFoundError` + `JSONDecodeError` |
 
 ## 课后作业
 
 | # | 文件 | 难度 | 预计时间 | 验收 |
 |---|---|---|---|---|
-| 1 | `homework/task01.py` | ⭐⭐⭐⭐ | 20 分钟 | 猜数字升级版（连胜统计） |
-| 2 | `homework/task02.py` | ⭐⭐⭐⭐⭐ | 30 分钟 | 购物系统函数封装 |
-| 3 | `homework/task03.py` | ⭐⭐⭐⭐ | 25 分钟 | 购物车数据导出文件 |
+| 1 | `homework/task01.py` | ⭐⭐⭐⭐ | 20 分钟 | 文件复制器 |
+| 2 | `homework/task02.py` | ⭐⭐⭐⭐ | 20 分钟 | JSON 通讯录升级版 |
+| 3 | `homework/task03.py` | ⭐⭐⭐⭐ | 25 分钟 | 异常防护的除法器 |
 
 ## 小 / 中型项目
 
-**完整购物系统**（`practice06` + `task02`）
-- 目标：实现带商品库、购物车、结算、会员折扣、历史记录的完整系统
-- 验收点：浏览商品、添加/删除、数量累加、会员 95 折、历史记录
-- 建议时长：30–40 分钟
+| # | 文件 | 难度 | 预计时间 | 验收 |
+|---|---|---|---|---|
+| 1 | `mini_project/diary.py` | ⭐⭐⭐⭐ | 45 分钟 | 日记本持久化（JSON + `try-except` + 菜单循环） |
 
 ## 阶段复习要点
 
-综合题覆盖：数据类型、算术运算、字符串处理、列表操作、循环、分支、嵌套、`f-string`、`random`、文件 I/O、函数封装。
+综合题覆盖：数据类型、算术运算、字符串处理、列表操作、循环、分支、嵌套、`f-string`、`random`、文件 I/O、异常处理。

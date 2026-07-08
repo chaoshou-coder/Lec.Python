@@ -187,7 +187,7 @@ model.save_pretrained("./qwen2-alpaca-final")
 
 ```python
 # 方式 1: 看 Trainer 自带日志(简单)
-# 方式 2: W&B / MLflow(生产级,Day 7 不展开)
+# 方式 2: W&B / MLflow(生产级,后续展开)
 # 方式 3: 训练后画曲线
 import json, matplotlib.pyplot as plt
 logs = []

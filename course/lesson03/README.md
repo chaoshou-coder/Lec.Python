@@ -1,35 +1,39 @@
-# Day03 · 字符串基础
+# Day03 · 条件分支
 
 ## 关键知识点
-- 字符串索引与切片：`s[i]`、`s[start:end]`
-- `len()` 获取字符串长度
-- 字符串查找：`find()`、`rfind()`
-- 字符串判断：`isdigit()`、`isalpha()`、`isalnum()`
-- 字符串替换：`replace()`
-- 格式化输出：`%`、`format`、`f-string`
+- 比较运算符：`>`、`<`、`==`、`!=`、`>=`、`<=`（`=` 赋值 vs `==` 比较）
+- `if` 语句：冒号 + 缩进（4 格）
+- `if-else`：二选一
+- `if-elif-else`：多选一，从上到下第一个满足即跳出
+- 逻辑运算：`and`、`or`、`not`
+- 嵌套条件：条件里再挖条件（建议不超过两层）
+- 三元表达式：`值1 if 条件 else 值2`
+- `in` 运算符：判断字符串包含 / 成员判断
+- 综合实战：BMI 计算器、闰年判断
 
 ## 当堂练习
 
 | # | 文件 | 难度 | 预计时间 | 验收 |
 |---|---|---|---|---|
-| 1 | `in_class/practice01.py` | ⭐⭐ | 10 分钟 | 用 `find()` 提取邮箱域名 |
-| 2 | `in_class/practice02.py` | ⭐⭐ | 10 分钟 | `len()` + `isdigit()` 校验手机号 |
-| 3 | `in_class/practice03.py` | ⭐⭐⭐ | 15 分钟 | `find()` 与 `rfind()` 正反查找 |
-| 4 | `in_class/practice04.py` | ⭐⭐⭐ | 15 分钟 | `rfind()` 提取文件名与后缀 |
-| 5 | `in_class/practice05.py` | ⭐⭐⭐⭐ | 20 分钟 | 身份证号提取出生日期 |
+| 1 | `in_class/practice01.py` | ⭐⭐ | 10 分钟 | 成绩等级 A/B/C/D/F |
+| 2 | `in_class/practice02.py` | ⭐⭐⭐⭐ | 20 分钟 | 输入年份 + 月份，输出天数（含闰年） |
+| 3 | `in_class/practice03.py` | ⭐⭐⭐ | 15 分钟 | `if` 嵌套找三个整数最大值 |
+| 4 | `in_class/practice04.py` | ⭐⭐⭐ | 15 分钟 | 简易计算器（+ - * /） |
+| 5 | `in_class/practice05.py` | ⭐⭐⭐ | 15 分钟 | 满减打折（满 500 九折、满 300 九五折） |
 
 ## 课后作业
 
 | # | 文件 | 难度 | 预计时间 | 验收 |
 |---|---|---|---|---|
-| 1 | `homework/task01.py` | ⭐⭐⭐ | 15 分钟 | `replace()` 替换敏感词 |
-| 2 | `homework/task02.py` | ⭐⭐⭐⭐ | 20 分钟 | 解析 URL 协议与域名 |
+| 1 | `homework/task01.py` | ⭐⭐⭐⭐ | 20 分钟 | BMI 评级 |
+| 2 | `homework/task02.py` | ⭐⭐⭐⭐ | 20 分钟 | 水仙花数判断 |
+| 3 | `homework/task03.py` | ⭐⭐⭐⭐ | 25 分钟 | 猜数字游戏（7 次上限） |
 
 ## 小 / 中型项目
 
 | # | 文件 | 难度 | 预计时间 | 验收 |
 |---|---|---|---|---|
-| 1 | `mini_project/phone_masking.py` | ⭐⭐⭐ | 25 分钟 | `len()` + `isdigit()` 校验 11 位手机号,切片脱敏为 `138****8000` |
+| 1 | `mini_project/bmi_report.py` | ⭐⭐⭐⭐ | 45 分钟 | BMI 计算器 + 健康建议报告 |
 
 ## 阶段复习要点
 

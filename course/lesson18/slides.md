@@ -214,7 +214,7 @@ print(classification_report(
     target_names=data.target_names))
 
 # 7. 调参(下节讲 GridSearch)
-#    + 部署(第 20 天讲 ONNX/Flask)
+#    + 部署(后续专题讲 ONNX/Flask)
 ```
 
 ### 知识点 5.2 常见分类器快速一览
