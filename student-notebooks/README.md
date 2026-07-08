@@ -32,6 +32,18 @@
 - Day 3-4: ⭐⭐~⭐⭐⭐⭐ (逻辑与循环)
 - Day 5+: ⭐⭐⭐~⭐⭐⭐⭐⭐ (函数与抽象)
 
+### 零基础?先学 Jupyter!
+
+**从未用过 Jupyter Notebook?** → 先打开 [`00_JupyterNotebook使用教程.ipynb`](00_JupyterNotebook使用教程.ipynb),30 分钟学会:
+
+- 安装/启动 Jupyter
+- Cell 操作(创建/编辑/运行/删除)
+- Markdown 笔记写法
+- 快捷键速查
+- Kernel 操作(重启/中断)
+- 常见问题排查(Q1-Q5)
+- 实战:创建你的第一个 Notebook
+
 ---
 
 ## 📂 文件导航
