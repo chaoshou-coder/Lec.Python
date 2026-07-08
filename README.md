@@ -9,7 +9,7 @@
 
 ### 每日教学流程
 
-1. **课前**:看 `lessonXX/README.md` 与 `slides.md`,确认当日当堂练选题
+1. **课前**:看 `course/lessonXX/README.md` 与 `course/lessonXX/slides.md`,确认当日当堂练选题
 2. **课中**:用 `demo/` 演示 → 当堂练(每节 2-3 题)→ 巡场点评
 3. **课后**:学员做 `homework/`(含当堂练未完成部分 + 选做)→ 教师写 `teacher_notes.md`
 4. **每 7-10 天**:阶段复习日(Day 10/17/40)或 期末答辩(Day 60)
@@ -191,6 +191,6 @@ M = Mini Project(单点综合)  W = Weekly Project(模块综合)  ┌─ = Capst
 ---
 
 - [ ] 阅读 `PREREQUISITES.md` → 确认前置数学/网络知识已具备
-- [ ] 逐课看 `slides.md` + `lessonXX/README.md` → 确认当堂练选题
+- [ ] 逐课看 `course/lessonXX/slides.md` + `course/lessonXX/README.md` → 确认当堂练选题
 - [ ] 为每个 weekly_project 准备验收脚本(`test_week_N.py`)
 - [ ] Day 58: 为 4 个期末作品方向准备脚手架代码

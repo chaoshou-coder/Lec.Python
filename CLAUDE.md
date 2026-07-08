@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a **courseware asset repo**, not a software project. It holds a 60-day "Python zero-base → AI-ready engineer" teaching plan for adult beginners / cross-track learners. The shipping product is **structured lesson directories** — slides, demo scripts, exercise files, and teacher notes — not an installable application.
 
-- **60 lesson directories** (`lesson01/` ~ `lesson06/`) = daily 6-hour classes
+- **60 lesson directories** (`course/lesson01/` ~ `course/lesson60/`) = daily 6-hour classes
 - **~500+ exercise files** (in-class + homework) across the 60 lessons
 - **4 capability targets**: Machine Learning, LLM Fine-tuning, Web Scraping, AI Application Development
 - **3 medium weekly projects** (`weekly_projects/week01_shopping_cart/`, `week02_library_manager/`, `week03_book_manager_oop/`)
@@ -26,12 +26,12 @@ This repo has no build system, linter, or test runner. Verification is by inspec
 
 ```bash
 # Run a single demo script to verify it executes
-python3 lessonXX/demo/<file>.py
+python3 course/lessonXX/demo/<file>.py
 
 # Create a timestamped backup before any major edit
 TIMESTAMP=$(date +%Y%m%d-%H%M%S)
 mkdir -p .versions
-cp -r lesson*/ weekly_projects/ .versions/lessons-v${VERSION}-${TIMESTAMP}/
+cp -r course/lesson*/ weekly_projects/ .versions/lessons-v${VERSION}-${TIMESTAMP}/
 
 # Check git status before pushing
 git status
@@ -47,7 +47,7 @@ The most frequent operation is **authoring a new exercise file** (`practiceNN.py
 ```
 Lec.Python/
 ├── CLAUDE.md / README.md / summary.md / references.md / PREREQUISITES.md
-├── lesson01/ ~ lesson06/                  ← 60 standard lesson dirs = SHIPPING CORE
+├── course/lesson01/ ~ course/lesson60/            ← 60 standard lesson dirs = SHIPPING CORE
 │   ├── README.md / slides.md / teacher_notes.md
 │   ├── demo/          ← instructor demo scripts
 │   ├── in_class/      ← practice01.py ~ practiceNN.py (当堂练)
@@ -89,7 +89,7 @@ Each ships a `README.md` with a验收 checklist.
 
 ## Hard rules when writing exercises
 
-File naming: `lessonXX/in_class/practiceNN.py` or `lessonXX/homework/taskNN.py` — `NN` is zero-filled. Every exercise file **must** contain this exact anatomy:
+File naming: `course/lessonXX/in_class/practiceNN.py` or `course/lessonXX/homework/taskNN.py` — `NN` is zero-filled. Every exercise file **must** contain this exact anatomy:
 
 ```python
 """
@@ -162,7 +162,7 @@ Current version: **v2.0.0** (2026-07-07) — 60 days / 6 modules / 4 capability 
 | 60-day schedule + capability targets | `summary.md` |
 | Teacher daily flow + grading breakdown | `README.md` |
 | Non-Python prerequisites (math/CS) | `PREREQUISITES.md` |
-| Per-lesson topic distribution | `lessonXX/README.md` |
+| Per-lesson topic distribution | `course/lessonXX/README.md` |
 | Market course comparison / exercise pool | `references.md` |
-| Canonical exercise-file example | `lesson01/in_class/practice01.py` |
+| Canonical exercise-file example | `course/lesson01/in_class/practice01.py` |
 | New-day → old-lesson exercise mapping | `dev/module0-mapping.md` |

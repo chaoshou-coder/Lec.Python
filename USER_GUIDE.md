@@ -21,6 +21,7 @@
 | 9 | [期末作品](#9-期末作品) | 四选一方向、评分标准、时间安排 |
 | 10 | [常见问题 FAQ](#10-常见问题-faq) | 安装/学习/环境/评估 Q&A |
 | 11 | [参考资料](#11-参考资料) | 教材/社区/求助渠道 |
+| 12 | [学习断层与修复](#12-学习断层与修复) | 6 个 P0 断层及修复状态 |
 
 ---
 
@@ -69,7 +70,7 @@ Lec.Python/
 ├── PREREQUISITES.md               ← 数学/网络/系统前置知识
 ├── references.md                  ← 14 门课程对比 + 100+ 习题素材池
 │
-├── lesson01/ ~ lesson06/          ← 60 个课时目录(每天 1 个)
+├── course/lesson01/ ~ course/lesson06/          ← 60 个课时目录(每天 1 个)
 │   ├── README.md                  ← 每课概览(主题 / 习题表)
 │   ├── slides.md                  ← 教师讲义(当课主线)
 │   ├── demo/                      ← 演示脚本(教师课堂演示)
@@ -461,7 +462,7 @@ jupyter notebook
 | 演示表达 | 20% | Demo 流畅,能清晰讲解架构和亮点 |
 | 文档质量 | 20% | README 完整(安装/运行/架构/亮点/踩坑) |
 
-> 📋 详细评分细则见 `lesson60/FINAL_PROJECT_RUBRIC.md`
+> 📋 详细评分细则见 `course/lesson60/FINAL_PROJECT_RUBRIC.md`
 
 ### 9.4 每个方向提供的脚手架
 
@@ -546,6 +547,38 @@ jupyter notebook
 | 环境安装问题 | 搜索引擎报错信息 + GitHub Issues |
 | LLM 微调问题 | Hugging Face Forums / r/LocalLLaMA |
 | 爬虫反爬问题 | Scrapy GitHub Issues / 爬虫社区 |
+
+---
+
+## 12. 学习断层与修复
+
+> 在 60 天课程研发过程中,我们梳理出 **6 个 P0 级学习断层**——这些是学员从"听懂"到"能干"之间最容易掉进去的坑。每个断层都附带了修复策略,落地到具体 Day 的具体课时。完整详情见 [`dev/learning-gaps.md`](dev/learning-gaps.md)。
+
+### 12.1 P0 断层清单
+
+| # | 断层名称 | 出现位置 | 断层表现 | 修复策略 | 状态 |
+|---|---|---|---|---|---|
+| P0-1 | **第三方库入门缺失** | Day 11 | 前 10 天从未教过"第三方库"概念,Day11 一上来就 `import numpy`,遇到 `ModuleNotFoundError` 无从排查 | Day11 slides.md 开头插入 10 分钟"第三方库入门"微课(pip install / import ... as / from ... import) | ✅ 已修复 |
+| P0-2/3 | **sklearn 标准 workflow 缺失** | Day 18 | Day18 直接调 `train_test_split` / `fit` / `predict`,但学员从未见过这个固定套路,无法建立 ML 工作流心智模型 | Day18 slides.md 开头插入半日"sklearn 标准 workflow"微课(6 步套路 + 动手) | ✅ 已修复 |
+| P0-4 | **数学基础(偏导数+链式法则)缺失** | Day 26 | Day26 直接讲链式法则 / 矩阵求导,学员看到 `∂L/∂w` 完全陌生,反向传播推导无法跟进 | Day26 slides.md 开头插入 15 分钟"偏导数 + 链式法则"速学 | ✅ 已修复 |
+| P0-5 | **强化学习术语缺失** | Day 41 | Day41 假设学员懂 RLHF / DPO / PPO / Reward Model,但从未教过,学员面对缩写词堆砌无法理解动机 | Day41 slides.md 开头插入 15 分钟"RL 极简入门(驯狗类比)"微课 | 🔄 修复中 |
+| P0-6 | **异步编程极简入门缺失** | Day 49 | Day49 把 `asyncio` / `aiohttp` / `threading` / SQL 四领域挤进一天,学员信息过载 | Day49 slides.md 开头插入 20 分钟"异步编程极简入门"微课(同步 vs 异步类比 + asyncio 三件套) | 🔄 修复中 |
+
+### 12.2 修复原则
+
+每个 P0 断层的修复都遵循三件套:
+
+1. **可视化类比** — 把新概念映射到学员已熟悉的结构(如"参数是带名字的变量")
+2. **对比练习** — 同一任务用新旧两种方式做,辨析适用场景
+3. **错题锚定** — 在 `teacher_notes.md` 预设"本题高频错"位置,教师课后必填
+
+### 12.3 使用说明
+
+- **教师**:备课时扫一眼对应 Day 的断层提醒,课堂上主动踩坑处慢下来
+- **学员**:遇到听不懂时,查阅 `dev/learning-gaps.md` 中对应断层的"自检问题"
+- **课程维护者**:每个断层都有"修复状态"标签,迭代时优先处理 🔄 和 📋 项
+
+> 📖 完整断层详情、自检题目、修复验证数据见 [`dev/learning-gaps.md`](dev/learning-gaps.md)
 
 ---
 
