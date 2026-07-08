@@ -200,7 +200,7 @@
 | **购物车系统** | `Product` + `CartItem` + `Cart` + `Order` | PyNative OOP Ex20 | 20 |
 | **动物园喂食系统** | `Animal` + `Lion`/`Elephant`/`Parrot` + `Zoo` | PyNative OOP Ex29 | 20 |
 | **音乐播放列表** | `Song` + `Playlist` + 洗牌 | PyNative OOP Ex31 | 20 |
-| **图书管理系统 v2(OOP)** | `Book` + `Member` + `Library` + `Loan` | 综合设计 | 21 |
+| **RAG 问答系统** | `Document` + `VectorDB` + `Retriever` + `Agent` | RAG + 向量检索 + Agent | 54 |
 
 ---
 
@@ -208,7 +208,7 @@
 
 | 项目 | 核心类 | 涉及知识点 | 来源参考 |
 |---|---|---|---|
-| **图书管理系统 v2** | `Book`/`Member`/`Library`/`Loan` | OOP + JSON + CSV + 异常 | 本课程主线 |
+| **AI 应用(RAG+Agent)** | `Document`/`VectorDB`/`Retriever` | RAG + 向量检索 + LangChain | 54 |
 | **学生管理系统** | `Student`/`Course`/`Teacher`/`School` | OOP + 继承 + 持久化 | GeeksforGeeks OOP |
 | **超市收银系统** | `Product`/`Cart`/`Order`/`Payment` | OOP + 组合 + 文件 | PyNative OOP Ex20 |
 | **记账本** | `Transaction`/`Account`/`Category` | OOP + CSV + 统计 | Automate Ch16 |
@@ -240,7 +240,7 @@
 | 9 | **不读 Traceback** | 教"从下往上读错误";每节课演示调试过程 |
 | 10 | **变量作用域 LEGB** | 演示 `UnboundLocalError`;引出 `global` / `nonlocal` |
 
-### 3.2 函数与高阶函数(Day08–Day12)
+### 3.2 函数与高阶函数(Module 0 Day05-09 + Module 1-2)
 
 | # | 易错点 | 教案建议 |
 |---|---|---|
@@ -250,7 +250,7 @@
 | 14 | **返回函数 vs 返回值** | 对比 `return f` 与 `return f()`;演示闭包 |
 | 15 | **装饰器丢失元信息** | 引出 `@functools.wraps`;演示 `__name__` 变化 |
 
-### 3.3 文件 / 异常 / JSON / CSV(Day13–Day17)
+### 3.3 文件 / 异常 / JSON / CSV(Module 0 Day07 + Module 4-5)
 
 | # | 易错点 | 教案建议 |
 |---|---|---|
@@ -260,7 +260,7 @@
 | 19 | **JSON 不支持 datetime** | 演示 `TypeError`;引出 `default=` 参数 |
 | 20 | **异常捕获过于宽泛** | 避免 `except:`;指定异常类型 |
 
-### 3.4 面向对象(Day18–Day21)
+### 3.4 面向对象(Module 0 Day08)
 
 | # | 易错点 | 教案建议 |
 |---|---|---|
