@@ -1,59 +1,63 @@
 """
-[难度: ⭐⭐⭐⭐⭐]
-[所属知识点: 文档写作]
-[预计完成时间: 45 分钟]
+[难度: ⭐⭐⭐⭐]
+[所属知识点: 分类器对比]
+[预计完成时间: 20 分钟]
 
-题目描述:
-为图书管理系统编写 README.md,包含以下内容:
-1. 功能介绍(系统能做什么)
-2. 使用说明(如何安装、运行、使用各功能)
-3. 类图(文字描述各类的职责和关系)
-4. 示例代码(展示典型使用场景)
-5. 已知限制或未来改进方向
+题目: 用 load_iris(3 类)对比 LogisticRegression(max_iter=200)
+和 DecisionTreeClassifier 的测试准确率。各跑 3 次取均值
+(不同 random_state),输出对比表(含每次准确率和平均值)。
 
-要求:结构清晰,描述准确,示例可运行。
-
-示例(文字类图):
-    LibrarySystem
-    ├── books: list[Book]
-    ├── add_book(title, author)
-    ├── remove_book(title)
-    ├── borrow_book(title, borrower)
-    ├── return_book(title)
-    └── list_books()
-
-    Book
-    ├── title: str
-    ├── author: str
-    ├── is_borrowed: bool
-    └── borrower: str | None
+示例:
+    >>> run()
+      次数  逻辑回归  决策树
+    0   1   0.97   0.93
+    1   2   0.93   0.97
+    2   3   0.97   0.93
+    平均       0.96   0.94
 """
+
+from sklearn.datasets import load_iris
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+import pandas as pd
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-pass
+def run():
+    iris = load_iris()
+    seeds = [0, 1, 2]
+    results = []
+
+    for seed in seeds:
+        X_train, X_test, y_train, y_test = train_test_split(
+            iris.data, iris.target, test_size=0.2, random_state=seed
+        )
+
+        lr = LogisticRegression(max_iter=200)
+        lr.fit(X_train, y_train)
+        lr_acc = lr.score(X_test, y_test)
+
+        dt = DecisionTreeClassifier(random_state=seed)
+        dt.fit(X_train, y_train)
+        dt_acc = dt.score(X_test, y_test)
+
+        results.append({
+            "次数": seed + 1,
+            "逻辑回归": round(lr_acc, 2),
+            "决策树": round(dt_acc, 2),
+        })
+
+    df = pd.DataFrame(results)
+    lr_avg = df["逻辑回归"].mean()
+    dt_avg = df["决策树"].mean()
+    print(df.to_string(index=False))
+    print(f"平均       {lr_avg:.2f}   {dt_avg:.2f}")
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    # 验证 README.md 是否存在且内容完整
-    import os
-
-    readme_path = "/Users/bang/Documents/learning/python/课件/重构计划/lesson21/homework/README.md"
-
-    if os.path.exists(readme_path):
-        with open(readme_path, "r", encoding="utf-8") as f:
-            content = f.read()
-        print(f"README.md 存在,共 {len(content)} 字符")
-
-        # 检查必要章节
-        required = ["功能介绍", "使用说明", "类图", "示例"]
-        for section in required:
-            if section in content:
-                print(f"✓ 包含章节: {section}")
-            else:
-                print(f"✗ 缺少章节: {section}")
-    else:
-        print("README.md 尚未创建,请完成 task02")
+    # 测试 1: 两种分类器准确率都应较高
+    run()

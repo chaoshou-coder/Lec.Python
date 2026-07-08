@@ -1,52 +1,73 @@
 """
-[难度: ⭐⭐⭐⭐⭐]
-[所属知识点: 类 + 列表 + 字典 + 方法]
-[预计完成时间: 25 分钟]
+[难度: ⭐⭐⭐⭐]
+[所属知识点: 预处理组合拳]
+[预计完成时间: 20 分钟]
 
 题目描述:
-定义一个类 Library,包含 books 列表(存储书名)和 borrowed 字典(记录借阅关系),
-定义 add_book(title) 添加图书,
-定义 borrow_book(title, user) 借书(书不存在或已借出抛异常),
-定义 return_book(title) 还书(书未借出抛异常),
-定义 list_books() 列出所有图书及状态。
+模拟一个完整预处理流水线:给定 DataFrame 含缺失值和分类列
+({"城市":["北京","上海",None],"年龄":[25,None,35],
+"收入":[10000,20000,15000]}),
+先用 SimpleImputer 填充缺失值,
+再用 LabelEncoder 编码城市列,返回处理后的 DataFrame。
 
 示例:
-    >>> lib = Library()
-    >>> lib.add_book("Python入门")
-    >>> lib.borrow_book("Python入门", "小明")
-    >>> lib.list_books()
-    Python入门 - 已借出(借阅者: 小明)
+    >>> 缺失值被填充,城市列变为 0/1 整数
 """
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-pass
+import pandas as pd
+import numpy as np
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import LabelEncoder
+
+
+def preprocess_pipeline(df):
+    """完整的预处理流水线:填充缺失值 + 编码分类列"""
+    df_result = df.copy()
+
+    # 第一步: 对数值列用中位数填充缺失值
+    num_cols = df_result.select_dtypes(exclude="object").columns
+    imp_median = SimpleImputer(strategy="median")
+    df_result[num_cols] = imp_median.fit_transform(df_result[num_cols])
+
+    # 第二步: 对分类列用众数填充缺失值
+    cat_cols = df_result.select_dtypes(include="object").columns
+    imp_most = SimpleImputer(strategy="most_frequent")
+    df_result[cat_cols] = imp_most.fit_transform(df_result[cat_cols])
+
+    # 第三步: 对分类列进行 LabelEncoder 编码
+    le = LabelEncoder()
+    for col in cat_cols:
+        df_result[col] = le.fit_transform(df_result[col])
+
+    return df_result
+
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    # 测试 1: 添加并借阅图书
-    lib = Library()
-    lib.add_book("Python入门")
-    lib.add_book("算法导论")
-    lib.borrow_book("Python入门", "小明")
-    lib.list_books()
+    # 测试 1: 正常情况
+    df = pd.DataFrame({
+        "城市": ["北京", "上海", None],
+        "年龄": [25, None, 35],
+        "收入": [10000, 20000, 15000],
+    })
+    print("原始数据:")
+    print(df)
+    result = preprocess_pipeline(df)
+    print("\n预处理后:")
+    print(result)
 
-    # 测试 2: 归还图书
-    lib.return_book("Python入门")
-    lib.list_books()
-
-    # 测试 3: 借出不存在的书
-    try:
-        lib.borrow_book("不存在的书", "小红")
-    except Exception as e:
-        print(f"异常: {e}")
-
-    # 测试 4: 借出已借出的书
-    lib.borrow_book("算法导论", "小红")
-    try:
-        lib.borrow_book("算法导论", "小刚")
-    except Exception as e:
-        print(f"异常: {e}")
+    # 测试 2: 多个缺失值
+    df2 = pd.DataFrame({
+        "城市": [None, "北京", "上海"],
+        "年龄": [None, None, 30],
+        "收入": [5000, None, None],
+    })
+    print("\n多缺失原始数据:")
+    print(df2)
+    print("\n预处理后:")
+    print(preprocess_pipeline(df2))

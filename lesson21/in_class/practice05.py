@@ -1,79 +1,59 @@
 """
-[难度: ⭐⭐⭐⭐⭐]
-[所属知识点: 类 + JSON + 异常 + 多用户]
-[预计完成时间: 30 分钟]
+[难度: ⭐⭐⭐]
+[所属知识点: 树深度 / 过拟合]
+[预计完成时间: 15 分钟]
 
-题目描述:
-在题 4 基础上,加入用户管理:
-1. 读者注册(用户名, 密码)
-2. 读者登录(验证用户名密码)
-3. 登录后才能借书(记录借阅者)
-4. 支持多读者借阅不同图书
-5. 用户数据也持久化到 JSON
+题目: 用 load_iris 数据,分别设置 max_depth = 1/2/3/5/None
+训练 DecisionTreeClassifier,记录每种情况下训练集和测试集
+准确率。返回 DataFrame 展示过拟合趋势。
+提示: 观察 max_depth=None 时训练集准确率与测试集的差距。
 
 示例:
-    >>> system = LibrarySystemV2("/tmp/lib_v2.json")
-    >>> system.register("小明", "123456")
-    >>> system.login("小明", "123456")
-    True
-    >>> system.add_book("Python入门", "张三")
-    >>> system.borrow_book("Python入门")
+    >>> df = run()
+    >>> print(df)
+       max_depth  训练集准确率  测试集准确率
+    0          1       0.68       0.66
+    1          2       0.96       0.93
+    2          3       0.98       0.97
+    3          5       1.00       0.97
+    4       None       1.00       0.95
 """
+
+from sklearn.datasets import load_iris
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+import pandas as pd
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-pass
+def run():
+    iris = load_iris()
+    X_train, X_test, y_train, y_test = train_test_split(
+        iris.data, iris.target, test_size=0.2, random_state=42
+    )
+
+    depths = [1, 2, 3, 5, None]
+    results = []
+
+    for d in depths:
+        model = DecisionTreeClassifier(max_depth=d, random_state=42)
+        model.fit(X_train, y_train)
+        train_acc = model.score(X_train, y_train)
+        test_acc = model.score(X_test, y_test)
+        results.append({
+            "max_depth": d,
+            "训练集准确率": round(train_acc, 2),
+            "测试集准确率": round(test_acc, 2),
+        })
+
+    df = pd.DataFrame(results)
+    return df
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    import os
-
-    data_path = "/tmp/test_lib_v2.json"
-
-    # 测试 1: 注册
-    system = LibrarySystemV2(data_path)
-    system.register("小明", "123456")
-    system.register("小红", "abcdef")
-
-    # 测试 2: 登录
-    print(f"登录小明: {system.login('小明', '123456')}")
-    print(f"密码错误: {system.login('小明', 'wrong')}")
-
-    # 测试 3: 添加图书(无需登录)
-    system.add_book("Python入门", "张三")
-    system.add_book("算法导论", "李四")
-
-    # 测试 4: 借书(需登录)
-    system.borrow_book("Python入门")
-    system.list_books()
-
-    # 测试 5: 切换用户借书
-    system.login("小红", "abcdef")
-    system.borrow_book("算法导论")
-    system.list_books()
-
-    # 测试 6: 未登录借书
-    system.logout()
-    try:
-        system.borrow_book("Python入门")
-    except Exception as e:
-        print(f"异常: {e}")
-
-    # 测试 7: 重复注册
-    try:
-        system.register("小明", "newpass")
-    except Exception as e:
-        print(f"异常: {e}")
-
-    # 测试 8: 持久化
-    system.save()
-    system2 = LibrarySystemV2(data_path)
-    system2.load()
-    print(f"加载后用户数: {len(system2.users)}")
-
-    # 清理
-    if os.path.exists(data_path):
-        os.remove(data_path)
+    # 测试 1: 查看不同 max_depth 下的过拟合趋势
+    df = run()
+    print(df)

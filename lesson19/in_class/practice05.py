@@ -1,46 +1,56 @@
 """
-[难度: ⭐⭐⭐⭐]
-[所属知识点: 私有属性 + 方法 + raise]
-[预计完成时间: 20 分钟]
+[难度: ⭐⭐⭐]
+[所属知识点: SimpleImputer]
+[预计完成时间: 15 分钟]
 
 题目描述:
-定义一个类 BankAccount,包含私有属性 _balance,
-定义 deposit(amount) 方法用于存款(余额增加),
-定义 withdraw(amount) 方法用于取款(余额减少),
-取款时如果余额不足,抛出 ValueError("余额不足")。
+使用 sklearn SimpleImputer(strategy="median") 填充一个含
+缺失值的 DataFrame,并对比均值填充结果。
+给定 df 含 3 行 [1,NaN,3],[4,5,NaN],[NaN,8,9],
+展示两种策略填充后行列的值。
 
 示例:
-    >>> acc = BankAccount(100)
-    >>> acc.deposit(50)
-    >>> acc._balance
-    150
-    >>> acc.withdraw(200)
-    ValueError: 余额不足
+    >>> 中位数填充后的 DataFrame 和均值填充后的 DataFrame
 """
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-pass
+import pandas as pd
+import numpy as np
+from sklearn.impute import SimpleImputer
+
+
+def impute_compare(df):
+    """分别用中位数和均值填充缺失值,返回两个 DataFrame"""
+    # 中位数填充
+    imp_median = SimpleImputer(strategy="median")
+    arr_median = imp_median.fit_transform(df)
+    df_median = pd.DataFrame(arr_median, columns=df.columns)
+
+    # 均值填充
+    imp_mean = SimpleImputer(strategy="mean")
+    arr_mean = imp_mean.fit_transform(df)
+    df_mean = pd.DataFrame(arr_mean, columns=df.columns)
+
+    return df_median, df_mean
+
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    # 测试 1: 正常存取款
-    acc1 = BankAccount(100)
-    acc1.deposit(50)
-    acc1.withdraw(30)
-    print(f"余额: {acc1._balance}")
-
-    # 测试 2: 余额不足抛出异常
-    acc2 = BankAccount(50)
-    try:
-        acc2.withdraw(100)
-    except ValueError as e:
-        print(f"异常: {e}")
-
-    # 测试 3: 刚好取完全部余额
-    acc3 = BankAccount(80)
-    acc3.withdraw(80)
-    print(f"余额: {acc3._balance}")
+    # 测试 1: 正常情况
+    df = pd.DataFrame(
+        [[1, np.nan, 3],
+         [4, 5, np.nan],
+         [np.nan, 8, 9]],
+        columns=["A", "B", "C"],
+    )
+    print("原始数据:")
+    print(df)
+    df_med, df_mean = impute_compare(df)
+    print("\n中位数填充:")
+    print(df_med)
+    print("\n均值填充:")
+    print(df_mean)

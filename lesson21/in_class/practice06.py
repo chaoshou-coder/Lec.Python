@@ -1,84 +1,56 @@
 """
-[难度: ⭐⭐⭐⭐⭐]
-[所属知识点: Day01-20 大综合 + 统计]
-[预计完成时间: 30 分钟]
+[难度: ⭐⭐⭐]
+[所属知识点: RandomForestClassifier]
+[预计完成时间: 15 分钟]
 
-题目描述:
-在题 5 基础上,加入统计功能:
-1. 借阅排行榜(按借阅次数降序)
-2. 热门图书 Top N
-3. 导出统计报告到 CSV(包含图书名、借阅次数、当前状态)
+题目: 用 load_iris 对比单棵 DecisionTreeClassifier
+和 RandomForestClassifier(n_estimators=100) 在测试集上的
+准确率。重复 5 次取平均(不同 random_state 切分),
+验证集成学习效果更好。
+提示: 每次用不同 random_state 切分数据再训练。
 
 示例:
-    >>> system = LibrarySystemV3("/tmp/lib_v3.json")
-    >>> # ... 添加图书、借阅等操作后
-    >>> system.borrow_ranking()
-    [{'title': 'Python入门', 'count': 5}, ...]
-    >>> system.export_report("/tmp/report.csv")
+    >>> run()
+    决策树 5 次平均测试准确率: 0.94
+    随机森林 5 次平均测试准确率: 0.96
 """
+
+from sklearn.datasets import load_iris
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-pass
+def run():
+    iris = load_iris()
+    dt_scores = []
+    rf_scores = []
+
+    # 1. 重复 5 次实验,每次用不同的 random_state
+    for seed in range(5):
+        X_train, X_test, y_train, y_test = train_test_split(
+            iris.data, iris.target, test_size=0.2, random_state=seed
+        )
+
+        dt = DecisionTreeClassifier(random_state=seed)
+        dt.fit(X_train, y_train)
+        dt_scores.append(dt.score(X_test, y_test))
+
+        rf = RandomForestClassifier(n_estimators=100, random_state=seed)
+        rf.fit(X_train, y_train)
+        rf_scores.append(rf.score(X_test, y_test))
+
+    # 2. 计算并打印平均准确率
+    dt_avg = sum(dt_scores) / len(dt_scores)
+    rf_avg = sum(rf_scores) / len(rf_scores)
+    print(f"决策树 5 次平均测试准确率: {dt_avg:.2f}")
+    print(f"随机森林 5 次平均测试准确率: {rf_avg:.2f}")
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    import os
-
-    data_path = "/tmp/test_lib_v3.json"
-    report_path = "/tmp/test_report.csv"
-
-    system = LibrarySystemV3(data_path)
-
-    # 准备数据
-    system.register("小明", "123")
-    system.register("小红", "456")
-    system.add_book("Python入门", "张三")
-    system.add_book("算法导论", "李四")
-    system.add_book("红楼梦", "曹雪芹")
-
-    # 模拟多次借阅
-    system.login("小明", "123")
-    system.borrow_book("Python入门")
-    system.return_book("Python入门")
-    system.borrow_book("红楼梦")
-    system.return_book("红楼梦")
-
-    system.login("小红", "456")
-    system.borrow_book("Python入门")
-    system.return_book("Python入门")
-    system.borrow_book("Python入门")
-    system.return_book("Python入门")
-    system.borrow_book("算法导论")
-    system.return_book("算法导论")
-
-    # 测试 1: 借阅排行榜
-    ranking = system.borrow_ranking()
-    print("借阅排行榜:")
-    for item in ranking:
-        print(f"  {item}")
-
-    # 测试 2: 热门图书 Top 2
-    hot = system.hot_books(2)
-    print(f"热门 Top 2: {hot}")
-
-    # 测试 3: 导出统计报告
-    system.export_report(report_path)
-    if os.path.exists(report_path):
-        with open(report_path, "r", encoding="utf-8") as f:
-            print("报告内容:")
-            print(f.read())
-
-    # 测试 4: 持久化
-    system.save()
-    system2 = LibrarySystemV3(data_path)
-    system2.load()
-    print(f"加载后图书数: {len(system2.books)}")
-
-    # 清理
-    for p in [data_path, report_path]:
-        if os.path.exists(p):
-            os.remove(p)
+    # 测试 1: 随机森林平均准确率通常高于单棵决策树
+    run()

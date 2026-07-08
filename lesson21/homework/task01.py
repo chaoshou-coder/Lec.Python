@@ -1,63 +1,66 @@
 """
-[难度: ⭐⭐⭐⭐⭐]
-[所属知识点: 单元测试 + 综合]
-[预计完成时间: 45 分钟]
+[难度: ⭐⭐⭐]
+[所属知识点: 特征重要性可视化]
+[预计完成时间: 15 分钟]
 
-题目描述:
-完善图书管理系统(参考 practice04),添加单元测试,
-至少包含 5 个测试用例,覆盖以下场景:
-1. 添加图书成功
-2. 借阅不存在的图书(异常)
-3. 重复借阅同一本书(异常)
-4. 归还图书成功
-5. 删除图书成功
-
-使用 unittest 模块编写测试。
+题目: 用 RandomForestClassifier(n_estimators=50) 训练 iris 数据,
+获取 feature_importances_,按重要性降序输出特征名及对应分数
+(保留 3 位小数),并用柱状图展示。
+提示: 可用 matplotlib 或直接打印 Series。
 
 示例:
-    # 运行测试
-    $ python -m unittest test_library.py
-    .....
-    Ran 5 tests in 0.001s
-    OK
+    >>> run()
+    花瓣长度 (cm): 0.452
+    花瓣宽度 (cm): 0.426
+    花萼长度 (cm): 0.089
+    花萼宽度 (cm): 0.033
+    (柱状图显示)
 """
+
+from sklearn.datasets import load_iris
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-pass
+def run():
+    iris = load_iris()
+    X_train, X_test, y_train, y_test = train_test_split(
+        iris.data, iris.target, test_size=0.2, random_state=42
+    )
+
+    model = RandomForestClassifier(n_estimators=50, random_state=42)
+    model.fit(X_train, y_train)
+
+    # 1. 按重要性降序排序
+    importances = model.feature_importances_
+    pairs = sorted(
+        zip(iris.feature_names, importances),
+        key=lambda x: x[1],
+        reverse=True,
+    )
+
+    names = [p[0] for p in pairs]
+    scores = [p[1] for p in pairs]
+
+    # 2. 打印特征重要性(保留 3 位小数)
+    for name, score in pairs:
+        print(f"{name}: {score:.3f}")
+
+    # 3. 绘制柱状图
+    plt.figure(figsize=(8, 4))
+    plt.bar(names, scores, color="steelblue")
+    plt.title("Iris 特征重要性(RandomForest)")
+    plt.ylabel("重要性")
+    plt.tight_layout()
+    plt.savefig("feature_importance.png")
+    print("柱状图已保存为 feature_importance.png")
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    import unittest
-
-    class TestLibrarySystem(unittest.TestCase):
-        def setUp(self):
-            """每个测试前创建新系统"""
-            from practice04 import LibrarySystem
-            self.system = LibrarySystem("/tmp/test_unit.json")
-
-        def test_add_book(self):
-            """测试添加图书"""
-            pass
-
-        def test_borrow_nonexistent(self):
-            """测试借阅不存在的图书"""
-            pass
-
-        def test_duplicate_borrow(self):
-            """测试重复借阅"""
-            pass
-
-        def test_return_book(self):
-            """测试归还图书"""
-            pass
-
-        def test_remove_book(self):
-            """测试删除图书"""
-            pass
-
-    # 运行测试
-    unittest.main(verbosity=2)
+    # 测试 1: 花瓣特征重要性应明显高于花萼特征
+    run()

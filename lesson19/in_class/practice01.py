@@ -1,35 +1,49 @@
 """
-[难度: ⭐⭐]
-[所属知识点: class + __init__ + 实例方法]
-[预计完成时间: 10 分钟]
+[难度: ⭐]
+[所属知识点: MinMaxScaler 原理]
+[预计完成时间: 5 分钟]
 
 题目描述:
-定义一个类 Student,包含 __init__ 方法初始化 name 和 age,
-并定义一个方法 introduce(),打印 "我是 XX,今年 YY 岁"。
+给定一个年龄列表 age = [20, 30, 40, 50, 60],
+手写一个手动 MinMax 归一化函数 `minmax_scale(values)`,
+将数据缩放到 [0, 1]。
+公式: x_scaled = (x - min) / (max - min)。
+返回 numpy 数组。
 
 示例:
-    >>> s = Student("小明", 18)
-    >>> s.introduce()
-    我是 小明,今年 18 岁
+    >>> minmax_scale([20, 30, 40, 50, 60])
+    array([0.  , 0.25, 0.5 , 0.75, 1.  ])
 """
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-pass
+import numpy as np
+
+
+def minmax_scale(values):
+    """手动实现 MinMax 归一化,将数据缩放到 [0, 1]"""
+    arr = np.array(values, dtype=float)
+    min_val = arr.min()
+    max_val = arr.max()
+    # 防止除零: 如果最大值等于最小值,直接返回全 0
+    if max_val == min_val:
+        return np.zeros_like(arr)
+    return (arr - min_val) / (max_val - min_val)
+
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    # 测试 1: 正常实例化并调用 introduce
-    s1 = Student("小明", 18)
-    s1.introduce()
+    # 测试 1: 正常情况
+    result = minmax_scale([20, 30, 40, 50, 60])
+    print("测试1 - 正常情况:", result)
 
-    # 测试 2: 年龄为 0 的边界情况
-    s2 = Student("小红", 0)
-    s2.introduce()
+    # 测试 2: 边界情况 — 所有值相同
+    result2 = minmax_scale([5, 5, 5])
+    print("测试2 - 全部相同:", result2)
 
-    # 测试 3: 年龄较大的情况
-    s3 = Student("老王", 60)
-    s3.introduce()
+    # 测试 3: 只有两个值
+    result3 = minmax_scale([0, 100])
+    print("测试3 - 两个值:", result3)
