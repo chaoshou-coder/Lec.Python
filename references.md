@@ -1,4 +1,4 @@
-# Python 入门到 OOP 教学参考资料库
+# Python 入门到 AI 就绪工程师 · 教学参考资料库
 
 > 调研日期:2026-07-07
 > 用途:为 Day08–Day21 的 slides / in_class / homework 提供"素材池"

@@ -1,34 +1,39 @@
-# Python 零基入门到 OOP + 小项目 · 21 天教学计划(重构版 v2)
+# Python 零基入门到 AI 就绪工程师 · 60 天教学计划 v2.0.0
 
 > 计划作者: Claude
 > 适用对象: 成年零基础(转行 / NIT / 兴趣驱动)
 > 节奏: 周一到周五,每天 6 小时(约 6 节 × 45 分钟)
-> 前置要求: 能打字,会用鼠标,知道"文件 / 目录"概念
-> 最终作品: OOP 图书管理系统 v2(JSON 持久化 / CSV 导出 / 异常)
-> 与旧课件关系: 保留 day01-day07 完全不动;本计划独立存于 `重构计划/`,内容按新顺序重排
+> 前置要求: 能打字,会用鼠标,知道"文件 / 目录"概念(详见 `PREREQUISITES.md`)
+> 终点能力: 机器学习 / LLM 微调 / Web 爬虫 / AI 应用开发
+> 期末作品: 四选一(AI 应用 / LLM 微调 / 数据爬虫 / ML 工程)
 
 ---
 
 ## 目录结构
 
 ```
-重构计划/
-├── summary.md                     ← 本文件:总览
+Lec.Python/
+├── summary.md                     ← 本文件:60 天总进度
 ├── README.md                      ← 教师使用指南
-├── references.md                  ← 外部成熟课程参考(由 side-agent 并行搜集)
-├── lesson01/ ~ lesson21/          ← 21 个标准课时目录
+├── CLAUDE.md                      ← AI 开发助手指南
+├── PREREQUISITES.md               ← 数学/网络/系统前置知识
+├── references.md                  ← 外部成熟课程参考(14 门课程对比 + 100+ 习题素材池)
+├── lesson01/ ~ lesson06/          ← 60 个标准课时目录
 │   ├── README.md                  ← 每课概览(主题 / 习题 / 项目)
 │   ├── slides.md                  ← 教师讲义
-│   ├── demo/                      ← 演示脚本(每个文件对应一个细分知识点)
-│   ├── in_class/                  ← 当堂练习(学生当场写)
-│   ├── homework/                  ← 课后作业(学生回家写)
-│   ├── assets/                    ← 素材(xiongmao.txt / data_1.txt 等)
+│   ├── demo/                      ← 演示脚本
+│   ├── in_class/                  ← 当堂练习(标注 当堂练/选做)
+│   ├── homework/                  ← 课后作业(选做)
+│   ├── assets/                    ← 素材
 │   ├── mini_project/              ← 每 2~3 天的综合小项目
 │   └── teacher_notes.md           ← 教师备忘(高频错 3 件事)
-└── weekly_projects/
-    ├── week01_shopping_cart/
-    ├── week02_library_manager/
-    └── week03_book_manager_oop/
+├── weekly_projects/
+│   ├── week01_shopping_cart/      ← Day 10 阶段复习项目
+│   ├── week02_library_manager/
+│   └── week03_book_manager_oop/
+└── dev/
+    ├── module0-mapping.md         ← 新 Day → 旧 lesson 习题映射
+    └── plans/                     ← 备份
 ```
 
 ---
@@ -45,14 +50,15 @@
 | 第 5 节 | 45' | 小项目延续 / 第四讲 | 若 Day 无小项目,改为第四讲 |
 | 第 6 节 | 45' | 总结 + 测验 + 作业布置 | 教师总结(5') + 错题本(5') + 闭卷小测(10') + 作业说明(5') + 自由问答(20') |
 
-> 当堂练数量根据 Day 难度调整;阶段复习日(Day07/14/21)调整为 6 节全部做题 + 中型项目。
+> 当堂练数量根据 Day 难度调整;阶段复习日(Day10/17/40)调整为 6 节全部做题 + 综合项目,期末答辩(Day60)为 Demo+问答+互评。
 
 ---
 
 ## 60 天总进度
 
-> v2.0.0 重构: 从"Python 零基→OOP"重构为"Python 零基→AI 就绪工程师"。
+> v2.0.0: 从"Python 零基→OOP"重构为"Python 零基→AI 就绪工程师"。
 > 课时分配按优先级: AI 应用(10d) > 爬虫(7d) > LLM(7d) > ML(8d) > DL(6d)。
+> 非 Python 知识(数学/网络/系统)列为前置,详见 `PREREQUISITES.md`。
 
 ### Module 0: Python 核心 + 数据处理(Day 1-17)
 
@@ -157,62 +163,30 @@
 Module 0 (Day 1-17)    Python 核心 + 数据基础: 变量/函数/OOP/NumPy/Pandas
 Module 1 (Day 18-25)   机器学习: 监督/无监督/评估/流水线
 Module 2 (Day 26-31)   深度学习: NN/BP⚡/PyTorch/CNN/RNN
-Module 3 (Day 32-43)   NLP+LLM: Attention⚡/Transformer/LoRA 微调
-Module 4 (Day 44-50)   爬虫: HTTP/解析/Scrapy/反爬/并发
-Module 5 (Day 51-60)   AI 应用: FastAPI/RAG/Agent/部署 ★重点
+Module 3 (Day 32-36)   NLP 与 Transformer: Attention⚡/BERT/GPT/HF 实战
+Module 4 (Day 37-43)   LLM 微调: LoRA/训练/评测/部署
+Module 5 (Day 44-50)   爬虫: HTTP/解析/Scrapy/反爬/并发
+Module 6 (Day 51-60)   AI 应用: FastAPI/RAG/Agent/部署 ★重点
 ```
-
----
-
-## Day01-Day07 原有缺陷修复清单(必须在新 plan 同步落地)
-
-重定向自 plan 内 §1.2 与 §1.3:
-
-### Day01 缺陷
-| # | 文件 | 问题 | 修复 |
-|---|---|---|---|
-| 1 | `04.使用变量来展示一个学生的信息.py` | 注释中混用 `%10d` 与 `f-string` 对齐,学员易混淆 | 新增 3 道对比练习 |
-| 2 | `Exam01.py` | 单一测试,题型未覆盖 | 补充 2 道相似习题 |
-
-### Day02 缺陷
-| # | 文件 | 问题 | 修复 |
-|---|---|---|---|
-| 1 | `01.类型案例.py` | `isdigit/isalpha/isalnum` 一笔带过,学员不清楚应用场景 | 补充 3 道验证题 |
-| 2 | `04.模拟一个抽奖的程序.py` | 重复了一段几乎完全相同的代码 | 改为循环,正是 Day05 循环课的铺垫题 |
-| 3 | `07.for循环.py` | `for _` 教学示例薄弱 | 配 3 道"用 _ 优雅遍历 + 不用 _ 又怎么写"对比题 |
-| 4 | `08.案例.py` | 三项统计一次性写,无梯度 | 变为 3 小题各 5 分钟 |
-
-### Day03 缺陷
-| # | 文件 | 问题 | 修复 |
-|---|---|---|---|
-| 1 | `01.循环的应用.py` | 最值排位法+循环嵌套同时出现 | 先讲单循环求最值;下节再讲嵌套 |
-| 2 | `04.菜单选择.py` | `while 1:` 从未讲过 | 在 Day05 循环课先讲思路 |
-| 3 | `05.print函数的详解.py` | `open('w')` 讲了,`open('r')` 跳了,`with … as` 两行 | 同一天 05 文件后追加"读 + with"小节 |
-| 4 | `06/07 嵌套循环` | 鸡兔同笼 + 菱形打印 + 等腰三角形同一天爆 | 镶嵌到 Day05 + Day06 分讲 |
-| 5 | `tt.py` + `data.txt` | `encoding='gbk'` 却无讲解 | Day03 讲 open 时追加 2 分钟"编码" |
-
-### Day04 缺陷
-| # | 文件 | 问题 | 修复 |
-|---|---|---|---|
-| 1 | `04.列表的增加操作.py` | `insert(50,200)` 无注释 | 加一行 `# 故意越界,观察会怎样` |
-| 2 | `06.列表的修改和删除.py` | 嵌套 `stus[j][2] = sex` 突然用 | 补 2 道"一维 → 二维"桥梁题 |
-| 3 | `09.深拷贝和浅拷贝.py` | `c[2].append(50)` 是 Bug,`c[2]` 是整数,会报 `AttributeError` | 修成 `c[3].append(50)` |
-| 4 | `10.综合案例.py` | 80 行一次写完,无梯度 | V3 plan 拆成 5 步搭脚手架 |
-| 5 | `字符串练习.py` | `.title()` Day03 从未讲 | 在 Day08 提升课时补讲 |
 
 ---
 
 ## 验收点
 
 ### 阶段测
-- Day07: 小组项目"购物车"完整可跑
-- Day14: Day08-Day13 函数综合应用题 ≥ 70% 正确率
-- Day21: OOP 图书管理系统 v2 走通 7 项功能
+- Day 10: 购物车项目(函数+OOP 版)完整可跑
+- Day 17: EDA 项目(数据清洗+可视化+洞察)交付
+- Day 25: ML 端到端项目(Kaggle 竞赛/California Housing 预测)
+- Day 40: DL vs ML 对比报告 + CIFAR-10 分类器
 
-### 期末作品
-- 控制台图书管理系统 v2 必须过 7 项验收点
-- Demo 录像 3 分钟
-- 作品 README 写明"自己的亮点"
+### 期末作品(Day 58-60 四选一)
+- **AI 应用方向**: RAG+Agent 智能助手完整可跑
+- **LLM 微调方向**: 垂直领域模型微调→评测→部署
+- **数据+爬虫方向**: 大规模数据采集→清洗→分析平台
+- **ML 工程方向**: 端到端预测系统→API 服务→部署
+
+评审标准(见 `lesson60/FINAL_PROJECT_RUBRIC.md`):
+- 功能完整性(30%) + 技术深度(30%) + 演示表达(20%) + 文档质量(20%)
 
 ---
 
@@ -228,6 +202,7 @@ Module 5 (Day 51-60)   AI 应用: FastAPI/RAG/Agent/部署 ★重点
 
 ## 配合本计划的其他资源
 
-- 旧课件 day01-day07 参考源码路径:`../day01/`(相对于本目录的父目录) ~ `../day07_code/`
-- 市场课程素材库:`references.md`
-- 21 天详细 plan 本体:`day7-day7-os-glowing-crystal.md`(通常在 `~/.claude/plans/`)
+- `references.md`: 外部成熟课程参考(14 门课程 / 100+ 习题 / 25 项教学红线)
+- `PREREQUISITES.md`: 数学(线代/微积分/概统) / 网络 / 系统 前置知识完整清单
+- `CLAUDE.md`: AI 开发助手的项目指南(含 per-Day 语法禁忌 / 版本控制)
+- `weekly_projects/`: 3 个中型项目(购物车/图书 v1/图书 v2 OOP)

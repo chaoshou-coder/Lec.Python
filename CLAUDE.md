@@ -14,10 +14,10 @@ This is a **courseware asset repo**, not a software project. It holds a 60-day "
 
 ## How to continue in a new session
 
-1. Read the top of `CHANGELOG.md` → confirm current version.
-2. Scroll to its "待做 / TODO" section → pick the highest-priority item.
+1. Read the top of `summary.md` → confirm current version and module scope.
+2. Pick the highest-priority unfinished item(e.g. exercise gaps, slide depth).
 3. Write/change files **following the hard rules below**.
-4. After changes: update `CHANGELOG.md` for the version, and optionally make a timestamp backup (see Commands).
+4. After changes: commit and push to main, optionally make a timestamp backup(see Commands).
 5. Don't do what the "Out of scope" section forbids.
 
 ## Common commands & operations
@@ -46,7 +46,7 @@ The most frequent operation is **authoring a new exercise file** (`practiceNN.py
 
 ```
 Lec.Python/
-├── CLAUDE.md / README.md / summary.md / references.md / CHANGELOG.md / PREREQUISITES.md
+├── CLAUDE.md / README.md / summary.md / references.md / PREREQUISITES.md
 ├── lesson01/ ~ lesson06/                  ← 60 standard lesson dirs = SHIPPING CORE
 │   ├── README.md / slides.md / teacher_notes.md
 │   ├── demo/          ← instructor demo scripts
@@ -138,15 +138,14 @@ An exercise authored for Day04 must not contain `def`; a Day08 exercise must not
 
 ## Version control scheme
 
-The repo uses **timestamp + CHANGELOG** for coursework, plus git for versioning:
+The repo uses **git + timestamp backup** for versioning:
 
 ```bash
-# 1. Before any major edit, make a timestamp backup (see Common commands)
-# 2. Update CHANGELOG.md under the relevant version section
-# 3. git add / commit / push for versioned releases
+# 1. Before any major edit, make a timestamp backup(see Common commands)
+# 2. git add / commit / push for versioned releases
 ```
 
-Current version: **v2.0.0** (2026-07-07) — 60 days / 8 modules / 4 capability targets.
+Current version: **v2.0.0** (2026-07-07) — 60 days / 6 modules / 4 capability targets.
 
 ## Out of scope (don't do)
 
@@ -165,6 +164,5 @@ Current version: **v2.0.0** (2026-07-07) — 60 days / 8 modules / 4 capability 
 | Non-Python prerequisites (math/CS) | `PREREQUISITES.md` |
 | Per-lesson topic distribution | `lessonXX/README.md` |
 | Market course comparison / exercise pool | `references.md` |
-| Version history | `CHANGELOG.md` |
 | Canonical exercise-file example | `lesson01/in_class/practice01.py` |
 | New-day → old-lesson exercise mapping | `dev/module0-mapping.md` |
