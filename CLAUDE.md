@@ -46,7 +46,7 @@ The most frequent operation is **authoring a new exercise file** (`practiceNN.py
 
 ```
 Lec.Python/
-├── CLAUDE.md / README.md / summary.md / references.md / PREREQUISITES.md
+├── CLAUDE.md / README.md / summary.md / references.md / PREREQUISITES.md / USER_GUIDE.md
 ├── course/lesson01/ ~ course/lesson60/            ← 60 standard lesson dirs = SHIPPING CORE
 │   ├── README.md / slides.md / teacher_notes.md
 │   ├── demo/          ← instructor demo scripts
@@ -54,11 +54,14 @@ Lec.Python/
 │   ├── homework/      ← task01.py ~ taskNN.py (课后作业/选做)
 │   ├── mini_project/  ← small project every 2–3 days
 │   └── assets/        ← materials
+├── student-notebooks/   ← Day 1-17 学生版 Jupyter Notebook(自学用, ~900 cells, h3+h4, 执行跟踪, 趁热打铁)
 ├── weekly_projects/                       ← 3 medium projects = SHIPPING CORE
 │   ├── week01_shopping_cart/  week02_library_manager/  week03_book_manager_oop/
 ├── dev/                 ← DEV convenience + ephemeral (not shipping)
 │   ├── plans/           ← backup of the Claude plan corpus
 │   ├── agent-artifacts/ ← intermediate agent output (safe to delete)
+│   ├── skills/          ← 课程开发经验沉淀(排版规范/知识地图/学习顺序/试题集)
+│   ├── learning-gaps.md ← 学习断层修复指南(6 个 P0 断层的修复建议)
 │   └── module0-mapping.md ← new-day → old-lesson → exercise mapping
 └── .versions/           ← LOCAL timestamp backups, gitignored
 ```
@@ -136,6 +139,62 @@ Constraints:
 
 An exercise authored for Day04 must not contain `def`; a Day08 exercise must not contain `class`. Check the target lesson's module in `summary.md` before writing.
 
+### Heading hierarchy (h3/h4 only)
+
+```
+✅ ### Day 08 · OOP           ← h3(唯一天标题)
+✅ #### __init__ 构造函数     ← h4(小节标题)
+✅ **逐行解剖**                ← 正文加粗(不是标题)
+❌ # Day 08 · OOP             ← H1 字体 ~28px,太大
+❌ ## 第一讲                  ← H2 字体 ~22px,太大
+❌ ### 知识点                 ← 嵌套标题,页面碎
+```
+
+**Why:** H1/H2 字体太大,页面拥挤;多层标题让阅读低效。
+
+**Rules:**
+- `###` 只用一次(当天标题)
+- `####` 用于每个知识点的标题
+- 不再往下嵌套(不用 `#####`)
+- 解释用 **加粗** + 正文,不额外加标题层级
+
+### Loop structure per knowledge point (趁热打铁)
+
+Each complete knowledge point = a mini cycle:
+
+1. **Concept md:** pain point(why) → analogy(life example) → explanation(what)
+2. **Example code:** per-line Chinese comments + execution trace(`# --- 执行过程 ---`)
+3. **Line-by-line breakdown md:** explain syntax and parameters
+4. **Socratic guidance md:** guiding questions(not direct answers)
+5. **Student code area:** `pass` placeholder
+6. **Reference answer:** complete runnable code + comments
+
+### Execution trace
+
+Every code cell must contain an execution trace comment(starting with `# --- 执行过程 ---`).
+
+**Format:**
+```python
+# --- 执行过程 ---
+# 第 X 行 code:
+#   ① what happens first
+#   ② what happens next
+```
+
+**Why:** Students run code and only see the final output, don't know what happened in between.
+
+### Socratic guidance
+
+Every exercise must have guiding questions before the answer(leading students to think, not giving answers directly).
+
+**Example:**
+```
+> Ask yourself:
+> - Which concept from today does this exercise need?
+> - What does "XX" in the problem correspond to?
+> - If it errors, what to check?
+```
+
 ## Version control scheme
 
 The repo uses **git + timestamp backup** for versioning:
@@ -145,7 +204,7 @@ The repo uses **git + timestamp backup** for versioning:
 # 2. git add / commit / push for versioned releases
 ```
 
-Current version: **v2.0.0** (2026-07-07) — 60 days / 6 modules / 4 capability targets.
+Current version: **v2.1.0** (2026-07-09) — 60 days / 6 modules / h3+h4 headings / execution trace / 趁热打铁 loop.
 
 ## Out of scope (don't do)
 
@@ -161,8 +220,13 @@ Current version: **v2.0.0** (2026-07-07) — 60 days / 6 modules / 4 capability 
 |---|---|
 | 60-day schedule + capability targets | `summary.md` |
 | Teacher daily flow + grading breakdown | `README.md` |
+| Complete user guide(for teachers / students / self-learners) | `USER_GUIDE.md` |
 | Non-Python prerequisites (math/CS) | `PREREQUISITES.md` |
 | Per-lesson topic distribution | `course/lessonXX/README.md` |
 | Market course comparison / exercise pool | `references.md` |
 | Canonical exercise-file example | `course/lesson01/in_class/practice01.py` |
+| Day 1-17 student Jupyter Notebooks(h3+h4 / execution trace / 趁热打铁) | `student-notebooks/` |
+| Jupyter 排版规范(gold standard = Day 08 v6 + 7 踩过的坑) | `dev/skills/05_Jupyter_Notebook_排版规范.md` |
+| 学习断层修复指南(6 个 P0 断层) | `dev/learning-gaps.md` |
+| 知识地图推理 / 学习顺序编排 / 试题集组织 | `dev/skills/01-04_*.md` |
 | New-day → old-lesson exercise mapping | `dev/module0-mapping.md` |
