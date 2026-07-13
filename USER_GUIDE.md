@@ -1,4 +1,4 @@
-# 60 天 AI 就绪 Python 工程师 · 使用说明书
+# 59 天 AI 就绪 Python 工程师 · 使用说明书
 
 > 版本: v2.0.0 | 2026-07-07
 > 适用对象: 教师 / 学员 / 自学者
@@ -16,7 +16,7 @@
 | 4 | [教师指南](#4-教师指南) | 每日教学流程、评分、课前准备 |
 | 5 | [学员指南](#5-学员指南) | 每日学习流程、笔记本使用、练习规范 |
 | 6 | [每日节奏](#6-每日节奏) | 6 节课的时间分配 |
-| 7 | [60 天课表总览](#7-60-天课表总览) | 6 个 Module 的 Day 列表 |
+| 7 | [59 天课表总览](#7-59-天课表总览) | 6 个 Module 的 Day 列表 |
 | 8 | [阶段复习与测验](#8-阶段复习与测验) | Day 10/17/40 的复习安排 |
 | 9 | [期末作品](#9-期末作品) | 四选一方向、评分标准、时间安排 |
 | 10 | [常见问题 FAQ](#10-常见问题-faq) | 安装/学习/环境/评估 Q&A |
@@ -33,17 +33,17 @@
 
 | 终点能力 | 具体标准 | 对应模块 |
 |---|---|---|
-| **机器学习** | 基于 scikit-learn 完成端到端 ML 项目(数据→预处理→建模→评估→部署) | Module 1 (Day 18-25) |
-| **LLM 微调** | 基于 Hugging Face + LoRA 微调开源大模型→评测→推理部署 | Module 4 (Day 37-43) |
-| **Web 爬虫** | HTTP/API/动态页面爬虫→数据清洗→存储→构建数据集 | Module 5 (Day 44-50) |
-| **AI 应用开发** | FastAPI + RAG + Agent + Docker 部署,上线 AI 应用 | Module 6 (Day 51-60) |
+| **机器学习** | 基于 scikit-learn 完成端到端 ML 项目(数据→预处理→建模→评估→部署) | Module 1 (Day 17-23) |
+| **LLM 微调** | 基于 Hugging Face + LoRA 微调开源大模型→评测→推理部署 | Module 4 (Day 35-41) |
+| **Web 爬虫** | HTTP/API/动态页面爬虫→数据清洗→存储→构建数据集 | Module 5 (Day 42-48) |
+| **AI 应用开发** | FastAPI + RAG + Agent + Docker 部署,上线 AI 应用 | Module 6 (Day 49-58) |
 
 ### 1.2 适用人群
 
 | 角色 | 要求 | 建议 |
 |---|---|---|
-| **零基础学员** | 能打字、会用鼠标、知道"文件/目录"概念 | 按 Day 1-60 顺序学习 |
-| **有 Python 基础** | 已掌握变量/函数/OOP | 从 Module 1 (Day 18) 开始 |
+| **零基础学员** | 能打字、会用鼠标、知道"文件/目录"概念 | 按 Day 1-59 顺序学习 |
+| **有 Python 基础** | 已掌握变量/函数/OOP | 从 Module 1 (Day 17) 开始 |
 | **转行/跨考** | 需要项目作品支撑求职 | 重点做好期末作品 |
 | **教师** | 有 Python 教学经验 | 参考教师指南 + slides.md |
 
@@ -51,7 +51,7 @@
 
 | 模式 | 周期 | 每日投入 |
 |---|---|---|
-| 全日制集训 | **60 天**(约 12 周) | 6 小时/天(360 分钟) |
+| 全日制集训 | **59 天**(约 12 周) | 6 小时/天(360 分钟) |
 | 业余学习 | 约 24 周 | 2-3 小时/天 |
 | 加速模式 | 约 40 天 | 8-10 小时/天 |
 
@@ -65,12 +65,12 @@
 Lec.Python/
 ├── USER_GUIDE.md                  ← 本文件:使用说明书
 ├── README.md                      ← 课程主文档(目标/流程/评分)
-├── summary.md                     ← 60 天进度表 + 每天知识点
+├── summary.md                     ← 59 天进度表 + 每天知识点
 ├── CLAUDE.md                      ← AI 开发助手操作指南
 ├── PREREQUISITES.md               ← 数学/网络/系统前置知识
 ├── references.md                  ← 14 门课程对比 + 100+ 习题素材池
 │
-├── course/lesson01/ ~ course/lesson06/          ← 60 个课时目录(每天 1 个)
+├── course/lesson01/ ~ course/lesson59/          ← 59 个课时目录(每天 1 个)
 │   ├── README.md                  ← 每课概览(主题 / 习题表)
 │   ├── slides.md                  ← 教师讲义(当课主线)
 │   ├── demo/                      ← 演示脚本(教师课堂演示)
@@ -210,7 +210,7 @@ jupyter notebook
 
 | 项 | 权重 | 说明 |
 |---|---|---|
-| 当堂小作品 | 30% | 60 次,取最高 20 次 |
+| 当堂小作品 | 30% | 59 次,取最高 20 次 |
 | 期末作品 | 40% | 四选一(Demo+文档+答辩) |
 | 每周中型项目 | 20% | 3 个(可选做) |
 | 出勤与错题本 | 10% | 出勤 + teacher_notes.md |
@@ -299,11 +299,11 @@ jupyter notebook
 | Day 10 | 6 节全部做题 + 购物车中型项目(函数+OOP 版) |
 | Day 17 | 6 节全部做题 + EDA 综合项目 |
 | Day 40 | ML+DL 综合项目 + DL vs ML 对比报告 |
-| Day 60 | 期末答辩(Demo + 问答 + 互评) |
+| Day 58 | 期末答辩(Demo + 问答 + 互评) |
 
 ---
 
-## 7. 60 天课表总览
+## 7. 59 天课表总览
 
 ### Module 0: Python 核心 + 数据处理(Day 1-17)
 
@@ -327,7 +327,7 @@ jupyter notebook
 | 16 | 数据摄取 | CSV/JSON/Excel/SQL/API | 🎯 多源数据整合 |
 | 17 | **阶段复习②(EDA)** | Module 0 综合 | 🌟 EDA 分析报告 |
 
-### Module 1: 机器学习(Day 18-25)
+### Module 1: 机器学习(Day 17-23)
 
 | Day | 主题 | 关键新增 | 项目 |
 |---|---|---|---|
@@ -340,7 +340,7 @@ jupyter notebook
 | 24 | 模型评估+流水线 | ROC-AUC/交叉验证/`Pipeline`/`GridSearchCV` | 多模型对比 |
 | 25 | **ML 项目日** | 模型持久化+端到端项目 | Kaggle 竞赛 |
 
-### Module 2: 深度学习(Day 26-31)
+### Module 2: 深度学习(Day 24-29)
 
 | Day | 主题 | 关键新增 | 项目 |
 |---|---|---|---|
@@ -351,7 +351,7 @@ jupyter notebook
 | 30 | CNN+RNN+正则化 | 卷积/池化/LSTM/Dropout | 图像分类器 |
 | 31 | 迁移学习+DL 项目 | 预训练/冻结/微调 | CIFAR-10 |
 
-### Module 3: NLP 与 Transformer(Day 32-36)
+### Module 3: NLP 与 Transformer(Day 30-34)
 
 | Day | 主题 | 关键新增 | 项目 |
 |---|---|---|---|
@@ -361,7 +361,7 @@ jupyter notebook
 | 35 | Transformer+预训练模型 | BERT/GPT/T5 架构选型 | Transformer 解剖 |
 | 36 | Hugging Face 实战 | `pipeline`/`AutoModel`/`Tokenizer` | 情感分析 |
 
-### Module 4: LLM 微调(Day 37-43)
+### Module 4: LLM 微调(Day 35-41)
 
 | Day | 主题 | 关键新增 | 项目 |
 |---|---|---|---|
@@ -373,7 +373,7 @@ jupyter notebook
 | 42 | 评测 | 困惑度/人工评测/`evaluate` | 模型评测 |
 | 43 | 部署 | 量化/GGUF/Ollama 推理 | Ollama 部署 |
 
-### Module 5: Web 爬虫(Day 44-50)
+### Module 5: Web 爬虫(Day 42-48)
 
 | Day | 主题 | 关键新增 | 项目 |
 |---|---|---|---|
@@ -385,7 +385,7 @@ jupyter notebook
 | 49 | 数据存储+并发 | SQLite/`asyncio`/`aiohttp` | 万级数据采集 |
 | 50 | **爬虫项目日** | 综合 | 为 AI 应用构建数据集 |
 
-### Module 6: AI 应用开发(Day 51-60)
+### Module 6: AI 应用开发(Day 49-58)
 
 | Day | 主题 | 关键新增 | 项目 |
 |---|---|---|---|
@@ -396,9 +396,9 @@ jupyter notebook
 | 55 | Agent 框架 | LangChain/LlamaIndex 工具调用 | Agent 实战 |
 | 56 | UI+Docker | Streamlit/`Dockerfile` | 应用容器化 |
 | 57 | 部署+监控 | 云平台/健康检查 | 上线部署 |
-| 58 | **选题+开发启动** | 4 方向选 1 | 作品开发 |
-| 59 | **作品冲刺** | 开发+文档 | 作品开发 |
-| 60 | **期末答辩** | Demo+问答+互评 | 答辩评审 |
+| 56 | **选题+开发启动** | 4 方向选 1 | 作品开发 |
+| 57 | **作品冲刺** | 开发+文档 | 作品开发 |
+| 58 | **期末答辩** | Demo+问答+互评 | 答辩评审 |
 
 ---
 
@@ -436,7 +436,7 @@ jupyter notebook
 
 ## 9. 期末作品
 
-### 9.1 四选一方向(Day 58-60)
+### 9.1 四选一方向(Day 56-58)
 
 | 方向 | 作品示例 | 串联 Domain | 难度 |
 |---|---|---|---|
@@ -449,9 +449,9 @@ jupyter notebook
 
 | Day | 任务 | 产出 |
 |---|---|---|
-| Day 58 | 选题 + 开发启动(确定方向/技术栈/搭建脚手架) | 项目计划 + 代码骨架 |
-| Day 59 | 作品冲刺(开发+测试+文档) | 完整可运行代码 + README |
-| Day 60 | 期末答辩(Demo 演示 5' + 问答 5' + 互评) | Demo + 答辩记录 |
+| Day 56 | 选题 + 开发启动(确定方向/技术栈/搭建脚手架) | 项目计划 + 代码骨架 |
+| Day 57 | 作品冲刺(开发+测试+文档) | 完整可运行代码 + README |
+| Day 58 | 期末答辩(Demo 演示 5' + 问答 5' + 互评) | Demo + 答辩记录 |
 
 ### 9.3 评分标准
 
@@ -462,7 +462,7 @@ jupyter notebook
 | 演示表达 | 20% | Demo 流畅,能清晰讲解架构和亮点 |
 | 文档质量 | 20% | README 完整(安装/运行/架构/亮点/踩坑) |
 
-> 📋 详细评分细则见 `course/lesson60/FINAL_PROJECT_RUBRIC.md`
+> 📋 详细评分细则见 `course/lesson58/FINAL_PROJECT_RUBRIC.md`
 
 ### 9.4 每个方向提供的脚手架
 
@@ -493,7 +493,7 @@ jupyter notebook
 | Day 1 都听不懂? | 先看书/视频补基础概念(推荐 CS50P Week 0 或 B 站 Python 入门) |
 | 代码报错看不懂? | 读 Traceback 最后一行 → 复制错误信息搜索 → 检查冒号/缩进/括号/中英文符号 |
 | 当堂练做不完? | 标记"未完成",课后继续做(把进度记在 homework/TODO.md) |
-| 想跳过 Module 0? | 如果你已掌握 Python 基础(变量/函数/OOP/文件),可从 Day 18 开始 |
+| 想跳过 Module 0? | 如果你已掌握 Python 基础(变量/函数/OOP/文件),可从 Day 17 开始 |
 | 每天 6 小时太多? | 可调整为 2-3 小时/天,延长总周期至 4-6 个月 |
 
 ### 10.3 项目与评估
@@ -521,7 +521,7 @@ jupyter notebook
 | 文档 | 用途 | 何时读 |
 |---|---|---|
 | `README.md` | 课程主文档(目标/流程/评分) | 开课前 |
-| `summary.md` | 60 天进度表 + 每天知识点 | 每天课前 |
+| `summary.md` | 59 天进度表 + 每天知识点 | 每天课前 |
 | `PREREQUISITES.md` | 数学/网络/系统前置知识 | 开课前/遇到不懂时 |
 | `references.md` | 14 门课程对比 + 100+ 习题素材池 | 备课/选题时 |
 | `CLAUDE.md` | AI 开发助手操作指南 | 用 Claude Code 辅助开发时 |
@@ -552,17 +552,17 @@ jupyter notebook
 
 ## 12. 学习断层与修复
 
-> 在 60 天课程研发过程中,我们梳理出 **6 个 P0 级学习断层**——这些是学员从"听懂"到"能干"之间最容易掉进去的坑。每个断层都附带了修复策略,落地到具体 Day 的具体课时。完整详情见 [`dev/learning-gaps.md`](dev/learning-gaps.md)。
+> 在 59 天课程研发过程中,我们梳理出 **6 个 P0 级学习断层**——这些是学员从"听懂"到"能干"之间最容易掉进去的坑。每个断层都附带了修复策略,落地到具体 Day 的具体课时。完整详情见 [`dev/learning-gaps.md`](dev/learning-gaps.md)。
 
 ### 12.1 P0 断层清单
 
 | # | 断层名称 | 出现位置 | 断层表现 | 修复策略 | 状态 |
 |---|---|---|---|---|---|
-| P0-1 | **第三方库入门缺失** | Day 11 | 前 10 天从未教过"第三方库"概念,Day11 一上来就 `import numpy`,遇到 `ModuleNotFoundError` 无从排查 | Day11 slides.md 开头插入 10 分钟"第三方库入门"微课(pip install / import ... as / from ... import) | ✅ 已修复 |
-| P0-2/3 | **sklearn 标准 workflow 缺失** | Day 18 | Day18 直接调 `train_test_split` / `fit` / `predict`,但学员从未见过这个固定套路,无法建立 ML 工作流心智模型 | Day18 slides.md 开头插入半日"sklearn 标准 workflow"微课(6 步套路 + 动手) | ✅ 已修复 |
-| P0-4 | **数学基础(偏导数+链式法则)缺失** | Day 26 | Day26 直接讲链式法则 / 矩阵求导,学员看到 `∂L/∂w` 完全陌生,反向传播推导无法跟进 | Day26 slides.md 开头插入 15 分钟"偏导数 + 链式法则"速学 | ✅ 已修复 |
-| P0-5 | **强化学习术语缺失** | Day 41 | Day41 假设学员懂 RLHF / DPO / PPO / Reward Model,但从未教过,学员面对缩写词堆砌无法理解动机 | Day41 slides.md 开头插入 15 分钟"RL 极简入门(驯狗类比)"微课 | 🔄 修复中 |
-| P0-6 | **异步编程极简入门缺失** | Day 49 | Day49 把 `asyncio` / `aiohttp` / `threading` / SQL 四领域挤进一天,学员信息过载 | Day49 slides.md 开头插入 20 分钟"异步编程极简入门"微课(同步 vs 异步类比 + asyncio 三件套) | 🔄 修复中 |
+| P0-1 | **第三方库入门缺失** | Day 10 | 前 9 天从未教过"第三方库"概念,Day10 一上来就 `import numpy`,遇到 `ModuleNotFoundError` 无从排查 | Day10 slides.md 开头插入 10 分钟"第三方库入门"微课(pip install / import ... as / from ... import) | ✅ 已修复 |
+| P0-2/3 | **sklearn 标准 workflow 缺失** | Day 17 | Day17 直接调 `train_test_split` / `fit` / `predict`,但学员从未见过这个固定套路,无法建立 ML 工作流心智模型 | Day17 slides.md 开头插入半日"sklearn 标准 workflow"微课(6 步套路 + 动手) | ✅ 已修复 |
+| P0-4 | **数学基础(偏导数+链式法则)缺失** | Day 25 | Day25 直接讲链式法则 / 矩阵求导,学员看到 `∂L/∂w` 完全陌生,反向传播推导无法跟进 | Day25 slides.md 开头插入 15 分钟"偏导数 + 链式法则"速学 | ✅ 已修复 |
+| P0-5 | **强化学习术语缺失** | Day 40 | Day40 假设学员懂 RLHF / DPO / PPO / Reward Model,但从未教过,学员面对缩写词堆砌无法理解动机 | Day40 slides.md 开头插入 15 分钟"RL 极简入门(驯狗类比)"微课 | 🔄 修复中 |
+| P0-6 | **异步编程极简入门缺失** | Day 48 | Day48 把 `asyncio` / `aiohttp` / `threading` / SQL 四领域挤进一天,学员信息过载 | Day48 slides.md 开头插入 20 分钟"异步编程极简入门"微课(同步 vs 异步类比 + asyncio 三件套) | 🔄 修复中 |
 
 ### 12.2 修复原则
 
@@ -583,5 +583,5 @@ jupyter notebook
 ---
 
 > **本文件结束**
-> 配套课程: [60 天 AI 就绪 Python 工程师](https://github.com/chaoshou-coder/Lec.Python)
+> 配套课程: [59 天 AI 就绪 Python 工程师](https://github.com/chaoshou-coder/Lec.Python)
 > 反馈/建议: 在 GitHub 提 Issue 或在课程中反馈给教师

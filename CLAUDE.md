@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-This is a **courseware asset repo**, not a software project. It holds a 60-day "Python zero-base → AI-ready engineer" teaching plan for adult beginners / cross-track learners. The shipping product is **structured lesson directories** — slides, demo scripts, exercise files, and teacher notes — not an installable application.
+This is a **courseware asset repo**, not a software project. It holds a 59-day "Python zero-base → AI-ready engineer" teaching plan for adult beginners / cross-track learners. The shipping product is **structured lesson directories** — slides, demo scripts, exercise files, and teacher notes — not an installable application.
 
 - **60 lesson directories** (`course/lesson01/` ~ `course/lesson60/`) = daily 6-hour classes
 - **~500+ exercise files** (in-class + homework) across the 60 lessons
@@ -69,16 +69,16 @@ Lec.Python/
 ### Six modules (pedagogical spine)
 
 ```
-Module 0 (Day 1-17)   Python Core + Data Foundations
-Module 1 (Day 18-25)  Machine Learning (scikit-learn)
-Module 2 (Day 26-31)  Deep Learning (PyTorch)
-Module 3 (Day 32-36)  NLP & Transformers
-Module 4 (Day 37-43)  LLM Fine-tuning (Hugging Face + LoRA)
-Module 5 (Day 44-50)  Web Scraping
-Module 6 (Day 51-60)  AI Application Development (RAG/Agent/Deploy)
+Module 0 (Day 1-16)   Python Core + Data Foundations
+Module 1 (Day 17-23)  Machine Learning (scikit-learn)
+Module 2 (Day 24-29)  Deep Learning (PyTorch)
+Module 3 (Day 30-34)  NLP & Transformers
+Module 4 (Day 35-41)  LLM Fine-tuning (Hugging Face + LoRA)
+Module 5 (Day 42-48)  Web Scraping
+Module 6 (Day 49-58)  AI Application Development (RAG/Agent/Deploy)
 ```
 
-- **Stage review days**: Day 10, 17, 40, 60(期末答辩).
+- **Stage review days**: Day 09, 16, 38, 58(期末答辩).
 - **Emphasis**: AI Application (10d) > Web Scraping (7d) > LLM (7d) > ML (8d) > DL (6d).
 - **Terminal deliverable**: Student-chosen capstone (4 directions: AI App / LLM Fine-tuning / Data+Scraping / ML Engineering).
 
@@ -204,7 +204,7 @@ The repo uses **git + timestamp backup** for versioning:
 # 2. git add / commit / push for versioned releases
 ```
 
-Current version: **v2.1.0** (2026-07-09) — 60 days / 6 modules / h3+h4 headings / execution trace / 趁热打铁 loop.
+Current version: **v2.2.0** (2026-07-09) — 59 days / 6 modules / h3+h4 / execution trace / 趁热打铁 / OOP 3 天.
 
 ## Out of scope (don't do)
 
@@ -218,7 +218,7 @@ Current version: **v2.1.0** (2026-07-09) — 60 days / 6 modules / h3+h4 heading
 
 | I need… | Read this |
 |---|---|
-| 60-day schedule + capability targets | `summary.md` |
+| 59-day schedule + capability targets | `summary.md` |
 | Teacher daily flow + grading breakdown | `README.md` |
 | Complete user guide(for teachers / students / self-learners) | `USER_GUIDE.md` |
 | Non-Python prerequisites (math/CS) | `PREREQUISITES.md` |
