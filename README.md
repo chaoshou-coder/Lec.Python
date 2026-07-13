@@ -1,6 +1,6 @@
-# 63 天 AI 就绪 Python 工程师 · 教学计划
+# 60 天 AI 就绪 Python 工程师 · 教学计划
 
-> 版本: v2.2.0 | 2026-07-09
+> 版本: v2.0.0 | 2026-07-07
 > 适用对象: 零基础(能打字、会用鼠标、知道"文件/目录"概念)
 > 终点能力: 机器学习 / LLM 微调 / Web 爬虫 / AI 应用开发
 > 前置知识: 见 [`PREREQUISITES.md`](PREREQUISITES.md)(数学/网络/系统,假设已具备或同步补足)
@@ -12,7 +12,7 @@
 1. **课前**:看 `course/lessonXX/README.md` 与 `course/lessonXX/slides.md`,确认当日当堂练选题
 2. **课中**:用 `demo/` 演示 → 当堂练(每节 2-3 题)→ 巡场点评
 3. **课后**:学员做 `homework/`(含当堂练未完成部分 + 选做)→ 教师写 `teacher_notes.md`
-4. **每 7-10 天**:阶段复习日(Day 09/16/39)或 期末答辩(Day 59)
+4. **每 7-10 天**:阶段复习日(Day 10/17/40)或 期末答辩(Day 60)
 
 ### 各目录角色
 
@@ -33,7 +33,7 @@
 - 每周中型项目 20%(3 个,可选做)
 - 出勤与错题本 10%
 
-### 期末作品四选一(Day 58-59)
+### 期末作品四选一(Day 58-60)
 
 | 方向 | 作品示例 | 串联 Domain |
 |---|---|---|
@@ -89,7 +89,7 @@
 | 2 | 17 | EDA 报告 | NumPy+Pandas+可视化 全流程 | 数据清洗 / 可视化 / 洞察表达 |
 | 3 | 25 | Kaggle ML Pipeline | ML 全流程(train→eval→tune) | Pipeline / GridSearch / joblib 持久化 |
 
-#### 第三层:期末 Capstone(Day 58-59,3 天集中)
+#### 第三层:期末 Capstone(Day 58-60,3 天集中)
 
 | 设计原则 | 说明 |
 |---|---|
@@ -121,7 +121,7 @@
         │─┤ M1 │    │    │    │    │    │
         │ │    │    │    │    │    │    │
         └─┴────┴────┴────┴────┴────┴────┴────→ Day
-          1    4    7   10   17   25   31   40   50-59
+          1    4    7   10   17   25   31   40   51-60
 
 M = Mini Project(单点综合)  W = Weekly Project(模块综合)  ┌─ = Capstone(跨模块)
 ```
@@ -144,16 +144,16 @@ M = Mini Project(单点综合)  W = Weekly Project(模块综合)  ┌─ = Capst
 
 | 能力 | 终点标准 | 对应模块 |
 |---|---|---|
-| **机器学习** | 能基于 scikit-learn 完成端到端 ML 项目 | Module 1 (Day 18-24) |
-| **LLM 微调** | 能基于 Hugging Face + LoRA 微调开源大模型 | Module 4 (Day 36-42) |
-| **Web 爬虫** | 能写 HTTP/API/动态页面爬虫构建数据集 | Module 5 (Day 43-49) |
-| **AI 应用开发** | 能开发 RAG/Agent/AI API 应用并部署 | Module 6 (Day 50-59) |
+| **机器学习** | 能基于 scikit-learn 完成端到端 ML 项目 | Module 1 (Day 18-25) |
+| **LLM 微调** | 能基于 Hugging Face + LoRA 微调开源大模型 | Module 4 (Day 37-43) |
+| **Web 爬虫** | 能写 HTTP/API/动态页面爬虫构建数据集 | Module 5 (Day 44-50) |
+| **AI 应用开发** | 能开发 RAG/Agent/AI API 应用并部署 | Module 6 (Day 51-60) |
 
 ### 参考资料
 
 - `references.md`: 外部成熟课程的习题 / 项目 / 教学思路素材库
 - `PREREQUISITES.md`: 数学/网络/系统前置知识(不在课程内讲授)
-- `summary.md`: 63 天总进度表
+- `summary.md`: 60 天总进度表
 
 ---
 
@@ -162,7 +162,7 @@ M = Mini Project(单点综合)  W = Weekly Project(模块综合)  ┌─ = Capst
 - Day 10: Python 核心阶段测 ≥ 70%
 - Day 17: 数据处理阶段测 ≥ 70%
 - Day 40: ML+DL 综合项目验收
-- Day 59: 期末答辩(4 方向选 1)
+- Day 60: 期末答辩(4 方向选 1)
 
 ---
 
@@ -186,7 +186,7 @@ M = Mini Project(单点综合)  W = Weekly Project(模块综合)  ┌─ = Capst
 4. 按 Day 01 → Day 17 顺序学习,每天约 6 小时
 5. 每个 notebook 内:阅读 → 看示例 → 做练习 → 对答案
 
-> 📖 Day 18-59(ML/DL/NLP/LLM/爬虫/AI 应用)暂未制作 Jupyter 版,使用 `course/lessonXX/` 的 slides + 习题自学。
+> 📖 Day 18-60(ML/DL/NLP/LLM/爬虫/AI 应用)暂未制作 Jupyter 版,使用 `course/lessonXX/` 的 slides + 习题自学。
 
 ---
 

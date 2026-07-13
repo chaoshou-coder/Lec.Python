@@ -204,7 +204,7 @@ The repo uses **git + timestamp backup** for versioning:
 # 2. git add / commit / push for versioned releases
 ```
 
-Current version: **v2.2.0** (2026-07-09) — 63 days / 6 modules / h3+h4 headings / execution trace / 趁热打铁 loop / OOP 3 天(封装/继承/抽象).
+Current version: **v2.1.0** (2026-07-09) — 60 days / 6 modules / h3+h4 headings / execution trace / 趁热打铁 loop.
 
 ## Out of scope (don't do)
 
@@ -218,15 +218,15 @@ Current version: **v2.2.0** (2026-07-09) — 63 days / 6 modules / h3+h4 heading
 
 | I need… | Read this |
 |---|---|
-| 63-day schedule + capability targets | `summary.md` |
+| 60-day schedule + capability targets | `summary.md` |
 | Teacher daily flow + grading breakdown | `README.md` |
 | Complete user guide(for teachers / students / self-learners) | `USER_GUIDE.md` |
 | Non-Python prerequisites (math/CS) | `PREREQUISITES.md` |
 | Per-lesson topic distribution | `course/lessonXX/README.md` |
 | Market course comparison / exercise pool | `references.md` |
 | Canonical exercise-file example | `course/lesson01/in_class/practice01.py` |
-| Day 1-17 学生版 Jupyter Notebook(h3+h4 / 执行跟踪 / 趁热打铁) | `student-notebooks/` |
+| Day 1-17 student Jupyter Notebooks(h3+h4 / execution trace / 趁热打铁) | `student-notebooks/` |
 | Jupyter 排版规范(gold standard = Day 08 v6 + 7 踩过的坑) | `dev/skills/05_Jupyter_Notebook_排版规范.md` |
-| 学习断层修复指南(6 个 P0 断层的修复建议) | `dev/learning-gaps.md` |
+| 学习断层修复指南(6 个 P0 断层) | `dev/learning-gaps.md` |
 | 知识地图推理 / 学习顺序编排 / 试题集组织 | `dev/skills/01-04_*.md` |
 | New-day → old-lesson exercise mapping | `dev/module0-mapping.md` |
