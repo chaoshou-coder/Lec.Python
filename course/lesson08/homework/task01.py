@@ -1,51 +1,85 @@
 """
-[难度: ⭐⭐⭐]
-[所属知识点: find() + 切片]
-[预计完成时间: 15 分钟]
+[难度: ⭐⭐⭐⭐]
+[所属知识点: @property 余额保护 + 存取款方法]
+[预计完成时间: 25 分钟]
 
 题目描述:
-    输入一个 URL(如 https://example.com/path),用 find 和切片
-    分别提取协议、域名、路径,并打印结果。
+    设计 BankAccount 类,用 @property 保护余额(非负),
+    提供 deposit(存款) 和 withdraw(取款) 方法,取款超额
+    返回 False。体会"业务逻辑封装在类内部"。
 
 示例:
-    >>> url = "https://example.com/path/to/page"
-    协议: https
-    域名: example.com
-    路径: /path/to/page
+    >>> acc = BankAccount("小明", 100)
+    >>> acc.deposit(50)
+    >>> acc.withdraw(30)
+    True
+    >>> print(acc.balance)
+    120
 """
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-url = input("请输入 URL: ")
-# 提取协议
-protocol_end = url.find("://")
-protocol = url[:protocol_end]
-# 提取域名(从 :// 后到下一个 /)
-host_start = protocol_end + 3
-path_pos = url.find("/", host_start)
-if path_pos == -1:
-    host = url[host_start:]
-    path = ""
-else:
-    host = url[host_start:path_pos]
-    path = url[path_pos:]
-print(f"协议: {protocol}")
-print(f"域名: {host}")
-print(f"路径: {path}")
+class BankAccount:
+    def __init__(self, owner, balance=0):
+        self.owner = owner
+        self.balance = balance  # 走 setter 校验
+
+    @property
+    def balance(self):
+        return self._balance
+
+    @balance.setter
+    def balance(self, value):
+        if value < 0:
+            raise ValueError("余额不能为负数")
+        self._balance = value
+
+    def deposit(self, amount):
+        if amount <= 0:
+            return False
+        self.balance += amount
+        return True
+
+    def withdraw(self, amount):
+        if amount <= 0 or amount > self.balance:
+            return False
+        self.balance -= amount
+        return True
+
+    def __str__(self):
+        return f"BankAccount(户主={self.owner}, 余额={self.balance})"
+
+acc = BankAccount("小明", 100)
+acc.deposit(50)
+acc.withdraw(30)
+print(acc)
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    # 测试 1: 带路径
-    u1 = "https://example.com/path/to/page"
-    print(f"测试1 URL: {u1}")
+    # 测试 1: 正常存取
+    a = BankAccount("小明", 100)
+    a.deposit(50)
+    print(f"测试1: {a.balance}")  # 150
+    ok = a.withdraw(30)
+    print(f"测试2: {ok} {a.balance}")  # True 120
 
-    # 测试 2: 不带路径
-    u2 = "https://www.baidu.com"
-    print(f"测试2 URL: {u2}")
+    # 测试 3: 取款超额失败
+    ok = a.withdraw(999)
+    print(f"测试3: {ok} {a.balance}")  # False 120
 
-    # 测试 3: http 协议
-    u3 = "http://test.site/api/v1"
-    print(f"测试3 URL: {u3}")
+    # 测试 4: 负数存款失败
+    ok = a.deposit(-10)
+    print(f"测试4: {ok} {a.balance}")  # False 120
+
+    # 测试 5: 构造时负数抛异常
+    try:
+        BankAccount("小红", -50)
+        print("测试5: 未抛异常(错)")
+    except ValueError as e:
+        print(f"测试5: {e}")  # 余额不能为负数
+
+    # 测试 6: __str__ 输出
+    print(f"测试6: {a}")  # BankAccount(户主=小明, 余额=120)

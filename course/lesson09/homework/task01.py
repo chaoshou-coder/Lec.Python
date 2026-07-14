@@ -1,40 +1,59 @@
 """
-[难度: ⭐⭐⭐⭐]
-[所属知识点: 列表生成式 + 二维列表]
+[难度: ⭐⭐⭐]
+[所属知识点: 装饰器(日志记录)]
 [预计完成时间: 20 分钟]
 
 题目描述:
-    给定二维列表 [[1,2,3],[4,5,6]],用列表生成式转置为
-    [[1,4],[2,5],[3,6]],并打印结果。
+    请编写一个日志装饰器 logger,用于记录函数的调用信息。
+    要求:
+      - 打印函数名、传入参数(args 和 kwargs)
+      - 打印函数返回值
+      - 使用 @wraps 保留原函数元信息
+
+    这是实际项目中非常实用的调试工具!
 
 示例:
-    >>> matrix = [[1,2,3],[4,5,6]]
-    输出: [[1, 4], [2, 5], [3, 6]]
+    >>> @logger
+    ... def add(a, b):
+    ...     return a + b
+    >>> add(3, 5)
+    [logger] 调用 add(3, 5)
+    [logger] add 返回: 8
+    8
 """
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-matrix = [[1, 2, 3], [4, 5, 6]]
-transposed = [[row[i] for row in matrix] for i in range(len(matrix[0]))]
-print("原矩阵:", matrix)
-print("转置后:", transposed)
+
+# 提示: 需要导入
+# from functools import wraps
+
+def logger(func):
+    """日志记录装饰器"""
+    # 使用 @wraps(func) 保留元信息
+    # 在调用前后分别打印参数和返回值
+    pass
+
+# 测试用函数
+@logger
+def add(a, b):
+    """两数相加"""
+    return a + b
+
+@logger
+def greet(name, greeting="你好"):
+    """打招呼"""
+    return f"{greeting},{name}!"
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    # 测试 1: 2x3 矩阵
-    m1 = [[1, 2, 3], [4, 5, 6]]
-    t1 = [[row[i] for row in m1] for i in range(len(m1[0]))]
-    print(f"测试1: {t1}")
-
-    # 测试 2: 方阵 2x2
-    m2 = [[1, 2], [3, 4]]
-    t2 = [[row[i] for row in m2] for i in range(len(m2[0]))]
-    print(f"测试2: {t2}")
-
-    # 测试 3: 单行
-    m3 = [[1, 2, 3]]
-    t3 = [[row[i] for row in m3] for i in range(len(m3[0]))]
-    print(f"测试3: {t3}")
+    # 测试 1: 普通调用
+    result = add(3, 5)
+    print(f"结果: {result}")
+    print("-" * 30)
+    # 测试 2: 带关键字参数
+    result = greet("世界", greeting="Hello")
+    print(f"结果: {result}")

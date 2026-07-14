@@ -1,48 +1,51 @@
 """
-[难度: ⭐⭐⭐⭐⭐]
-[所属知识点: sort(key=lambda x: ...)]
-[预计完成时间: 25 分钟]
+[难度: ⭐⭐⭐⭐]
+[所属知识点: lambda 实现自定义排序(多级排序)]
+[预计完成时间: 20 分钟]
 
 题目描述:
-    输入 N 个学生数据(姓名 + 成绩),计算平均分、最高分、最低分,
-    按成绩降序输出。用 sort + lambda 实现排序。
+    给定一组商品信息(名称, 价格, 库存),
+    请使用 lambda 实现多级排序:
+      1. 按价格升序
+      2. 价格相同时,按库存降序
+      3. 前两者都相同时,按名称字母顺序升序
+
+    要求: 只用一行 sorted + lambda 实现核心排序逻辑。
 
 示例:
-    >>> students = [("张三", 85), ("李四", 92), ("王五", 78)]
-    平均分: 85.0
-    最高分: 92
-    最低分: 78
-    排序: [('李四', 92), ('张三', 85), ('王五', 78)]
+    >>> products = [
+    ...     ("苹果", 5.0, 100),
+    ...     ("香蕉", 3.0, 200),
+    ...     ("橙子", 5.0, 150),
+    ...     ("葡萄", 3.0, 200),
+    ... ]
+    >>> sort_products(products)
+    [('香蕉', 3.0, 200), ('葡萄', 3.0, 200),
+     ('橙子', 5.0, 150), ('苹果', 5.0, 100)]
 """
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-students = [("张三", 85), ("李四", 92), ("王五", 78)]
-# 平均分
-avg = sum(s[1] for s in students) / len(students)
-# 最高最低分
-students_sorted = sorted(students, key=lambda x: x[1], reverse=True)
-highest = students_sorted[0][1]
-lowest = students_sorted[-1][1]
-print(f"平均分: {avg}")
-print(f"最高分: {highest}")
-print(f"最低分: {lowest}")
-print(f"降序: {students_sorted}")
+
+def sort_products(products):
+    """多级排序: 价格升序 → 库存降序 → 名称升序"""
+    # 提示: key=lambda p: (p[1], -p[2], p[0])
+    pass
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    # 测试 1: 正常数据
-    data1 = [("张三", 85), ("李四", 92), ("王5", 78)]
-    d1 = sorted(data1, key=lambda x: x[1], reverse=True)
-    print(f"测试1 排序: {d1}")
-
-    # 测试 2: 一个元素
-    data2 = [("唯一", 100)]
-    print(f"测试2 平均分: {data2[0][1]}")
-
-    # 测试 3: 成绩相同
-    data3 = [("A", 80), ("B", 80)]
-    print(f"测试3 排序: {sorted(data3, key=lambda x: x[1], reverse=True)}")
+    products = [
+        ("苹果", 5.0, 100),
+        ("香蕉", 3.0, 200),
+        ("橙子", 5.0, 150),
+        ("葡萄", 3.0, 200),
+    ]
+    # 测试 1: 多级排序
+    result = sort_products(products)
+    for name, price, stock in result:
+        print(f"{name}: 价格={price}, 库存={stock}")
+    # 测试 2: 空列表
+    print(f"空列表: {sort_products([])}")

@@ -1,88 +1,65 @@
 """
 [难度: ⭐⭐]
-[所属知识点: Day01-Day02 综合 + f-string 对齐]
-[预计完成时间: 15 分钟]
+[所属知识点: 文件读取 read / readline / readlines]
+[预计完成时间: 8 分钟]
 
 题目描述:
-  小明在超市购物后,想要打印一张整齐的购物明细表。
-  请你编写程序,让用户依次输入 3 件商品的名称、单价、数量,
-  然后用 f-string 的对齐功能打印出一张整齐的表格。
+  老师已经在当前目录创建了一个 "diary.txt" 文件,内容是三行
+  日记。请你用 with 语句打开文件,分别演示三种读取方式:
+  先 read() 全部读出,再 readline() 读一行,再 readlines()
+  读成列表。每次读取前用 open 重新打开(否则指针已在末尾)。
 
 要求:
-  - 表头包含: 商品名称(左对齐，占 12 字符)、单价(右对齐，占 8 字符)、
-    数量(右对齐，占 6 字符)、小计(右对齐，占 10 字符)
-  - 单价和小计保留 2 位小数
-  - 打印分隔线 "------------ -------- ------ ----------"
+  - 使用 with open(...) as f: 的写法
+  - 必须写 encoding="utf-8"
+  - 三种读取结果各 print 一次,并加注释说明
 
 示例:
-    输入:
-        商品1: 苹果
-        单价: 5.5
-        数量: 3
-        商品2: 牛奶
-        单价: 12.8
-        数量: 2
-        商品3: 面包
-        单价: 7.0
-        数量: 5
-    输出:
-        商品名称         单价     数量       小计
-        ------------ -------- ------
-        苹果            5.50      3     16.50
-        牛奶           12.80      2     25.60
-        面包            7.00      5     35.00
-        ------------ -------- ------ ----------
-        合计:                             77.10
+    >>> 运行程序
+    [read() 结果]
+    2026-07-01 晴 今天学了 Python
+
+    [readline() 结果]
+    2026-07-01 晴 今天学了 Python
+
+    [readlines() 结果]
+    ['2026-07-01 晴 今天学了 Python\n', ...]
 """
 
 # ======================
-# 学员代码区
+# 学员代码区(以 pass 作为占位符)
 # ======================
-
-# 输入 3 件商品的信息
-name1 = input("请输入第 1 件商品名称: ")
-price1 = float(input("请输入单价: "))
-qty1 = int(input("请输入数量: "))
-
-name2 = input("请输入第 2 件商品名称: ")
-price2 = float(input("请输入单价: "))
-qty2 = int(input("请输入数量: "))
-
-name3 = input("请输入第 3 件商品名称: ")
-price3 = float(input("请输入单价: "))
-qty3 = int(input("请输入数量: "))
-
-# 计算小计和合计
-sub1 = price1 * qty1
-sub2 = price2 * qty2
-sub3 = price3 * qty3
-total = sub1 + sub2 + sub3
-
-# 打印表格
-header = f"{'商品名称':<12}{'单价':>8}{'数量':>6}{'小计':>10}"
-print(header)
-print(f"{'------------':<12}{'--------':>8}{'------':>6}{'----------':>10}")
-print(f"{name1:<12}{price1:>8.2f}{qty1:>6}{sub1:>10.2f}")
-print(f"{name2:<12}{price2:>8.2f}{qty2:>6}{sub2:>10.2f}")
-print(f"{name3:<12}{price3:>8.2f}{qty3:>6}{sub3:>10.2f}")
-print(f"{'------------':<12}{'--------':>8}{'------':>6}{'----------':>10}")
-print(f"{'合计:':<12}{'':>8}{'':>6}{total:>10.2f}")
+pass
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    # 测试 1: 正常输入(苹果 5.5 3、牛奶 12.8 2、面包 7.0 5)
-    # 预期合计: 77.10
+    import os
+    tmp = "test_diary.txt"
+    # 创建测试文件
+    with open(tmp, "w", encoding="utf-8") as f:
+        f.write("2026-07-01 晴 今天学了 Python\n")
+        f.write("2026-07-02 阴 练习了循环\n")
+        f.write("2026-07-03 晴 写了小项目\n")
 
-    # 测试 2: 边界输入(商品名很长,如"新疆阿克苏苹果")
-    # 预期: 左对齐完整显示,不截断
+    # 测试 1: read() 返回字符串
+    with open(tmp, "r", encoding="utf-8") as f:
+        content = f.read()
+    assert isinstance(content, str), "read() 应返回字符串"
+    assert "今天学了 Python" in content
 
-    # 测试 3: 边界输入(数量为 1,单价为整数,如"鸡蛋 1 1")
-    # 预期: 小计为 1.00
+    # 测试 2: readline() 返回一行
+    with open(tmp, "r", encoding="utf-8") as f:
+        line = f.readline()
+    assert isinstance(line, str), "readline() 应返回字符串"
+    assert line.endswith("\n"), "readline() 保留换行符"
 
-    # 测试 4: 边界输入(单价为 0,如"赠品 0 1")
-    # 预期: 小计为 0.00
+    # 测试 3: readlines() 返回列表
+    with open(tmp, "r", encoding="utf-8") as f:
+        lines = f.readlines()
+    assert isinstance(lines, list), "readlines() 应返回列表"
+    assert len(lines) == 3, f"应有 3 行,实际 {len(lines)}"
 
-    # 由于本程序需要交互输入,教师可手动运行并依次输入测试数据
-    print("请直接运行本文件进行测试(需要交互输入)")
+    os.remove(tmp)
+    print("practice01 测试通过 ✓")

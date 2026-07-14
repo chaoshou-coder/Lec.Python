@@ -1,102 +1,58 @@
 """
 [难度: ⭐⭐⭐]
-[所属知识点: Day04 列表 + Day05 循环 + Day06 分支]
-[预计完成时间: 20 分钟]
+[所属知识点: JSON 反序列化 json.load / json.loads]
+[预计完成时间: 12 分钟]
 
 题目描述:
-  实现一个简单的"列表版购物车"程序,商品用字符串表示。
-  程序启动后,反复让用户输入命令,直到输入 0 退出。
-
-功能菜单:
-    1. 添加商品
-    2. 查看购物车
-    3. 删除商品
-    0. 退出
-
-操作说明:
-    - 输入 1: 提示用户输入商品名称,添加到购物车列表
-    - 输入 2: 打印购物车所有商品(带编号 1、2、3...)
-    - 输入 3: 让用户输入要删除的编号,删除对应商品
-    - 输入 0: 打印"欢迎下次光临!"并结束程序
-    - 输入其他: 打印"无效命令,请重新输入"
+  你已经有一个 JSON 文件 "student.json",内容是一个学生字典
+  (包含 name、age、scores 字段)。请用 json.load 读入并打印
+  学生的平均分。然后再用 json.loads 解析一个 JSON 字符串,
+  提取其中的 "city" 字段。
 
 要求:
-    - 用 while True 循环实现反复操作
-    - 用 if/elif/else 判断用户输入的命令
-    - 删除时若编号不存在,提示"该编号不存在"
+  - json.load 用于读文件,json.loads 用于读字符串
+  - 平均分 = sum(scores) / len(scores),保留 1 位小数
+  - 打印格式: "姓名 XX,平均分 YY" 和 "城市: ZZ"
 
 示例:
-    >>> 请输入命令(1 添加/2 查看/3 删除/0 退出): 1
-    >>> 请输入商品名称: 苹果
-    >>> 苹果已添加到购物车!
-
-    >>> 请输入命令(1 添加/2 查看/3 删除/0 退出): 2
-    >>> 1. 苹果
-
-    >>> 请输入命令(1 添加/2 查看/3 删除/0 退出): 0
-    >>> 欢迎下次光临!
+    >>> 运行程序
+    姓名 小明,平均分 89.0
+    城市: 北京
 """
 
 # ======================
-# 学员代码区
+# 学员代码区(以 pass 作为占位符)
 # ======================
-
-# 购物车列表
-cart = []
-
-# 循环显示菜单并处理命令
-while True:
-    # 显示菜单并获取用户输入
-    cmd = input("请输入命令(1 添加/2 查看/3 删除/0 退出): ")
-
-    if cmd == "1":
-        # 添加商品
-        item = input("请输入商品名称: ")
-        cart.append(item)
-        print(f"{item} 已添加到购物车!")
-    elif cmd == "2":
-        # 查看购物车
-        if len(cart) == 0:
-            print("购物车为空!")
-        else:
-            for i in range(len(cart)):
-                print(f"{i + 1}. {cart[i]}")
-    elif cmd == "3":
-        # 删除商品
-        num = int(input("请输入要删除的编号: "))
-        if 1 <= num <= len(cart):
-            removed = cart.pop(num - 1)
-            print(f"已删除: {removed}")
-        else:
-            print("该编号不存在!")
-    elif cmd == "0":
-        print("欢迎下次光临!")
-        break
-    else:
-        print("无效命令,请重新输入")
+pass
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    # 测试 1: 添加查看流程
-    # 输入序列: 1 -> 苹果 -> 1 -> 牛奶 -> 2 -> 0
-    # 预期: 打印 1.苹果 2.牛奶,然后退出
+    import json, os
+    tmp = "test_student.json"
 
-    # 测试 2: 删除流程
-    # 输入序列: 1 -> 苹果 -> 1 -> 牛奶 -> 3 -> 1 -> 2 -> 0
-    # 预期: 删除苹果后,查看只有牛奶
+    # 创建测试 JSON 文件
+    data = {"name": "小明", "age": 18, "scores": [90, 85, 92]}
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False)
 
-    # 测试 3: 删除不存在的编号
-    # 输入序列: 1 -> 苹果 -> 3 -> 5 -> 0
-    # 预期: 提示"该编号不存在!"
+    # 测试 1: json.load 读文件
+    with open(tmp, "r", encoding="utf-8") as f:
+        obj = json.load(f)
+    assert obj["name"] == "小明"
+    avg = sum(obj["scores"]) / len(obj["scores"])
+    assert avg == 89.0, f"平均分应为 89.0,实际 {avg}"
 
-    # 测试 4: 边界 - 空购物车查看
-    # 输入序列: 2 -> 0
-    # 预期: 提示"购物车为空!"
+    # 测试 2: json.loads 解析字符串
+    s = '{"city": "北京", "temp": 28}'
+    parsed = json.loads(s)
+    assert parsed["city"] == "北京"
 
-    # 测试 5: 无效命令
-    # 输入序列: 9 -> 0
-    # 预期: 提示"无效命令,请重新输入"
+    # 测试 3: json.loads 解析含中文的字符串
+    s2 = '{"city": "上海"}'
+    parsed2 = json.loads(s2)
+    assert parsed2["city"] == "上海"
 
-    print("请直接运行本文件进行测试(需要交互输入)")
+    os.remove(tmp)
+    print("practice03 测试通过 ✓")

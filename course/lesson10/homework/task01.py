@@ -1,38 +1,62 @@
 """
-[难度: ⭐⭐⭐]
-[所属知识点: def + 算术]
-[预计完成时间: 15 分钟]
+[难度: ⭐⭐⭐⭐]
+[所属知识点: 文件持久化(JSON 加载/保存)]
+[预计完成时间: 25 分钟]
 
 题目描述:
-    定义一个函数 celsius_to_fahrenheit(c),把摄氏度转华氏度,
-    公式: F = C * 9/5 + 32。
+    为购物车项目添加 JSON 文件持久化功能。
+
+    实现两个函数:
+      1. save_cart(cart, filename)
+         - 将购物车数据保存为 JSON 文件
+      2. load_cart(filename)
+         - 从 JSON 文件读取购物车数据
+         - 文件不存在时返回空列表
+
+    使用 json 模块,注意中文编码 ensure_ascii=False。
 
 示例:
-    >>> celsius_to_fahrenheit(0)
-    32.0
-    >>> celsius_to_fahrenheit(100)
-    212.0
+    >>> cart = [{"id": 1, "name": "苹果", "price": 5.0, "qty": 2}]
+    >>> save_cart(cart, "cart.json")
+    >>> new_cart = load_cart("cart.json")
+    >>> print(new_cart)
+    [{'id': 1, 'name': '苹果', 'price': 5.0, 'qty': 2}]
 """
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-def celsius_to_fahrenheit(c):
-    return c * 9 / 5 + 32
 
+# 提示: 需要导入
+# import json
+# import os
 
-# 示例调用
-print("0°C =", celsius_to_fahrenheit(0), "°F")
+def save_cart(cart, filename):
+    """保存购物车到 JSON 文件"""
+    # 提示: with open(filename, 'w', encoding='utf-8') as f:
+    #           json.dump(cart, f, ensure_ascii=False, indent=2)
+    pass
+
+def load_cart(filename):
+    """从 JSON 文件加载购物车"""
+    # 提示: 先判断 os.path.exists(filename)
+    #       存在则读取,不存在返回 []
+    pass
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    # 测试 1: 冰点
-    print(f"测试1: {celsius_to_fahrenheit(0)}")
-
-    # 测试 2: 沸点
-    print(f"测试2: {celsius_to_fahrenheit(100)}")
-
-    # 测试 3: 负温度
-    print(f"测试3: {celsius_to_fahrenheit(-40)}")
+    cart = [
+        {"id": 1, "name": "苹果", "price": 5.0, "qty": 2},
+        {"id": 2, "name": "香蕉", "price": 3.5, "qty": 3},
+    ]
+    # 测试 1: 保存
+    save_cart(cart, "cart_test.json")
+    print("已保存到 cart_test.json")
+    # 测试 2: 加载
+    loaded = load_cart("cart_test.json")
+    print(f"加载结果: {loaded}")
+    # 测试 3: 文件不存在
+    empty = load_cart("not_exist.json")
+    print(f"不存在: {empty}")

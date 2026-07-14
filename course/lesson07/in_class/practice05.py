@@ -1,104 +1,78 @@
 """
-[难度: ⭐⭐⭐⭐]
-[所属知识点: Day06 分支 + Day02 算术]
-[预计完成时间: 20 分钟]
+[难度: ⭐⭐⭐]
+[所属知识点: 基础异常处理 try / except FileNotFoundError
+ / ValueError]
+[预计完成时间: 12 分钟]
 
 题目描述:
-  在购物车的结算环节,超市推出了会员折扣活动:
-    - 会员享受 95 折(乘以 0.95)
-    - 非会员按原价结算
-
-  请编写程序,让用户输入若干商品的单价和数量(直到输入商品名为 "结束"),
-  然后询问用户是否是会员(y/n),最后打印:
-    - 商品清单(名称、单价、数量、小计)
-    - 原价合计
-    - 折扣金额(会员才有)
-    - 实付金额
+  写一个"安全打开文件"的程序:尝试读取用户指定的文件。
+  如果文件不存在,捕获 FileNotFoundError 并提示"文件不存在";
+  如果文件存在但内容不是数字,捕获 ValueError 并提示"内容
+  无法转为数字";如果成功,打印该数字的平方。
 
 要求:
-  - 用嵌套列表存储商品信息 [名称, 单价, 数量]
-  - 会员判断用 if/else
-  - 金额保留 2 位小数
+  - 用 try / except 分别捕获两种异常
+  - 不要裸写 except:,必须指定类型
+  - 用 else 分支在无异常时打印结果
 
 示例:
-    >>> 请输入商品名称(输入"结束"停止): 苹果
-    >>> 请输入单价: 5.5
-    >>> 请输入数量: 3
-    >>> 请输入商品名称(输入"结束"停止): 牛奶
-    >>> 请输入单价: 12.8
-    >>> 请输入数量: 2
-    >>> 请输入商品名称(输入"结束"停止): 结束
-    >>> 是否是会员(y/n)? y
-    ======== 结算清单 ========
-    1. 苹果  5.50 x 3 = 16.50
-    2. 牛奶 12.80 x 2 = 25.60
-    原价合计: 42.10
-    会员折扣: -2.11
-    实付金额: 39.99
+    >>> 运行程序(文件不存在时)
+    文件不存在,请检查路径
+
+    >>> 运行程序(文件内容是 abc 时)
+    内容无法转为数字
+
+    >>> 运行程序(文件内容是 5 时)
+    5 的平方是 25
 """
 
 # ======================
-# 学员代码区
+# 学员代码区(以 pass 作为占位符)
 # ======================
-
-# 存储商品信息
-cart = []
-
-# 循环输入商品
-while True:
-    name = input('请输入商品名称(输入"结束"停止): ')
-    if name == "结束":
-        break
-    price = float(input("请输入单价: "))
-    qty = int(input("请输入数量: "))
-    cart.append([name, price, qty])
-
-# 计算原价合计
-total = 0
-for item in cart:
-    subtotal = item[1] * item[2]
-    total += subtotal
-
-# 询问会员身份
-is_member = input("是否是会员(y/n)? ")
-
-# 计算折扣
-if is_member == "y":
-    discount = total * 0.05
-    final = total * 0.95
-else:
-    discount = 0
-    final = total
-
-# 打印结算清单
-print("======== 结算清单 ========")
-for i in range(len(cart)):
-    item = cart[i]
-    sub = item[1] * item[2]
-    print(f"{i + 1}. {item[0]}  {item[1]:.2f} x {item[2]} = {sub:.2f}")
-print(f"原价合计: {total:.2f}")
-if is_member == "y":
-    print(f"会员折扣: -{discount:.2f}")
-print(f"实付金额: {final:.2f}")
+pass
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    # 测试 1: 会员结算
-    # 输入: 苹果 5.5 3 -> 牛奶 12.8 2 -> 结束 -> y
-    # 预期: 原价 42.10,折扣 2.11,实付 39.99
+    import os
 
-    # 测试 2: 非会员结算
-    # 输入: 面包 7.0 1 -> 结束 -> n
-    # 预期: 原价 7.00,实付 7.00(无折扣)
+    # 测试 1: FileNotFoundError
+    # 模拟:open 一个不存在的文件应抛 FileNotFoundError
+    caught = False
+    try:
+        with open("no_such_file.txt", "r") as f:
+            f.read()
+    except FileNotFoundError:
+        caught = True
+    assert caught, "应捕获 FileNotFoundError"
 
-    # 测试 3: 边界 - 只买 1 件商品
-    # 输入: 鸡蛋 1.0 1 -> 结束 -> y
-    # 预期: 原价 1.00,折扣 0.05,实付 0.95
+    # 测试 2: ValueError(文件存在但内容不是数字)
+    tmp = "test_bad.txt"
+    with open(tmp, "w", encoding="utf-8") as f:
+        f.write("abc")
+    caught = False
+    try:
+        with open(tmp, "r", encoding="utf-8") as f:
+            num = float(f.read())
+    except ValueError:
+        caught = True
+    assert caught, "应捕获 ValueError"
+    os.remove(tmp)
 
-    # 测试 4: 边界 - 单价为 0
-    # 输入: 赠品 0 1 -> 结束 -> y
-    # 预期: 原价 0.00,折扣 0.00,实付 0.00
+    # 测试 3: 正常情况(文件内容是数字)
+    tmp = "test_good.txt"
+    with open(tmp, "w", encoding="utf-8") as f:
+        f.write("5")
+    result = None
+    try:
+        with open(tmp, "r", encoding="utf-8") as f:
+            num = float(f.read())
+    except (FileNotFoundError, ValueError):
+        pass
+    else:
+        result = num ** 2
+    assert result == 25, f"5 的平方应为 25,实际 {result}"
+    os.remove(tmp)
 
-    print("请直接运行本文件进行测试(需要交互输入)")
+    print("practice05 测试通过 ✓")

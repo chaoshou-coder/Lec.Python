@@ -1,110 +1,60 @@
 """
-[难度: ⭐⭐⭐⭐]
-[所属知识点: Day04 嵌套列表 + Day05 循环 + Day06 分支]
-[预计完成时间: 20 分钟]
+[难度: ⭐⭐⭐]
+[所属知识点: JSON 序列化 json.dump / json.dumps]
+[预计完成时间: 13 分钟]
 
 题目描述:
-  升级购物车功能! 现在购物车中每个商品是一个嵌套列表 [商品名, 数量]。
-  当用户添加一个已存在的商品时,数量累加;否则新增一条记录。
+  你有一个学生字典列表,需要把它保存为 JSON 文件,并且还要
+  生成一个 JSON 字符串用于"网络传输"。请分别用 json.dump
+  写文件、json.dumps 转字符串两种方式完成。
 
-功能菜单:
-    1. 添加商品
-    2. 查看购物车
-    3. 删除商品
-    0. 退出
-
-操作说明:
-    - 输入 1: 提示输入商品名和数量
-      - 若商品已存在,数量累加
-      - 若商品不存在,新增 [商品名, 数量]
-    - 输入 2: 打印所有商品(编号、名称、数量)
-    - 输入 3: 按编号删除商品
-    - 输入 0: 退出
+要求:
+  - json.dump 写文件时加 ensure_ascii=False 和 indent=2
+  - json.dumps 转字符串时也加 ensure_ascii=False
+  - 写完后读回文件,验证内容一致
+  - 打印 dumps 返回的字符串,确认是 str 类型
 
 示例:
-    >>> 请输入命令: 1
-    >>> 请输入商品名称: 苹果
-    >>> 请输入数量: 3
-    >>> 苹果已添加到购物车!
-
-    >>> 请输入命令: 1
-    >>> 请输入商品名称: 苹果
-    >>> 请输入数量: 2
-    >>> 苹果数量已更新为 5!
-
-    >>> 请输入命令: 2
-    >>> 1. 苹果 - 数量: 5
+    >>> 运行程序
+    dumps 类型: <class 'str'>
+    dumps 内容: [{"name": "小明", "age": 18}, ...]
+    文件读回验证通过
 """
 
 # ======================
-# 学员代码区
+# 学员代码区(以 pass 作为占位符)
 # ======================
-
-# 购物车: 每个元素是 [商品名, 数量]
-cart = []
-
-while True:
-    cmd = input("请输入命令(1 添加/2 查看/3 删除/0 退出): ")
-
-    if cmd == "1":
-        name = input("请输入商品名称: ")
-        qty = int(input("请输入数量: "))
-        # 查找商品是否已存在
-        found = False
-        for item in cart:
-            if item[0] == name:
-                item[1] += qty
-                found = True
-                print(f"{name} 数量已更新为 {item[1]}!")
-                break
-        if not found:
-            cart.append([name, qty])
-            print(f"{name} 已添加到购物车!")
-
-    elif cmd == "2":
-        if len(cart) == 0:
-            print("购物车为空!")
-        else:
-            for i in range(len(cart)):
-                print(f"{i + 1}. {cart[i][0]} - 数量: {cart[i][1]}")
-
-    elif cmd == "3":
-        num = int(input("请输入要删除的编号: "))
-        if 1 <= num <= len(cart):
-            removed = cart.pop(num - 1)
-            print(f"已删除: {removed[0]}")
-        else:
-            print("该编号不存在!")
-
-    elif cmd == "0":
-        print("欢迎下次光临!")
-        break
-
-    else:
-        print("无效命令,请重新输入")
+pass
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    # 测试 1: 添加新商品
-    # 输入: 1 -> 苹果 -> 3 -> 2 -> 0
-    # 预期: 显示 1.苹果 - 数量:3
+    import json, os
+    tmp = "test_class.json"
 
-    # 测试 2: 累加数量
-    # 输入: 1 -> 苹果 -> 3 -> 1 -> 苹果 -> 2 -> 2 -> 0
-    # 预期: 显示 1.苹果 - 数量:5
+    students = [
+        {"name": "小明", "age": 18},
+        {"name": "小红", "age": 19}
+    ]
 
-    # 测试 3: 删除后重新添加
-    # 输入: 1 -> 苹果 -> 3 -> 1 -> 牛奶 -> 2 -> 3 -> 1 -> 2 -> 0
-    # 预期: 删除苹果后,查看只有牛奶
+    # 测试 1: json.dump 写文件
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(students, f, ensure_ascii=False, indent=2)
 
-    # 测试 4: 边界 - 数量为 0
-    # 输入: 1 -> 苹果 -> 0 -> 2 -> 0
-    # 预期: 显示 1.苹果 - 数量:0
+    # 测试 2: 读回验证
+    with open(tmp, "r", encoding="utf-8") as f:
+        loaded = json.load(f)
+    assert loaded == students, "读回内容应与原数据一致"
 
-    # 测试 5: 边界 - 删除编号超出范围
-    # 输入: 1 -> 苹果 -> 3 -> 3 -> 9 -> 0
-    # 预期: 提示"该编号不存在!"
+    # 测试 3: json.dumps 返回字符串
+    s = json.dumps(students, ensure_ascii=False)
+    assert isinstance(s, str), "dumps 应返回字符串"
+    assert "小明" in s, "ensure_ascii=False 时中文不转义"
 
-    print("请直接运行本文件进行测试(需要交互输入)")
+    # 测试 4: 对比 ensure_ascii=True 时中文被转义
+    s2 = json.dumps(students, ensure_ascii=True)
+    assert "\\u" in s2, "ensure_ascii=True 时中文应被转义"
+
+    os.remove(tmp)
+    print("practice04 测试通过 ✓")

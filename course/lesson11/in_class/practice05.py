@@ -1,51 +1,54 @@
 """
-[难度: ⭐⭐⭐⭐]
-[所属知识点: lambda + sort(key=...)]
-[预计完成时间: 20 分钟]
+[难度: ⭐⭐⭐]
+[所属知识点: 数组切片与索引(多维)]
+[预计完成时间: 15 分钟]
 
 题目描述:
-    定义一个函数 sort_students(students, key='name'),
-    根据 key 对学生列表(字典构成的列表)排序,默认按姓名。
+    给定一个 4x4 二维数组,请完成以下切片操作:
+      1. 取第 1 行(索引 0)
+      2. 取第 2 列(索引 1)
+      3. 取左上 2x2 子矩阵
+      4. 取所有偶数元素(布尔索引)
+
+    切片语法: arr[行切片, 列切片]
 
 示例:
-    >>> students = [
-    ...     {"name": "张三", "score": 85},
-    ...     {"name": "李四", "score": 92},
-    ... ]
-    >>> sort_students(students, key='score')
-    [{'name': '张三', 'score': 85}, {'name': '李四', 'score': 92}]
+    >>> arr = np.arange(1, 17).reshape(4, 4)
+    >>> # arr = [[1,2,3,4],[5,6,7,8],
+    >>> #        [9,10,11,12],[13,14,15,16]]
+    >>> print(arr[0, :])
+    [1 2 3 4]
+    >>> print(arr[:2, :2])
+    [[1 2]
+     [5 6]]
 """
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-def sort_students(students, key='name'):
-    return sorted(students, key=lambda s: s[key])
 
+import numpy as np
 
-# 示例调用
-students = [
-    {"name": "张三", "score": 85},
-    {"name": "李四", "score": 92},
-    {"name": "王五", "score": 78},
-]
-print("按姓名:", sort_students(students))
-print("按成绩:", sort_students(students, key='score'))
+arr = np.arange(1, 17).reshape(4, 4)
+
+# 任务 1: 第 1 行
+row1 = None  # 替换为 arr[0, :]
+
+# 任务 2: 第 2 列
+col2 = None  # 替换为 arr[:, 1]
+
+# 任务 3: 左上 2x2 子矩阵
+sub = None  # 替换为 arr[:2, :2]
+
+# 任务 4: 所有偶数元素
+evens = None  # 替换为 arr[arr % 2 == 0]
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    # 测试 1: 按姓名排序
-    data = [
-        {"name": "Charlie", "age": 25},
-        {"name": "Alice", "age": 30},
-        {"name": "Bob", "age": 20},
-    ]
-    print(f"测试1 按name: {sort_students(data)}")
-
-    # 测试 2: 按年龄排序
-    print(f"测试2 按age: {sort_students(data, key='age')}")
-
-    # 测试 3: 空列表
-    print(f"测试3 空列表: {sort_students([])}")
+    print(f"原数组:\n{arr}")
+    print(f"第 1 行: {row1}")
+    print(f"第 2 列: {col2}")
+    print(f"左上 2x2:\n{sub}")
+    print(f"偶数元素: {evens}")

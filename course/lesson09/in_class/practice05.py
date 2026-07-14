@@ -1,51 +1,44 @@
 """
-[难度: ⭐⭐⭐⭐]
-[所属知识点: copy.copy() / copy.deepcopy()]
-[预计完成时间: 20 分钟]
+[难度: ⭐⭐⭐]
+[所属知识点: map/filter 高阶函数]
+[预计完成时间: 15 分钟]
 
 题目描述:
-    给定列表 [1,2,3,[4,5]],分别用 copy.copy() 和 copy.deepcopy() 拷贝,
-    然后修改原列表的嵌套列表元素,观察拷贝后的差异,并打印结果。
+    给定一个整数列表 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    请使用 map 和 filter 完成以下任务:
+      1. 用 filter 筛选出所有偶数
+      2. 用 map 对筛选后的偶数求平方
+      3. 将结果转为列表输出
+
+    map(函数, 可迭代对象) — 对每个元素执行函数
+    filter(函数, 可迭代对象) — 保留使函数返回 True 的元素
 
 示例:
-    >>> original = [1, 2, 3, [4, 5]]
-    修改 original[3].append(6) 后
-    copy 版嵌套列表会同步变化,deepcopy 版不会。
+    >>> nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    >>> process_numbers(nums)
+    [4, 16, 36, 64, 100]
 """
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-import copy
 
-original = [1, 2, 3, [4, 5]]
-shallow = copy.copy(original)
-deep = copy.deepcopy(original)
-# 修改原列表的嵌套部分
-original[3].append(6)
-print("原列表:", original)
-print("浅拷贝:", shallow)
-print("深拷贝:", deep)
+def process_numbers(nums):
+    """筛选偶数并求平方"""
+    # 提示: 先 filter 偶数,再 map 平方
+    # evens = filter(lambda x: x % 2 == 0, nums)
+    # squares = map(lambda x: x ** 2, evens)
+    # return list(squares)
+    pass
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    # 测试 1: 浅拷贝会受影响
-    import copy as cp
-    orig = [1, 2, 3, [4, 5]]
-    s = cp.copy(orig)
-    orig[3].append(6)
-    print(f"测试1 浅拷贝受影响: {s[3]}")
-
-    # 测试 2: 深拷贝不受影响
-    orig2 = [1, 2, 3, [4, 5]]
-    d = cp.deepcopy(orig2)
-    orig2[3].append(6)
-    print(f"测试2 深拷贝不受影响: {d[3]}")
-
-    # 测试 3: 替换外层元素不影响拷贝
-    orig3 = [1, 2, 3, [4, 5]]
-    s3 = cp.copy(orig3)
-    orig3[0] = 99
-    print(f"测试3 浅拷贝外层不变: {s3[0]}")
+    nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    # 测试 1: 常规列表
+    print(f"偶数平方: {process_numbers(nums)}")
+    # 测试 2: 全奇数
+    print(f"全奇数: {process_numbers([1, 3, 5])}")
+    # 测试 3: 空列表
+    print(f"空列表: {process_numbers([])}")

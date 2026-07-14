@@ -1,62 +1,57 @@
 """
-[难度: ⭐⭐⭐⭐⭐]
-[所属知识点: 函数 + 二维列表 + CRUD]
-[预计完成时间: 25 分钟]
+[难度: ⭐⭐⭐⭐]
+[所属知识点: 自定义装饰器(@wraps + 计时器)]
+[预计完成时间: 20 分钟]
 
 题目描述:
-    用二维列表存储学生信息(学号/姓名/成绩),用函数实现:
-    - add_student(lst, sid, name, score) 添加学生
-    - find_student(lst, sid) 按学号查询,返回信息或 None
-    - remove_student(lst, sid) 按学号删除
-    并给出示例调用示例。
+    请编写一个计时器装饰器 timer,用于测量函数的执行时间。
+    要求:
+      - 使用 @wraps 保留原函数的元信息(如 __name__)
+      - 打印函数名和耗时(秒,保留 4 位小数)
+      - 不影响原函数的返回值
+
+    wraps 需从 functools 导入,用于"包裹"内部函数。
+
+示例:
+    >>> @timer
+    ... def slow_add(a, b):
+    ...     import time
+    ...     time.sleep(0.1)
+    ...     return a + b
+    >>> slow_add(3, 5)
+    [timer] slow_add 耗时: 0.1001 秒
+    8
 """
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-def add_student(lst, sid, name, score):
-    lst.append([sid, name, score])
-    print(f"已添加: {sid} {name} {score}")
 
+# 提示: 需要导入
+# import time
+# from functools import wraps
 
-def find_student(lst, sid):
-    for s in lst:
-        if s[0] == sid:
-            return s
-    return None
+def timer(func):
+    """计时器装饰器"""
+    # 使用 @wraps(func) 保留元信息
+    # 内部函数记录开始时间、调用 func、计算耗时
+    pass
 
-
-def remove_student(lst, sid):
-    for s in lst:
-        if s[0] == sid:
-            lst.remove(s)
-            print(f"已删除学号 {sid}")
-            return True
-    print(f"未找到学号 {sid}")
-    return False
-
-
-# 示例调用
-students = []
-add_student(students, "001", "张三", 90)
-add_student(students, "002", "李四", 85)
-print("查找 001:", find_student(students, "001"))
-remove_student(students, "002")
-print("当前学生:", students)
+# 测试用函数
+@timer
+def slow_add(a, b):
+    """模拟耗时加法"""
+    import time
+    time.sleep(0.1)
+    return a + b
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    # 测试 1: 添加和查询
-    data = []
-    add_student(data, "A1", "王五", 78)
-    found = find_student(data, "A1")
-    print(f"测试1 查找: {found}")
-
-    # 测试 2: 删除不存在
-    ok = remove_student(data, "Z9")
-    print(f"测试2 删除不存在的返回值: {ok}")
-
-    # 测试 3: 查找不存在
-    print(f"测试3 查找不存在: {find_student(data, 'X0')}")
+    # 测试 1: 计时功能
+    result = slow_add(3, 5)
+    print(f"返回值: {result}")
+    # 测试 2: wraps 保留元信息
+    print(f"函数名: {slow_add.__name__}")
+    print(f"文档字符串: {slow_add.__doc__}")

@@ -1,38 +1,55 @@
 """
 [难度: ⭐⭐⭐]
-[所属知识点: 默认参数 + 算术]
-[预计完成时间: 15 分钟]
+[所属知识点: 矩阵运算(二维数组)]
+[预计完成时间: 20 分钟]
 
 题目描述:
-    定义一个函数 apply_discount(price, discount=0.1),
-    返回打折后的价格,默认 9 折(即 discount=0.1)。
+    使用 NumPy 完成矩阵运算。
+
+    给定两个 2x2 矩阵:
+      A = [[1, 2], [3, 4]]
+      B = [[5, 6], [7, 8]]
+
+    请计算:
+      1. 矩阵加法 A + B
+      2. 逐元素乘法 A * B
+      3. 矩阵乘法 A @ B(或 np.dot(A, B))
+
+    注意区分逐元素乘法和矩阵乘法!
 
 示例:
-    >>> apply_discount(100)
-    90.0
-    >>> apply_discount(100, discount=0.2)
-    80.0
+    >>> A = np.array([[1, 2], [3, 4]])
+    >>> B = np.array([[5, 6], [7, 8]])
+    >>> print(A + B)
+    [[ 6  8]
+     [10 12]]
+    >>> print(A @ B)
+    [[19 22]
+     [43 50]]
 """
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-def apply_discount(price, discount=0.1):
-    return price * (1 - discount)
 
+import numpy as np
 
-# 示例调用
-print("默认 9 折:", apply_discount(100))
+A = np.array([[1, 2], [3, 4]])
+B = np.array([[5, 6], [7, 8]])
+
+# 任务 1: 矩阵加法
+add_result = None  # 替换为 A + B
+
+# 任务 2: 逐元素乘法
+elem_mul = None  # 替换为 A * B
+
+# 任务 3: 矩阵乘法
+mat_mul = None  # 替换为 A @ B
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    # 测试 1: 默认折扣
-    print(f"测试1: {apply_discount(200)}")
-
-    # 测试 2: 自定义折扣
-    print(f"测试2: {apply_discount(200, discount=0.3)}")
-
-    # 测试 3: 零折扣
-    print(f"测试3: {apply_discount(150, discount=0)}")
+    print(f"A + B =\n{add_result}")
+    print(f"A * B(逐元素) =\n{elem_mul}")
+    print(f"A @ B(矩阵乘) =\n{mat_mul}")

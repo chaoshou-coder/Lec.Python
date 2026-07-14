@@ -1,65 +1,65 @@
 """
 [难度: ⭐⭐⭐]
-[所属知识点: Day03 字符串 + Day04 列表 + Day05 字典]
-[预计完成时间: 15 分钟]
+[所属知识点: 文件写入 write / writelines]
+[预计完成时间: 12 分钟]
 
 题目描述:
-  在数据处理中,经常需要把 CSV(逗号分隔)格式的字符串解析成结构化数据。
-  给定一行 CSV 字符串,例如:
-      "苹果,5.5,3,水果"
-  请把它切成列表,再转成字典形式,字典的键为 "col1"、"col2"、"col3"...
+  请你用 with 语句创建一个 "score.txt" 文件,写入一个班级的
+  成绩单。先用 write() 逐行写入 3 个学生的信息,然后再用
+  writelines() 追加 2 个转学生的信息。最终文件应有 5 行。
 
 要求:
-  - 用字符串的 split 方法切分
-  - 用字典推导或循环创建字典
-  - 列数不固定,程序需适配任意列数
+  - 每行格式: "姓名,分数\n"(注意 write 不会自动加换行)
+  - 前 3 行用 write() 写入(模式 'w')
+  - 后 2 行用 writelines() 追加(模式 'a')
+  - 最后用 readlines() 读出并 print 行数,确认是 5 行
 
 示例:
-    >>> parse_csv("苹果,5.5,3,水果")
-    {'col1': '苹果', 'col2': '5.5', 'col3': '3', 'col4': '水果'}
-
-    >>> parse_csv("北京,2025,晴")
-    {'col1': '北京', 'col2': '2025', 'col3': '晴'}
+    >>> 运行程序
+    共写入 5 行
+    第 1 行: 小明,95
+    第 2 行: 小红,88
+    第 3 行: 小刚,72
+    第 4 行: 小丽,91
+    第 5 行: 小强,86
 """
 
-
-def parse_csv(csv_string: str) -> dict:
-    """将 CSV 字符串解析成字典"""
-    # ======================
-    # 学员代码区
-    # ======================
-    # 参考思路:
-    # 1. 用 split(',') 把字符串切成列表
-    # 2. 遍历列表,为每个元素生成键名 "col1"、"col2"...
-    # 3. 把键值对存入字典并返回
-    pass
-
+# ======================
+# 学员代码区(以 pass 作为占位符)
+# ======================
+pass
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    # 测试 1: 4 列 CSV
-    result1 = parse_csv("苹果,5.5,3,水果")
-    print(f"测试 1: {result1}")
-    # 预期: {'col1': '苹果', 'col2': '5.5', 'col3': '3', 'col4': '水果'}
+    import os
+    tmp = "test_score.txt"
 
-    # 测试 2: 3 列 CSV
-    result2 = parse_csv("北京,2025,晴")
-    print(f"测试 2: {result2}")
-    # 预期: {'col1': '北京', 'col2': '2025', 'col3': '晴'}
+    # 测试 1: write() 写入 3 行
+    with open(tmp, "w", encoding="utf-8") as f:
+        f.write("小明,95\n")
+        f.write("小红,88\n")
+        f.write("小刚,72\n")
 
-    # 测试 3: 1 列(边界)
-    result3 = parse_csv("单独")
-    print(f"测试 3: {result3}")
-    # 预期: {'col1': '单独'}
+    # 测试 2: writelines() 追加 2 行
+    lines = ["小丽,91\n", "小强,86\n"]
+    with open(tmp, "a", encoding="utf-8") as f:
+        f.writelines(lines)
 
-    # 测试 4: 空字符串(边界)
-    result4 = parse_csv("")
-    print(f"测试 4: {result4}")
-    # 预期: {'col1': ''}
+    # 测试 3: 读取验证共 5 行
+    with open(tmp, "r", encoding="utf-8") as f:
+        result = f.readlines()
+    assert len(result) == 5, f"应有 5 行,实际 {len(result)}"
+    assert result[0].strip() == "小明,95"
+    assert result[4].strip() == "小强,86"
 
-    # 测试 5: 6 列(扩展)
-    result5 = parse_csv("a,b,c,d,e,f")
-    print(f"测试 5: {result5}")
-    # 预期: {'col1':'a','col2':'b','col3':'c','col4':'d','col5':'e','col6':'f'}
+    # 测试 4: writelines 不带换行会粘在一起
+    with open(tmp, "w", encoding="utf-8") as f:
+        f.writelines(["A", "B"])  # 没换行
+    with open(tmp, "r", encoding="utf-8") as f:
+        content = f.read()
+    assert content == "AB", "writelines 不自动加换行"
+
+    os.remove(tmp)
+    print("practice02 测试通过 ✓")

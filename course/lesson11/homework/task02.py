@@ -1,43 +1,48 @@
 """
 [难度: ⭐⭐⭐⭐]
-[所属知识点: 默认参数 + 循环 + 列表]
+[所属知识点: 数据标准化(向量化)]
 [预计完成时间: 20 分钟]
 
 题目描述:
-    定义一个函数 filter_scores(scores, threshold=60),
-    返回所有大于等于 threshold 的成绩列表,默认阈值 60。
+    在机器学习中,数据标准化是常见预处理步骤。
+
+    Z-score 标准化公式:
+      X_norm = (X - mean) / std
+
+    请使用 NumPy 向量化运算对一组数据标准化。
+    要求: 整个计算过程不能出现显式 for 循环。
+
+    标准化后数据均值应为 0,标准差应为 1。
 
 示例:
-    >>> filter_scores([55, 70, 85, 40, 90])
-    [70, 85, 90]
+    >>> data = np.array([10, 20, 30, 40, 50])
+    >>> normalized = standardize(data)
+    >>> print(f"均值: {normalized.mean():.4f}")
+    均值: 0.0000
+    >>> print(f"标准差: {normalized.std():.4f}")
+    标准差: 1.0000
 """
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-def filter_scores(scores, threshold=60):
-    result = []
-    for s in scores:
-        if s >= threshold:
-            result.append(s)
-    return result
 
+import numpy as np
 
-# 示例调用
-print("及格分数:", filter_scores([55, 70, 85, 40, 90]))
+def standardize(data):
+    """Z-score 标准化"""
+    # 提示: (data - data.mean()) / data.std()
+    pass
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    # 测试 1: 默认阈值 60
-    print(f"测试1: {filter_scores([55, 70, 85, 40, 90])}")
-
-    # 测试 2: 自定义阈值
-    print(f"测试2: {filter_scores([55, 70, 85], threshold=80)}")
-
-    # 测试 3: 全部不及格
-    print(f"测试3: {filter_scores([10, 20, 30])}")
-
-    # 测试 4: 空列表
-    print(f"测试4: {filter_scores([])}")
+    data = np.array([10, 20, 30, 40, 50])
+    # 测试 1: 标准化
+    normalized = standardize(data)
+    print(f"原始数据: {data}")
+    print(f"标准化后: {normalized}")
+    # 测试 2: 验证均值和标准差
+    print(f"均值: {normalized.mean():.4f}")
+    print(f"标准差: {normalized.std():.4f}")

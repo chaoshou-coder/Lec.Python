@@ -1,104 +1,75 @@
 """
 [难度: ⭐⭐⭐⭐]
-[所属知识点: Day05-Day06 综合 + 状态追踪]
+[所属知识点: 日记本持久化 — 读/写 JSON 文件]
 [预计完成时间: 20 分钟]
 
 题目描述:
-  在 Day06 的猜数游戏基础上进行升级:
-    - 系统随机生成 1~100 之间的数字
-    - 玩家有 7 次猜测机会
-    - 每次提示"太大了"或"太小了"
-    - 猜中后显示"恭喜,你猜对了!用了 X 次"
-    - 7 次都没猜中,显示"很遗憾,正确答案是 XXX"
-  新增功能:
-    - 统计玩家"连续猜中次数"(本次猜中就 +1,没猜中就归零)
-    - 连续猜中 3 次时,触发隐藏奖励:"🎉 连中三元!获得神秘大奖!"
-    - 每次游戏结束后,显示当前连胜次数
+  实现一个"日记本"程序,启动时从 diary.json 读取历史日记
+  (每条是一个字符串),让用户输入新日记追加到列表中,输入
+  quit 时把所有日记写回文件并退出。
 
 要求:
-  - 用 random.randint(1, 100) 生成随机数
-  - 用 while 循环控制游戏次数
-  - 用变量追踪连续猜中次数
-  - 用 input 判断是否继续游戏(y/n)
+  - 启动时读 diary.json,文件不存在则用空列表开始
+  - 每次输入后立刻写回文件(防止数据丢失)
+  - 输入 quit 时打印全部日记再退出
+  - 所有文件操作使用 with + encoding="utf-8"
+  - json.dump 时加 ensure_ascii=False 和 indent=2
 
 示例:
-    >>> 请猜一个 1~100 的数字(第 1/7 次): 50
-    >>> 太大了!
-    >>> 请猜一个 1~100 的数字(第 2/7 次): 25
-    >>> 太小了!
-    >>> 请猜一个 1~100 的数字(第 3/7 次): 37
-    >>> 恭喜,你猜对了!用了 3 次
-    >>> 当前连胜: 1
-    >>> 是否继续(y/n)? y
-    ...
+    >>> 运行程序
+    写日记(quit 退出): 今天天气真好
+    已保存
+    写日记(quit 退出): 学了文件 I/O
+    已保存
+    写日记(quit 退出): quit
+    --- 你的日记 ---
+    1. 今天天气真好
+    2. 学了文件 I/O
 """
 
 # ======================
-# 学员代码区
+# 学员代码区(以 pass 作为占位符)
 # ======================
-
-import random
-
-# 连胜次数
-streak = 0
-
-while True:
-    # 生成随机数
-    target = random.randint(1, 100)
-    print("\n新游戏开始!请猜一个 1~100 的数字。")
-
-    # 猜测次数
-    max_tries = 7
-    guessed = False
-
-    for i in range(1, max_tries + 1):
-        guess = int(input(f"请猜一个 1~100 的数字(第 {i}/{max_tries} 次): "))
-        if guess == target:
-            print(f"恭喜,你猜对了!用了 {i} 次")
-            streak += 1
-            guessed = True
-            break
-        elif guess > target:
-            print("太大了!")
-        else:
-            print("太小了!")
-
-    if not guessed:
-        print(f"很遗憾,正确答案是 {target}")
-        streak = 0
-
-    # 显示连胜
-    print(f"当前连胜: {streak}")
-
-    # 隐藏奖励
-    if streak == 3:
-        print("🎉 连中三元!获得神秘大奖!")
-
-    # 是否继续
-    again = input("是否继续(y/n)? ")
-    if again != "y":
-        print("下次再战!")
-        break
+pass
 
 # ======================
 # 测试区(教师可复制到终端验证)
-# ==========================
+# ======================
 if __name__ == '__main__':
-    # 测试 1: 正常猜中流程
-    # 输入: 随机猜测 -> 猜中 -> 查看连胜
+    import json, os
+    tmp = "test_diary.json"
 
-    # 测试 2: 7 次都没猜中
-    # 输入: 故意猜错 7 次 -> 显示正确答案,连胜归零
+    # 测试 1: 文件不存在 → 读入空列表
+    if os.path.exists(tmp):
+        os.remove(tmp)
+    # 模拟学员逻辑
+    diary = []
+    if os.path.exists(tmp):
+        with open(tmp, "r", encoding="utf-8") as f:
+            diary = json.load(f)
+    assert diary == [], "文件不存在时应为空列表"
 
-    # 测试 3: 连胜 3 次触发隐藏奖励
-    # 操作: 连续玩 3 局并都猜中
-    # 预期: 第 3 局后显示"🎉 连中三元!获得神秘大奖!"
+    # 测试 2: 追加日记并写回
+    diary.append("今天天气真好")
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(diary, f, ensure_ascii=False, indent=2)
+    with open(tmp, "r", encoding="utf-8") as f:
+        reloaded = json.load(f)
+    assert reloaded == ["今天天气真好"], "写回后应能读回"
 
-    # 测试 4: 连胜中断
-    # 操作: 猜中 2 次后,第 3 次失败
-    # 预期: 连胜归零
+    # 测试 3: 多次追加
+    diary.append("学了文件 I/O")
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(diary, f, ensure_ascii=False, indent=2)
+    with open(tmp, "r", encoding="utf-8") as f:
+        reloaded = json.load(f)
+    assert len(reloaded) == 2
+    assert reloaded[1] == "学了文件 I/O"
 
-    # 测试 5: 边界 - 第 1 次就猜中
-    # 输入: 直接猜中 -> 显示"用了 1 次"
+    # 测试 4: 中文不被转义
+    with open(tmp, "r", encoding="utf-8") as f:
+        raw = f.read()
+    assert "今天天气真好" in raw, "ensure_ascii=False 中文不转义"
 
-    print("请直接运行本文件进行测试(需要交互输入)")
+    os.remove(tmp)
+    print("task01 测试通过 ✓")

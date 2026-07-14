@@ -1,42 +1,52 @@
 """
 [难度: ⭐⭐⭐⭐]
-[所属知识点: def + 循环 + return]
-[预计完成时间: 20 分钟]
+[所属知识点: 结算 + 总价计算(会员折扣)]
+[预计完成时间: 25 分钟]
 
 题目描述:
-    定义一个函数 factorial(n),返回 n 的阶乘(用循环实现)。
-    约定 0! = 1。
+    实现 checkout(cart, is_vip=False),完成结算功能。
+
+    规则:
+      - 计算购物车总金额
+      - VIP 会员享受 9 折
+      - 打印商品清单 + 原价 + 折扣 + 实付
+      - 结算后清空购物车
+      - 空购物车时提示并返回
 
 示例:
-    >>> factorial(5)
-    120
+    >>> cart = [
+    ...     {"id": 1, "name": "苹果", "price": 5.0, "qty": 2},
+    ... ]
+    >>> checkout(cart, is_vip=True)
+    商品: 苹果 x2 = 10.00
+    原价: 10.00
+    VIP 折扣: 9 折
+    实付: 9.00
 """
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-def factorial(n):
-    result = 1
-    for i in range(1, n + 1):
-        result *= i
-    return result
 
-
-# 示例调用
-print("5! =", factorial(5))
+def checkout(cart, is_vip=False):
+    """结算购物车"""
+    # 1. 判断 cart 是否为空
+    # 2. 遍历 cart,计算每项小计和总金额
+    # 3. VIP 打 9 折
+    # 4. 打印清单和金额
+    # 5. 清空 cart (cart.clear())
+    pass
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    # 测试 1: 正常值
-    print(f"测试1: {factorial(5)}")
-
-    # 测试 2: 0 的阶乘
-    print(f"测试2: {factorial(0)}")
-
-    # 测试 3: 1 的阶乘
-    print(f"测试3: {factorial(1)}")
-
-    # 测试 4: 较大值
-    print(f"测试4: {factorial(10)}")
+    cart = [
+        {"id": 1, "name": "苹果", "price": 5.0, "qty": 2},
+        {"id": 2, "name": "香蕉", "price": 3.5, "qty": 3},
+    ]
+    # 测试 1: VIP 结算
+    checkout(cart, is_vip=True)
+    print(f"结算后购物车: {cart}")
+    # 测试 2: 空购物车
+    checkout(cart)
