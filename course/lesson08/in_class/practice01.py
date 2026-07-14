@@ -1,75 +1,47 @@
 """
 [难度: ⭐⭐]
-[所属知识点: 组合 vs 继承判断]
+[所属知识点: 字符串find()]
 [预计完成时间: 10 分钟]
 
 题目描述:
-    每组选择一个正确答案:"用继承还是组合"?
+    输入一句话和一个关键词,用 find 查找关键词第一次出现的位置,
+    找不到返回 -1,并打印结果。
 
-    1. Order(订单) has-a Cart(购物车):
-       A. class Order(Cart)    B. Order 持有 Cart 实例
+示例:
+    >>> sentence = "我喜欢吃苹果,苹果很好吃"
+    >>> keyword = "苹果"
+    输出: 关键词 '苹果' 第一次出现的位置是 4
 
-    2. Dog(狗) is-a Animal(动物):
-       A. Dog 持有 Animal 实例  B. class Dog(Animal)
-
-    3. Car(汽车) has-a Engine(引擎):
-       A. class Car(Engine)     B. Car 持有 Engine 实例
-
-    4. ShoppingCart(购物车) has-a Product(商品):
-       A. class ShoppingCart(Product)
-       B. ShoppingCart 持有 Product 列表
-
-    5. Student(学生) has-a SchoolCard(校卡):
-       A. class Student(SchoolCard)
-       B. Student 持有 SchoolCard 实例
-
-    答案:1-B, 2-B, 3-B, 4-B, 5-B(除 2 外全用组合)
+    >>> sentence = "我喜欢吃苹果"
+    >>> keyword = "香蕉"
+    输出: 关键词 '香蕉' 第一次出现的位置是 -1
 """
 
 # ======================
-# 学员代码区
+# 学员代码区(以 pass 作为占位符)
 # ======================
-# 请先独立判断,再运行下方验证
-
-# 演示:组合(应该这样做)
-class Cart:
-    def total(self):
-        return 100
-
-class Address:
-    def __init__(self, city):
-        self.city = city
-
-class Order:
-    """组合:Cart + Address"""
-    def __init__(self, cart, address):
-        self.cart = cart        # has-a
-        self.address = address  # has-a
-
-# 演示:继承(应该这样做)
-class Animal:
-    def breathe(self):
-        pass
-
-class Dog(Animal):  # is-a
-    def bark(self):
-        pass
-
-# 请创建实例验证两种方式都能用
-cart = Cart()
-addr = Address("北京")
-order = Order(cart, addr)
-
-dog = Dog()
+sentence = input("请输入一句话: ")
+keyword = input("请输入一个关键词: ")
+# 用 find 查找位置
+position = sentence.find(keyword)
+print(f"关键词 '{keyword}' 第一次出现的位置是 {position}")
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    assert order.cart.total() == 100
-    assert order.address.city == "北京"
-    # Dog is-a Animal
-    assert isinstance(dog, Animal)
-    # Order has-a Cart 而非 is-a Cart
-    assert not isinstance(order, Cart)
-    print("✅ 所有测试通过")
+    # 测试 1: 能找到关键词
+    s1, k1 = "我喜欢吃苹果,苹果很好吃", "苹果"
+    print(f"测试1: {s1.find(k1)}")  # 期望 4
+
+    # 测试 2: 找不到关键词
+    s2, k2 = "我喜欢吃苹果", "香蕉"
+    print(f"测试2: {s2.find(k2)}")  # 期望 -1
+
+    # 测试 3: 关键词在开头
+    s3, k3 = "你好世界", "你好"
+    print(f"测试3: {s3.find(k3)}")  # 期望 0
+
+    # 测试 4: 空字符串
+    s4, k4 = "", "any"
+    print(f"测试4: {s4.find(k4)}")  # 期望 -1

@@ -1,91 +1,41 @@
-# Day08 · OOP 组合+Pythonic (L4)
+# Day08 · OOP 基础
 
 ## 关键知识点
-
-- **组合优于继承**(Composition over Inheritance):has-a 关系用组合
-- 运算符重载:`__add__` / `__eq__` / `__lt__` 等
-- `__len__` 与 `len()` 内建函数对接
-- `__iter__` / `__next__` 迭代协议 —— 支持 `for x in obj`
-- `__repr__` 与 `__str__` 完整对比
-
-## 设计叙事
-
-> 电商订单系统 v2:最后一块拼图。
-> 老板:两个客户的购物车能不能合并?能不能 `len(cart)` 直接数?
-> for 循环能不能直接遍历?
-> 今天让自定义对象"像内置类型一样自然" —— 这就是 Pythonic。
+- `class` 定义类（大驼峰命名）
+- `__init__` 构造函数：`self` 代表当前对象，实例化时自动调用
+- 实例方法：第一个参数写 `self`
+- 实例属性 vs 类属性（`self.name` vs `类名.school`）
+- `@property`：把方法变成"属性"（getter / setter 校验）
+- `__str__` 与 `__repr__` 魔术方法
+- 继承：`class 子类(父类)`，复用 + 扩展 + 覆盖
+- `super()` 调用父类方法
+- 类属性统计实例数
 
 ## 当堂练习
 
 | # | 文件 | 难度 | 预计时间 | 验收 |
 |---|---|---|---|---|
-| 1 | `in_class/practice01.py` | ⭐⭐ | 10 分钟 | 组合 vs 继承:何时用哪个 |
-| 2 | `in_class/practice02.py` | ⭐⭐⭐ | 12 分钟 | `__add__` 实现购物车合并 |
-| 3 | `in_class/practice03.py` | ⭐⭐⭐ | 12 分钟 | `__len__` + `__iter__` 让 `len()` / `for` 直接能用 |
-| 4 | `in_class/practice04.py` | ⭐⭐⭐⭐ | 15 分钟 | `__eq__` 同款判定(购物车去重) |
-| 5 | `in_class/practice05.py` | ⭐⭐⭐⭐ | 15 分钟 | 综合:`Playlist` 类完整实现 add/len/iter/eq |
-| 6 | `in_class/practice06.py` | ⭐⭐⭐⭐⭐ | 15 分钟 | `__repr__` vs `__str__` + `Order 聚合`设计 |
+| 1 | `in_class/practice01.py` | ⭐⭐ | 8 分钟 | 定义 `Book` 类，实例化并打印属性 |
+| 2 | `in_class/practice02.py` | ⭐⭐⭐ | 12 分钟 | 给 `Book` 加 `info()` 方法，返回格式化字符串 |
+| 3 | `in_class/practice03.py` | ⭐⭐⭐ | 12 分钟 | `Student` 类 `@property` 校验成绩 0-100 |
+| 4 | `in_class/practice04.py` | ⭐⭐⭐ | 13 分钟 | `Book` 类加 `__str__`，`print(book)` 输出格式化 |
+| 5 | `in_class/practice05.py` | ⭐⭐⭐ | 12 分钟 | `Vehicle` 父类 + `Car`/`Bike` 子类，覆盖 `move()` |
+| 6 | `in_class/practice06.py` | ⭐⭐⭐⭐ | 13 分钟 | 类属性实现"统计共创建了多少个实例" |
 
 ## 课后作业
 
 | # | 文件 | 难度 | 预计时间 | 验收 |
 |---|---|---|---|---|
-| 1 | `homework/task01.py` | ⭐⭐⭐⭐ | 25 分钟 | Order 聚合 Cart + Payment + Address(组合实践) |
-| 2 | `homework/task02.py` | ⭐⭐⭐⭐⭐ | 30 分钟 | 电商订单系统 v2 雏形(全 L1-L4 知识整合) |
-| 3 | `homework/task03.py` | ⭐⭐⭐⭐⭐ | 35 分钟 | 对比题:同样需求分别用继承和组合实现,分析优劣 |
+| 1 | `homework/task01.py` | ⭐⭐⭐⭐ | 20 分钟 | BankAccount 类 + 余额校验 |
+| 2 | `homework/task02.py` | ⭐⭐⭐⭐ | 20 分钟 | Animal 继承体系 |
+| 3 | `homework/task03.py` | ⭐⭐⭐⭐ | 25 分钟 | 类属性统计实例数 + 文件持久化 |
 
-## 小项目(当堂完成)
+## 小 / 中型项目
 
 | # | 文件 | 难度 | 预计时间 | 验收 |
 |---|---|---|---|---|
-| 1 | `mini_project/ecommerce_v2.py` | ⭐⭐⭐⭐⭐ | 45 分钟 | 电商订单系统 v2 —— Product/Cart.__add__/__len__/__iter__ + Order(组合) + Payment(abc) |
-
-## 门控验收
-
-学员需提交订单系统 v2,满足:
-- `ShoppingCart.__add__(other)` 合并两车
-- `len(cart)` 直接返回件数
-- `for item in cart` 遍历
-- `product1 == product2` 同款判定
-- `Order` 类**组合**了 `Cart` + `Payment` + `Address`
-- **不使用继承来模拟 has-a 关系**(教师检查 Order 不应继承 Cart)
-
-## BREAK IT 环节
-
-**Break It 1**(10 分钟):直接用 `+` 会 TypeError
-```python
-cart1 = ShoppingCart([...])
-cart2 = ShoppingCart([...])
-cart3 = cart1 + cart2  # TypeError: unsupported operand type(s) for +: 'ShoppingCart' and 'ShoppingCart'
-```
-→ 引出 `__add__`:"我们想让对象怎么做,就定义对应的运算符方法"
-
-**Break It 2**(15 分钟):只有 `__len__` 没有 `__iter__`,for 循环会报错
-```python
-class BadCart:
-    def __len__(self): return 3
-    # 没有 __iter__!
-
-for item in BadCart():  # TypeError: 'BadCart' object is not iterable
-    print(item)
-```
-→ 引出"协议":`len()` 用 `__len__`,`for` 用 `__iter__`,想支持什么操作就实现什么协议
-
-**Break It 3**(10 分钟):继承模拟组合 → 设计坏味道
-```python
-# 错误示范:
-class Order(ShoppingCart):  # Order is-a Cart?! 设计错误!
-    ...
-```
-→ "继承是 is-a,组合是 has-a" 的判断练习
-
-## 易错点
-
-1. **`__add__` 修改了原对象而非返回新对象** —— 运算符通常应返回新对象
-2. **只写 `__len__` 没写 `__iter__`** —— `for` 循环仍不可用
-3. **`__eq__` 漏写导致对象比较变成身份比较(`is` 而非 `==`)**
-4. **用继承模拟 has-a 关系** —— is-a(继承) vs has-a(组合) 混淆
+| 1 | `mini_project/student.py` | ⭐⭐⭐⭐ | 45 分钟 | `Student` 类综合（`@property average` + `__str__` + 成绩校验 + 异常处理） |
 
 ## 阶段复习要点
 
-Day09 复习日综合(购物车从 dict 到完整 OOP 系统)
+后续 Day14 阶段复习

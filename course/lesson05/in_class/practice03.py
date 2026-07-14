@@ -1,49 +1,32 @@
 """
 [难度: ⭐⭐⭐]
-[所属知识点: @property getter / setter 校验]
-[预计完成时间: 12 分钟]
+[所属知识点: 嵌套循环 + end='']
+[预计完成时间: 20 分钟]
 
 题目描述:
-    定义一个 `Student` 类,表示学生。
-    - 构造函数接收 `name` 和 `score`
-    - `score` 用 `@property` 保护,合法范围为 0~100
-    - setter 收到非法值时拒绝修改,
-      并打印提示 "成绩必须在 0-100 之间"
+    使用嵌套 for 循环打印九九乘法表。
+    每一行格式为: 1×1=1  1×2=2  ... 1×9=9
+    使用 end='' 控制不换行,内层循环结束后再换行。
+    注意对齐,使输出整齐美观。
 
 示例:
-    >>> s = Student("小明", 85)
-    >>> print(s.score)
-    85
-    >>> s.score = 150
-    成绩必须在 0-100 之间
-    >>> print(s.score)
-    85  (没变)
+    >>> 运行程序
+    1×1=1  1×2=2  1×3=3  ... 1×9=9
+    2×1=2  2×2=4  2×3=6  ... 2×9=18
+    ...
+    9×1=9  9×2=18 ...       9×9=81
 """
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-class Student:
-    def __init__(self, name, score):
-        self.name = name
-        self.score = score  # 走 setter
-
-    # 请补全 @property 和 @score.setter
-    pass
+pass
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    s = Student("小明", 85)
-    assert s.score == 85
-    original = s.score
-    s.score = 150
-    assert s.score == original, "超 100 应被拒绝"
-    s.score = -5
-    assert s.score == original, "负数应被拒绝"
-    s.score = 0
-    assert s.score == 0
-    s.score = 100
-    assert s.score == 100
-    print("✅ 所有测试通过")
+    # 测试 1: 第一行应为 1×1=1 开头
+    # 测试 2: 最后一行最后一个式子应为 9×9=81
+    # 测试 3: 共 9 行 9 列,对齐整齐
+    pass

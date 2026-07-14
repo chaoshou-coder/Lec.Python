@@ -1,10 +1,21 @@
-# lesson08/in_class 当前全部为 placeholder,需要具体实现
+# Day08 · 字符串提升 · 当堂习题清单(待 sub-agent 填充)
 
-| # | 文件名 | 所属知识点 | 难度 |
-|---|---|---|---|
-| 1 | practice01.py | 组合 vs 继承判断 | ⭐⭐ |
-| 2 | practice02.py | __add__ 购物车合并 | ⭐⭐⭐ |
-| 3 | practice03.py | __len__ + __iter__ | ⭐⭐⭐ |
-| 4 | practice04.py | __eq__ 同款判定 | ⭐⭐⭐⭐ |
-| 5 | practice05.py | Playlist 完整类 | ⭐⭐⭐⭐ |
-| 6 | practice06.py | __repr__ vs __str__ + Order 聚合 | ⭐⭐⭐⭐⭐ |
+## 数量
+6 道当堂练(每道 1 个 .py 文件,命名 practice01.py ~ practice06.py)
+
+## 难度分布
+- ⭐ 1 题(直接套用)
+- ⭐⭐ 2 题(简单变形)
+- ⭐⭐⭐ 2 题(综合应用)
+- ⭐⭐⭐⭐ 1 题(挑战)
+
+## 题目方向(待 sub-agent 根据 references.md 与本课知识点具体化)
+
+(待 sub-agent 填充)
+
+## 验收
+每题必须:
+- 场景化(生活 / 工作 / 游戏)
+- 可独立运行
+- 测试区 ≥ 2 个用例
+- 预计完成时间标注

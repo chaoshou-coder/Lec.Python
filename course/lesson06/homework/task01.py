@@ -1,63 +1,32 @@
 """
-[难度: ⭐⭐⭐⭐]
-[所属知识点: Product 继承体系(Physical/Digital)]
-[预计完成时间: 25 分钟,选做]
+[难度: ⭐⭐⭐]
+[所属知识点: if/elif/else + 算术]
+[预计完成时间: 15 分钟]
 
 题目描述:
-    电商系统的产品继承体系。
-
-    - 基类 `Product(name, price)`
-      - `@property` 保护 price(不能为负)
-      - 方法 `shipping_cost()` 返回 0
-      - `__str__` 返回 "商品[XXX] :XX 元"
-    - 子类 `PhysicalProduct(Product)`,新增 `weight`
-      - 重写 `shipping_cost()` = weight * 8
-    - 子类 `DigitalProduct(Product)`,新增 `file_size`
-      - 不重写 `shipping_cost()`,继承基类的 0
-      - 免费送货
-
-    验证:两个子类的运费差异,
-    以及基类的 @property 保护仍然生效。
+    编写一个 BMI 计算器。让用户输入身高(米)和体重(千克),
+    计算 BMI 值(体重 ÷ 身高的平方),并根据以下标准输出评级:
+        - BMI < 18.5: 偏瘦
+        - 18.5 ≤ BMI < 24: 正常
+        - 24 ≤ BMI < 28: 偏胖
+        - BMI ≥ 28: 肥胖
 
 示例:
-    >>> PhysicalProduct("纸质书", 50, 10).shipping_cost()
-    80
-    >>> DigitalProduct("电子书", 30, "5MB").shipping_cost()
-    0
+    >>> 请输入身高(米): 1.75
+    >>> 请输入体重(千克): 70
+    BMI: 22.86, 评级: 正常
 """
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-class Product:
-    pass
-
-# p = PhysicalProduct("纸质书", 50, 10)
-# d = DigitalProduct("电子书", 30, "5MB")
-# print(p.shipping_cost())
-# print(d.shipping_cost())
+pass
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    p = PhysicalProduct("纸质书", 50, 10)
-    assert p.shipping_cost() == 80
-    assert p.name == "纸质书"
-
-    d = DigitalProduct("电子书", 30, "5MB")
-    assert d.shipping_cost() == 0
-    assert d.file_size == "5MB"
-
-    # __str__ 友好
-    assert "纸质书" in str(p)
-    assert "电子书" in str(d)
-
-    # 基类 @property 仍生效
-    try:
-        bad = Product("错误", -10)
-        assert False, "应该拒绝负数"
-    except ValueError:
-        pass
-
-    print("✅ 所有测试通过")
+    # 测试 1: 身高 1.75,体重 70 → BMI 约 22.86,正常
+    # 测试 2: 身高 1.75,体重 50 → BMI 约 16.33,偏瘦
+    # 测试 3: 身高 1.75,体重 90 → BMI 约 29.39,肥胖
+    pass

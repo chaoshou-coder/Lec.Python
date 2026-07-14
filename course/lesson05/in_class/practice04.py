@@ -1,43 +1,30 @@
 """
 [难度: ⭐⭐⭐]
-[所属知识点: __str__ 魔术方法]
-[预计完成时间: 12 分钟]
+[所属知识点: while + // + 计数]
+[预计完成时间: 15 分钟]
 
 题目描述:
-    在 `Product` 类基础上,新增 `__str__` 方法,
-    使得 `print(product)` 直接输出商品信息,
-    格式为 "商品[XXX] 价格:XX.XX 元"。
+    让用户输入一个正整数,使用 while 循环和整除(//)
+    计算并输出该整数是几位数。
+    例如:输入 12345,输出 5(因为它是 5 位数)。
 
-    对比不加 `__str__` 时的输出:
-    >>> print(product)
-    <__main__.Product object at 0x7f...>  ← 内存地址,无意义
-
-    加了之后:
-    >>> print(product)
-    商品[Python 入门] 价格:59.80 元
+示例:
+    >>> 请输入一个整数: 12345
+    5 位数
+    >>> 请输入一个整数: 7
+    1 位数
 """
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-class Product:
-    def __init__(self, name, price):
-        self.name = name
-        self.price = price
-
-    # 请补全 __str__ 方法
-    pass
+pass
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    p = Product("Python 入门", 59.8)
-    result = str(p)
-    assert "Python 入门" in result
-    assert "59.80" in result
-    assert isinstance(result, str)
-    assert "0x" not in result
-    assert "__main__" not in result
-    print("✅ 所有测试通过")
-    print(f"实际输出: {result}")
+    # 测试 1: 输入 12345,应输出 5
+    # 测试 2: 输入 7,应输出 1(边界:个位数)
+    # 测试 3: 输入 100000,应输出 6
+    pass

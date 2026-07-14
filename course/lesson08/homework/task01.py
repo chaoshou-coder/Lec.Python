@@ -1,100 +1,51 @@
 """
-[难度: ⭐⭐⭐⭐]
-[所属知识点: Order 聚合 Cart + Payment + Address]
-[预计完成时间: 25 分钟,选做]
+[难度: ⭐⭐⭐]
+[所属知识点: find() + 切片]
+[预计完成时间: 15 分钟]
 
 题目描述:
-    电商订单系统 v2 的 L4 部分。
-
-    - `Product` 类(name + price + __eq__ + __str__)
-    - `ShoppingCart` 类(items + __len__ + __iter__)
-    - `Address` 类(city + detail)
-    - `Order` 类**组合** Cart + Address
-      - 方法 `total()`:返回购物车总价
-      - 方法 `summary()`:返回订单摘要
-
-    验证:
-    1. Order 不继承 Cart(组合而非继承)
-    2. len(cart) 可用
-    3. for item in cart 可用
-    4. 两个同名 Product == 为 True
+    输入一个 URL(如 https://example.com/path),用 find 和切片
+    分别提取协议、域名、路径,并打印结果。
 
 示例:
-    >>> p1 = Product("Python", 50)
-    >>> p2 = Product("算法", 30)
-    >>> cart = ShoppingCart([p1, p2])
-    >>> addr = Address("北京", "朝阳")
-    >>> order = Order(cart, addr)
-    >>> print(order.summary())
-    订单含 2 件,总价: 80,送到: 北京
+    >>> url = "https://example.com/path/to/page"
+    协议: https
+    域名: example.com
+    路径: /path/to/page
 """
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-class Product:
-    def __init__(self, name, price):
-        self.name = name
-        self.price = price
-
-    def __eq__(self, other):
-        pass
-
-    def __hash__(self):
-        pass
-
-    def __str__(self):
-        pass
-
-class ShoppingCart:
-    def __init__(self, items=None):
-        self.items = items or []
-
-    def __len__(self):
-        pass
-
-    def __iter__(self):
-        pass
-
-class Address:
-    def __init__(self, city, detail):
-        self.city = city
-        self.detail = detail
-
-class Order:
-    """组合 Cart + Address"""
-    def __init__(self, cart, address):
-        pass
-
-    def total(self):
-        pass
-
-    def summary(self):
-        pass
+url = input("请输入 URL: ")
+# 提取协议
+protocol_end = url.find("://")
+protocol = url[:protocol_end]
+# 提取域名(从 :// 后到下一个 /)
+host_start = protocol_end + 3
+path_pos = url.find("/", host_start)
+if path_pos == -1:
+    host = url[host_start:]
+    path = ""
+else:
+    host = url[host_start:path_pos]
+    path = url[path_pos:]
+print(f"协议: {protocol}")
+print(f"域名: {host}")
+print(f"路径: {path}")
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    p1 = Product("Python", 50)
-    p2 = Product("算法", 30)
-    cart = ShoppingCart([p1, p2])
-    addr = Address("北京", "朝阳")
-    order = Order(cart, addr)
+    # 测试 1: 带路径
+    u1 = "https://example.com/path/to/page"
+    print(f"测试1 URL: {u1}")
 
-    # 组合验证
-    assert not isinstance(order, ShoppingCart)
-    assert order.cart is cart
+    # 测试 2: 不带路径
+    u2 = "https://www.baidu.com"
+    print(f"测试2 URL: {u2}")
 
-    # __len__ / __iter__
-    assert len(cart) == 2
-    assert [p.name for p in cart] == ["Python", "算法"]
-
-    # __eq__
-    assert Product("Python", 50) == Product("Python", 999)
-
-    # total / summary
-    assert order.total() == 80
-    text = order.summary()
-    assert "2" in text and "80" in text and "北京" in text
-    print("✅ 所有测试通过")
+    # 测试 3: http 协议
+    u3 = "http://test.site/api/v1"
+    print(f"测试3 URL: {u3}")

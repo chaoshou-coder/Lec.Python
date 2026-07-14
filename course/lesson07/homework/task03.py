@@ -1,70 +1,95 @@
 """
-[难度: ⭐⭐⭐⭐⭐]
-[所属知识点: 完整 Payment 系统(L3 综合)]
-[预计完成时间: 30 分钟,选做]
+[难度: ⭐⭐⭐⭐]
+[所属知识点: Day04 列表 + Day05 循环 + 文件写入]
+[预计完成时间: 25 分钟]
 
 题目描述:
-    **给定的 checkout 函数**(下方,不可修改核心逻辑)。
+  在完成购物车结算后,把购物车数据导出到一个文本文件中:
+    - 文件路径: ./data/cart_YYYYMMDD.txt
+      (YYYYMMDD 为当天日期,例如 20260707)
+    - 文件内容格式:
+        第 1 行: 标题"====== 购物清单 ======"
+        第 2 行: 导出日期时间
+        空行
+        每行一条记录: 商品名 单价 数量 小计
+        空行
+        最后一行: 合计: XXX.XX 元
 
-    要求:
-    1. 补全 Alipay / WeChatPay / ApplePay 三个子类
-    2. 新增一个 `CreditPay`(信用卡),不需改 checkout
-    3. 单元测试验证 4 种支付方式都能工作
-    4. **约束**:checkout 内禁止 if/elif/isinstance/type
-
-    这是 L3 的最终检验 —— 消费者函数即门控。
+要求:
+    - 用 os.makedirs() 确保目录存在
+    - 用 datetime 获取当天日期
+    - 用 with open(...) as f 写入文件
+    - 写入完成后,打印"导出成功: 文件路径"
 
 示例:
-    >>> for p in [Alipay(), WeChatPay(), ApplePay()]:
-    ...     checkout(99.0, p)
-    支付宝支付 99.0 元
-    微信支付 99.0 元
-    Apple Pay 99.0 元
-    True
+    导出文件 ./data/cart_20260707.txt 内容:
+        ====== 购物清单 ======
+        导出时间: 2026-07-07 15:30:00
+
+        苹果    5.50 x 3 = 16.50
+        牛奶   12.80 x 2 = 25.60
+        面包    7.00 x 1 = 7.00
+
+        合计: 49.10 元
+
+示例调用:
+    >>> cart = [["苹果", 5.50, 3], ["牛奶", 12.80, 2], ["面包", 7.00, 1]]
+    >>> export_cart(cart)
+    导出成功: ./data/cart_20260707.txt
 """
 
-# ======================
-# 学员代码区(下方 checkout 不可修改)
-# ======================
-import abc
 
-class Payment(abc.ABC):
-    @abc.abstractmethod
-    def execute(self, amount: float) -> bool:
-        ...
+import os
+import datetime
 
-def checkout(cart_total, payment):
-    """核心函数,不可修改核心逻辑"""
-    if cart_total <= 0:
-        print("购物车为空")
-        return False
-    return payment.execute(cart_total)
 
-# 请补全三个子类 + 新增 CreditPay:
-class Alipay(Payment):
+def export_cart(cart: list) -> str:
+    """将购物车数据导出到文件,返回文件路径"""
+    # ======================
+    # 学员代码区
+    # ======================
+    # 参考思路:
+    # 1. 获取当天日期,生成文件名
+    # 2. 用 os.makedirs 确保 ./data/ 目录存在
+    # 3. 用 with open 以写入模式打开文件
+    # 4. 写入标题、时间、每条商品记录、合计
+    # 5. 返回文件路径
     pass
 
-# class WeChatPay(Payment): ...
-# class ApplePay(Payment): ...
-# class CreditPay(Payment): ...
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    payments = [Alipay(), WeChatPay(), ApplePay(), CreditPay()]
-    for p in payments:
-        result = checkout(99.0, p)
-        assert result is True, f"{type(p).__name__} 应返回 True"
+    # 测试 1: 正常导出(3 件商品)
+    cart1 = [
+        ["苹果", 5.50, 3],
+        ["牛奶", 12.80, 2],
+        ["面包", 7.00, 1],
+    ]
+    path1 = export_cart(cart1)
+    print(f"测试 1 - 导出路径: {path1}")
+    # 预期: 文件内容包含 3 条记录,合计 49.10
 
-    # 漏写 execute 报错
-    try:
-        class BadPay(Payment): pass
-        BadPay()
-        assert False
-    except TypeError:
-        pass
+    # 测试 2: 空购物车(边界)
+    cart2 = []
+    path2 = export_cart(cart2)
+    print(f"测试 2 - 导出路径: {path2}")
+    # 预期: 文件内容为空清单,合计 0.00
 
-    # 0 元购物车
-    assert checkout(0, Alipay()) is False
-    print("✅ 所有测试通过")
+    # 测试 3: 1 件商品(边界)
+    cart3 = [["巧克力", 15.50, 10]]
+    path3 = export_cart(cart3)
+    print(f"测试 3 - 导出路径: {path3}")
+    # 预期: 文件只有 1 条记录,合计 155.00
+
+    # 测试 4: 同一天再次导出(应生成新文件覆盖)
+    path4 = export_cart(cart1)
+    print(f"测试 4 - 导出路径: {path4}")
+    # 预期: 文件覆盖,内容正确
+
+    # 测试 5: 验证文件内容
+    with open(path1, "r", encoding="utf-8") as f:
+        content = f.read()
+    print("测试 5 - 文件内容:\n" + content)
+    # 预期: 内容格式与题目描述一致

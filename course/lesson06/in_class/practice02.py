@@ -1,43 +1,33 @@
 """
-[难度: ⭐⭐⭐]
-[所属知识点: super().__init__() 扩展父类属性]
-[预计完成时间: 12 分钟]
+[难度: ⭐⭐⭐⭐]
+[所属知识点: if/elif/else + 闰年判断]
+[预计完成时间: 20 分钟]
 
 题目描述:
-    定义基类 `Product`,属性 `name` 和 `price`。
-    定义子类 `Book(Product)`,新增属性 `author`(作者)。
-    子类用 `super().__init__()` 继承基类属性,
-    再用 `self.author` 扩展自己的属性。
+    让用户输入年份和月份,输出该月份的天数。
+    注意:闰年的 2 月有 29 天,平年 2 月有 28 天。
+    闰年判定:能被 4 整除但不能被 100 整除,
+    或者能被 400 整除的年份。
 
 示例:
-    >>> b = Book("Python 入门", 59.8, "张三")
-    >>> print(b.name, b.price, b.author)
-    Python 入门 59.8 张三
+    >>> 请输入年份: 2024
+    >>> 请输入月份: 2
+    2024 年 2 月有 29 天
+    >>> 请输入年份: 2023
+    >>> 请输入月份: 2
+    2023 年 2 月有 28 天
 """
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-class Product:
-    def __init__(self, name, price):
-        self.name = name
-        self.price = price
-
-class Book(Product):
-    pass
-
-# b = Book("...", ...)
-# print(b.name, b.price, b.author)
+pass
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    b = Book("Python 入门", 59.8, "张三")
-    assert b.name == "Python 入门"
-    assert b.price == 59.8
-    assert b.author == "张三"
-    # 验证各实例独立
-    b2 = Book("算法", 45, "李四")
-    assert b.author == "张三"  # b 未受影响
-    print("✅ 所有测试通过")
+    # 测试 1: 2024 年 2 月 → 29 天(闰年)
+    # 测试 2: 2023 年 2 月 → 28 天(平年)
+    # 测试 3: 2024 年 1 月 → 31 天
+    pass

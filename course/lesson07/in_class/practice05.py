@@ -1,64 +1,104 @@
 """
 [难度: ⭐⭐⭐⭐]
-[所属知识点: 消费者函数即门控(checkout 骨架)]
-[预计完成时间: 15 分钟]
+[所属知识点: Day06 分支 + Day02 算术]
+[预计完成时间: 20 分钟]
 
 题目描述:
-    下方 `checkout` 函数由教师提供,**不可修改核心逻辑**。
-    学员必须通过实现正确的子类让它跑通。
+  在购物车的结算环节,超市推出了会员折扣活动:
+    - 会员享受 95 折(乘以 0.95)
+    - 非会员按原价结算
 
-    约束:
-    - checkout 函数内不使用 if/elif/isinstance/type
-    - 函数体不超过 4 行
-    - 漏写 execute 方法时,实例化阶段报 TypeError
+  请编写程序,让用户输入若干商品的单价和数量(直到输入商品名为 "结束"),
+  然后询问用户是否是会员(y/n),最后打印:
+    - 商品清单(名称、单价、数量、小计)
+    - 原价合计
+    - 折扣金额(会员才有)
+    - 实付金额
 
-    请补全下方的 `Alipay` / `WeChatPay` / `ApplePay`。
+要求:
+  - 用嵌套列表存储商品信息 [名称, 单价, 数量]
+  - 会员判断用 if/else
+  - 金额保留 2 位小数
 
 示例:
-    >>> checkout(99.0, Alipay())
-    支付宝支付 99.0 元
-    True
+    >>> 请输入商品名称(输入"结束"停止): 苹果
+    >>> 请输入单价: 5.5
+    >>> 请输入数量: 3
+    >>> 请输入商品名称(输入"结束"停止): 牛奶
+    >>> 请输入单价: 12.8
+    >>> 请输入数量: 2
+    >>> 请输入商品名称(输入"结束"停止): 结束
+    >>> 是否是会员(y/n)? y
+    ======== 结算清单 ========
+    1. 苹果  5.50 x 3 = 16.50
+    2. 牛奶 12.80 x 2 = 25.60
+    原价合计: 42.10
+    会员折扣: -2.11
+    实付金额: 39.99
 """
 
-# ====================== 学员代码区(不可修改)=====================
-import abc
+# ======================
+# 学员代码区
+# ======================
 
-class Payment(abc.ABC):
-    @abc.abstractmethod
-    def execute(self, amount):
-        ...
+# 存储商品信息
+cart = []
 
-def checkout(cart_total, payment):
-    if cart_total <= 0:
-        print("购物车为空")
-        return False
-    # payment.execute(amount) 是核心:统一接口,不同实现
-    return payment.execute(cart_total)
+# 循环输入商品
+while True:
+    name = input('请输入商品名称(输入"结束"停止): ')
+    if name == "结束":
+        break
+    price = float(input("请输入单价: "))
+    qty = int(input("请输入数量: "))
+    cart.append([name, price, qty])
 
-# 请补全下面三个子类:
-class Alipay(Payment):
-    pass
+# 计算原价合计
+total = 0
+for item in cart:
+    subtotal = item[1] * item[2]
+    total += subtotal
 
-# class WeChatPay(Payment): ...
-# class ApplePay(Payment): ...
+# 询问会员身份
+is_member = input("是否是会员(y/n)? ")
 
-# ====================== 测试区(不可修改)=====================
+# 计算折扣
+if is_member == "y":
+    discount = total * 0.05
+    final = total * 0.95
+else:
+    discount = 0
+    final = total
+
+# 打印结算清单
+print("======== 结算清单 ========")
+for i in range(len(cart)):
+    item = cart[i]
+    sub = item[1] * item[2]
+    print(f"{i + 1}. {item[0]}  {item[1]:.2f} x {item[2]} = {sub:.2f}")
+print(f"原价合计: {total:.2f}")
+if is_member == "y":
+    print(f"会员折扣: -{discount:.2f}")
+print(f"实付金额: {final:.2f}")
+
+# ======================
+# 测试区(教师可复制到终端验证)
+# ======================
 if __name__ == '__main__':
-    payments = [Alipay(), WeChatPay(), ApplePay()]
-    for p in payments:
-        result = checkout(99.0, p)
-        assert result is True or result is False
+    # 测试 1: 会员结算
+    # 输入: 苹果 5.5 3 -> 牛奶 12.8 2 -> 结束 -> y
+    # 预期: 原价 42.10,折扣 2.11,实付 39.99
 
-    # 验证漏写 execute 会报错
-    try:
-        class BadPay(Payment):
-            pass
-        BadPay()
-        assert False, "漏写 execute 应报 TypeError"
-    except TypeError:
-        pass
+    # 测试 2: 非会员结算
+    # 输入: 面包 7.0 1 -> 结束 -> n
+    # 预期: 原价 7.00,实付 7.00(无折扣)
 
-    # 验证 0 元被拒绝
-    assert checkout(0, Alipay()) is False
+    # 测试 3: 边界 - 只买 1 件商品
+    # 输入: 鸡蛋 1.0 1 -> 结束 -> y
+    # 预期: 原价 1.00,折扣 0.05,实付 0.95
 
-    print("✅ 所有测试通过")
+    # 测试 4: 边界 - 单价为 0
+    # 输入: 赠品 0 1 -> 结束 -> y
+    # 预期: 原价 0.00,折扣 0.00,实付 0.00
+
+    print("请直接运行本文件进行测试(需要交互输入)")

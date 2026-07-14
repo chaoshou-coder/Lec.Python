@@ -1,66 +1,110 @@
 """
 [难度: ⭐⭐⭐⭐]
-[所属知识点: Plugin(abc.ABC) 插件系统]
-[预计完成时间: 15 分钟]
+[所属知识点: Day04 嵌套列表 + Day05 循环 + Day06 分支]
+[预计完成时间: 20 分钟]
 
 题目描述:
-    定义抽象类 `Plugin(abc.ABC)`,
-    包含两个抽象方法:
-    - `name()`:返回插件名字
-    - `run(data)`:处理数据并返回结果
+  升级购物车功能! 现在购物车中每个商品是一个嵌套列表 [商品名, 数量]。
+  当用户添加一个已存在的商品时,数量累加;否则新增一条记录。
 
-    定义两个子类:
-    - `UpperPlugin`:run 返回 data.upper()
-    - `ReversePlugin`:run 返回 data[::-1]
+功能菜单:
+    1. 添加商品
+    2. 查看购物车
+    3. 删除商品
+    0. 退出
 
-    定义函数 `run_plugins(plugins, data)`,
-    循环调用每个插件的 run(),
-    打印 "插件名: 结果"。
-
-    体会:新增插件(如 `TrimPlugin`)时,
-    只需添加一个类,**无需修改任何现有代码**。
+操作说明:
+    - 输入 1: 提示输入商品名和数量
+      - 若商品已存在,数量累加
+      - 若商品不存在,新增 [商品名, 数量]
+    - 输入 2: 打印所有商品(编号、名称、数量)
+    - 输入 3: 按编号删除商品
+    - 输入 0: 退出
 
 示例:
-    >>> plugins = [UpperPlugin(), ReversePlugin()]
-    >>> run_plugins(plugins, "hello")
-    upper: HELLO
-    reverse: olleh
+    >>> 请输入命令: 1
+    >>> 请输入商品名称: 苹果
+    >>> 请输入数量: 3
+    >>> 苹果已添加到购物车!
+
+    >>> 请输入命令: 1
+    >>> 请输入商品名称: 苹果
+    >>> 请输入数量: 2
+    >>> 苹果数量已更新为 5!
+
+    >>> 请输入命令: 2
+    >>> 1. 苹果 - 数量: 5
 """
 
 # ======================
-# 学员代码区(以 pass 作为占位符)
+# 学员代码区
 # ======================
-import abc
 
-class Plugin(abc.ABC):
-    # 请定义 name() 和 run(data) 抽象方法
-    pass
+# 购物车: 每个元素是 [商品名, 数量]
+cart = []
 
-class UpperPlugin(Plugin):
-    pass
+while True:
+    cmd = input("请输入命令(1 添加/2 查看/3 删除/0 退出): ")
 
-# class ReversePlugin(Plugin): ...
-# def run_plugins(plugins, data): ...
+    if cmd == "1":
+        name = input("请输入商品名称: ")
+        qty = int(input("请输入数量: "))
+        # 查找商品是否已存在
+        found = False
+        for item in cart:
+            if item[0] == name:
+                item[1] += qty
+                found = True
+                print(f"{name} 数量已更新为 {item[1]}!")
+                break
+        if not found:
+            cart.append([name, qty])
+            print(f"{name} 已添加到购物车!")
 
-# plugins = [UpperPlugin(), ReversePlugin()]
-# run_plugins(plugins, "hello")
+    elif cmd == "2":
+        if len(cart) == 0:
+            print("购物车为空!")
+        else:
+            for i in range(len(cart)):
+                print(f"{i + 1}. {cart[i][0]} - 数量: {cart[i][1]}")
+
+    elif cmd == "3":
+        num = int(input("请输入要删除的编号: "))
+        if 1 <= num <= len(cart):
+            removed = cart.pop(num - 1)
+            print(f"已删除: {removed[0]}")
+        else:
+            print("该编号不存在!")
+
+    elif cmd == "0":
+        print("欢迎下次光临!")
+        break
+
+    else:
+        print("无效命令,请重新输入")
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    plugins = [UpperPlugin(), ReversePlugin()]
-    results = [(p.name(), p.run("hello")) for p in plugins]
-    # UpperPlugin
-    assert results[0] == ("upper", "HELLO")
-    # ReversePlugin
-    assert results[1] == ("reverse", "olleh")
+    # 测试 1: 添加新商品
+    # 输入: 1 -> 苹果 -> 3 -> 2 -> 0
+    # 预期: 显示 1.苹果 - 数量:3
 
-    # 新增插件无需改 run_plugins
-    class TrimPlugin(Plugin):
-        def name(self): return "trim"
-        def run(self, data): return data.strip()
+    # 测试 2: 累加数量
+    # 输入: 1 -> 苹果 -> 3 -> 1 -> 苹果 -> 2 -> 2 -> 0
+    # 预期: 显示 1.苹果 - 数量:5
 
-    plugins2 = plugins + [TrimPlugin()]
-    assert plugins2[2].run("  hi  ") == "hi"
-    print("✅ 所有测试通过")
+    # 测试 3: 删除后重新添加
+    # 输入: 1 -> 苹果 -> 3 -> 1 -> 牛奶 -> 2 -> 3 -> 1 -> 2 -> 0
+    # 预期: 删除苹果后,查看只有牛奶
+
+    # 测试 4: 边界 - 数量为 0
+    # 输入: 1 -> 苹果 -> 0 -> 2 -> 0
+    # 预期: 显示 1.苹果 - 数量:0
+
+    # 测试 5: 边界 - 删除编号超出范围
+    # 输入: 1 -> 苹果 -> 3 -> 3 -> 9 -> 0
+    # 预期: 提示"该编号不存在!"
+
+    print("请直接运行本文件进行测试(需要交互输入)")

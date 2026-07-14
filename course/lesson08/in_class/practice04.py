@@ -1,60 +1,35 @@
 """
-[难度: ⭐⭐⭐⭐]
-[所属知识点: __eq__ 同款判定(购物车去重)]
+[难度: ⭐⭐⭐]
+[所属知识点: 字符串join()]
 [预计完成时间: 15 分钟]
 
 题目描述:
-    定义 `Product` 类,包含 `name`。
-    实现 `__eq__`:两个 Product 的 `name` 相同则同款。
-    实现 `__hash__`:使商品能放入 `set`(用于去重)。
-
-    定义函数 `unique_count(products)`:
-    用 set 去重后返回商品数。
+    输入 4 个单词,用 join 把它们用 "-" 连接成一个字符串,并打印结果。
 
 示例:
-    >>> p1 = Product("Python")
-    >>> p2 = Product("Python")  # 同款
-    >>> p3 = Product("算法")
-    >>> print(p1 == p2)      # True
-    >>> print(p1 == p3)      # False
-    >>> unique_count([p1, p2, p3])
-    2
+    >>> w1,w2,w3,w4 = "I","love","Python","now"
+    输出: I-love-Python-now
 """
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-class Product:
-    def __init__(self, name):
-        self.name = name
-
-    def __eq__(self, other):
-        pass
-
-    def __hash__(self):
-        pass
-
-# def unique_count(products): ...
+w1 = input("请输入第 1 个单词: ")
+w2 = input("请输入第 2 个单词: ")
+w3 = input("请输入第 3 个单词: ")
+w4 = input("请输入第 4 个单词: ")
+result = "-".join([w1, w2, w3, w4])
+print("拼接结果:", result)
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    p1 = Product("Python")
-    p2 = Product("Python")  # 同款
-    p3 = Product("算法")
+    # 测试 1: 正常 4 个词
+    print(f"测试1: {'-'.join(['I','love','Python','now'])}")
 
-    # __eq__
-    assert p1 == p2
-    assert not (p1 == p3)
+    # 测试 2: 空字符串
+    print(f"测试2: {'-'.join(['','','',''])}")
 
-    # set 去重
-    s = {p1, p2, p3}
-    assert len(s) == 2
-
-    # unique_count
-    assert unique_count([p1, p2, p3, Product("算法")]) == 2
-
-    # hash
-    assert hash(p1) == hash(p2)
-    print("✅ 所有测试通过")
+    # 测试 3: 包含数字字符串
+    print(f"测试3: {'-'.join(['a','1','b','2'])}")

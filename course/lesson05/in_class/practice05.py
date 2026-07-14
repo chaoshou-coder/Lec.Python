@@ -1,22 +1,20 @@
 """
-[难度: ⭐⭐⭐]
-[所属知识点: 类属性 vs 实例属性]
-[预计完成时间: 13 分钟]
+[难度: ⭐⭐⭐⭐]
+[所属知识点: while + if/else + 累加 + 累乘]
+[预计完成时间: 20 分钟]
 
 题目描述:
-    定义一个 `Product` 类,所有商品共享同一个增值税率。
-    - 类属性 `tax_rate = 0.13`(13%)
-    - 每个商品有独立的 `name` 和 `price`(实例属性)
-    - 定义实例方法 `price_with_tax()`,返回含税价格
+    让用户循环输入整数,输入 0 表示结束。
+    统计所有奇数的平均值,以及所有偶数的乘积,
+    最后分别输出。(0 不参与统计)
 
 示例:
-    >>> p1 = Product("Python 入门", 100)
-    >>> p2 = Product("算法图解", 200)
-    >>> print(p1.price_with_tax())
-    113.0
-    >>> Product.tax_rate = 0.09  # 税率改为 9%
-    >>> print(p1.price_with_tax())
-    109.0  (所有商品一起变)
+    >>> 请输入一个整数(输入 0 结束): 3
+    >>> 请输入一个整数(输入 0 结束): 4
+    >>> 请输入一个整数(输入 0 结束): 5
+    >>> 请输入一个整数(输入 0 结束): 0
+    奇数的平均值: 4.0
+    偶数的乘积: 4
 """
 
 # ======================
@@ -28,16 +26,7 @@ pass
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    Product.tax_rate = 0.13
-    p1 = Product("Python 入门", 100)
-    p2 = Product("算法图解", 200)
-    assert p1.price_with_tax() == 113.0
-    assert p2.price_with_tax() == 226.0
-    Product.tax_rate = 0.09
-    assert p1.price_with_tax() == 109.0
-    assert p2.price_with_tax() == 218.0
-    p1.tax_rate = 0.5  # 给 p1 加了实例属性
-    assert p1.tax_rate == 0.5
-    assert Product.tax_rate == 0.09
-    assert p2.price_with_tax() == 218.0
-    print("✅ 所有测试通过")
+    # 测试 1: 输入 3,4,5,0 → 奇数均值 4.0,偶数积 4
+    # 测试 2: 输入 2,6,0 → 无奇数,偶数积 12
+    # 测试 3: 输入 0 直接结束 → 无奇数无偶数
+    pass

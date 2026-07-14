@@ -1,73 +1,35 @@
 """
 [难度: ⭐⭐⭐⭐]
-[所属知识点: 对比题-继承+重写 vs 纯 duck typing]
-[预计完成时间: 30 分钟,选做]
+[所属知识点: random.randint() + for/else + if/elif/else]
+[预计完成时间: 25 分钟]
 
 题目描述:
-    同一需求(Zoo 动物园)分别用两种方式实现。
-
-    方式 A(继承):
-    - `Animal` 基类 + `speak()` 返回 "..."
-    - `Dog` / `Cat / Bird` 子类重写 speak()
-
-    方式 B(鸭子类型):
-    - 直接定义 `Dog` / `Cat` / `Bird`,不继承同一个父类
-    - 各自实现 speak()
-
-    分别创建各三只动物,验证两种方式结果相同。
-
-    思考:方式 B 代码更少,为什么还要用方式 A?
+    编写猜数字游戏。程序随机生成一个 1~100 之间的整数,
+    用户最多可以猜 7 次。每次猜测后,程序提示"大了"或"小了"。
+    如果猜中,输出"恭喜,猜中了!"并结束;
+    如果 7 次都没猜中,输出"很遗憾,正确答案是 XX"。
+    提示:使用 for...else 结构,else 在循环正常结束时执行。
 
 示例:
-    # 方式 A
-    zoo_a = [Dog(), Cat(), Bird()]
-    # 方式 B
-    zoo_b = [Dog(), Cat(), Bird()]
-
-    结果应相同,但扩展性不同。
+    >>> 运行程序(假设答案是 42)
+    请输入你的猜测(1~100): 50
+    大了
+    请输入你的猜测(1~100): 25
+    小了
+    请输入你的猜测(1~100): 42
+    恭喜,猜中了!
 """
 
 # ======================
 # 学员代码区(以 pass 作为占位符)
 # ======================
-
-# ===== 方式 A:继承 =====
-class Animal:
-    def speak(self):
-        return "..."
-
-class Dog(Animal):
-    pass
-
-# class Cat(Animal): ...
-# class Bird(Animal): ...
-
-# ===== 方式 B:鸭子类型 =====
-class Dog2:
-    pass
-
-# class Cat2: ...
-# class Bird2: ...
+pass
 
 # ======================
 # 测试区(教师可复制到终端验证)
 # ======================
 if __name__ == '__main__':
-    # 方式 A
-    zoo_a = [Dog(), Cat(), Bird()]
-    sounds_a = [a.speak() for a in zoo_a]
-
-    # 方式 B
-    zoo_b = [Dog2(), Cat2(), Bird2()]
-    sounds_b = [a.speak() for a in zoo_b]
-
-    # 结果应相同
-    assert sounds_a == sounds_b
-    print(f"方式 A: {sounds_a}")
-    print(f"方式 B: {sounds_b}")
-
-    # 验证方式 A 有继承链
-    assert isinstance(Dog(), Animal)
-    # 方式 B 没有
-    assert not isinstance(Dog2(), Animal)
-    print("✅ 所有测试通过")
+    # 测试 1: 猜中时输出恭喜信息
+    # 测试 2: 7 次未猜中时输出正确答案
+    # 测试 3: 每次提示"大了"或"小了"正确
+    pass
