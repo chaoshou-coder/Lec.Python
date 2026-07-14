@@ -1,224 +1,142 @@
-# Day06 · 列表与字典
+# Day06 · OOP 继承 (L2)
 
 > 本节时长: 6 小时(约 6 节 × 45 分钟)
-> 前置: Day01-05 已掌握变量、字符串、条件、循环、`def` 函数、`return`、`in` 运算符
-> 关键问题: 当数据量增大(比如 100 个名字),一个一个变量存不现实 —— Python 提供**列表**(有序排队)和**字典**(带标签盒子)两种容器,本节进入 **CRUD 时代 = 增删改查**
+> 前置: Day01-05(print/input/变量/字符串/分支/循环/函数/列表字典/
+> OOP 封装)
+> 关键问题: 当几个类的代码几乎一样,复制粘贴越多改 bug 越痛 ——
+> 能不能**抽共性到上层**,差异留在下层?
+> 叙事锚点: 电商订单系统 v2 — Product 基类 + Physical/Digital 子类
 
 ---
 
-## 0. 引入(5 分钟)
+## 0. 引入(10 分钟)
 
-- **抽问上节**(2 分钟): 让学员口答 —— Python 函数四种形式是哪四种?`return a, b` 实际返回什么?`in` 运算符能判断什么?
-- **赏玩 demo**(3 分钟): 在黑板上画 5 个独立变量 `name1 = "张三"`, `name2 = "李四"` ... 画到第 5 个时停下:"如果我要存 1000 个名字怎么办?"引出"列表 = 把一排格子粘在一起"。再问: "如果既存名字又存电话,一一对应怎么办?"引出"字典 = 带 key 的快递柜"。
+- **痛点演示**(5 分钟): 给出两份 90% 重复的代码
+  (`PhysicalProduct` + `DigitalProduct`),要求改运费计算 →
+  学员发现要改两处 → 引出"代码坏味道:重复"。
+- **赏玩 demo**(2 分钟): 给出重构后的基类 + 子类版本,
+  改一处即生效。
+- **微项目预告**(3 分钟): 今天的最终产出 —— 员工薪资系统
+  `show_pay` 函数一行调用,多态执行。
 
 ---
 
-## 1. 第一讲(15 分钟) —— 列表创建、索引、切片
+## 1. 第一讲(15 分钟) —— 为什么需要继承(is-a 关系)
 
-### 知识点 1.1 列表:有序、可变、可重复
+### 知识点 1.1 继承 = 代码复用 + is-a 语义
 
-```python
-fruits = ["苹果", "香蕉", "橘子"]
-numbers = [1, 2, 3, 4, 5]
-mixed = "张三", 18, True]    # 可混合类型(但不推荐)
-empty = []                   # 空列表
-```
+- 子类**自动拥有**父类的属性和方法
+- 子类可以**扩展**或**修改**父类行为
+- `class Dog(Animal):` 代表 "Dog is-a Animal"
 
-> 列表和字符串很像:**有序、支持索引和切片**;关键区别是字符串不可变,列表**可以修改**。
+### 知识点 1.2 Python 单继承语法
 
-### 知识点 1.2 索引 + 切片(同字符串)
+`class 子类(父类):` 括号里写父类名,Python 支持多继承
+(本节只讲单继承)。
 
-```python
-fruits = ["苹果", "香蕉", "橘子", "葡萄"]
-print(fruits[0])     # 苹果
-print(fruits[-1])    # 葡萄
-print(fruits[1:3])   # ['香蕉', '橘子'] ← 左闭右开
-print(fruits[::-1])  # ['葡萄', '橘子', '香蕉', '苹果'] ← 逆序
-```
+### BREAK IT: 忘记继承括号
 
-### 知识点 1.3 列表是可变的(跟字符串不一样!)
+教师演示:`class Dog Animal:`(漏冒号) 和 `class Dog:`(漏括号) 的报错。
 
-```python
-fruits = ["苹果", "香蕉"]
-fruits[0] = "榴莲"           # 直接改,OK!
-print(fruits)                # ['榴莲', '香蕉']
-
-# 字符串:s[0] = "X"  ← 报错!字符串不可变
-```
+---
 
 ## 2. 当堂练 1(20 分钟)
 
-- 练习 1: `in_class/practice01.py` —— 列表创建 + 索引 + 打印全部(⭐,10 分钟)
-- 练习 2: `in_class/practice02.py` —— `append()` + `while` 循环输入朋友名单(⭐⭐,15 分钟)
-
-> 巡场重点: 看学员是否用了 `fruits[-1]` 取最后一个(而不是 `fruits[len(fruits)-1]`,虽然后者也对但不够 Python)。
+- 练习 1: `in_class/practice01.py` —— Product→Book 继承(⭐⭐,10 分钟)
+- 练习 2: `in_class/practice02.py` —— `super().__init__()` 扩展(⭐⭐⭐,12 分钟)
 
 ---
 
-## 3. 第二讲(15 分钟) —— 列表 CRUD:`append` `insert` `pop` `remove` `sort`
+## 3. 第二讲(15 分钟) —— `super().__init__()` 深度
 
-### 知识点 3.1 增:`append` `insert` `extend`
+### 知识点 3.1 子类构造函数必须调 `super()`
 
-```python
-fruits = ["苹果", "香蕉"]
+- `super().__init__(父类参数)` 安全调用父类构造函数
+- 等价于 `Animal.__init__(self, ...)`,但**更规范**
 
-# append:末尾追加一个
-fruits.append("橘子")
-print(fruits)   # ['苹果', '香蕉', '橘子']
+### 知识点 3.2 方法重写(override)
 
-# insert:指定位置插入
-fruits.insert(1, "榴莲")
-print(fruits)   # ['苹果', '榴莲', '香蕉', '橘子']
+- 子类**同名定义**即覆盖父类方法
+- 如果想保留父类版本并扩展:子类里用 `super().方法()`
 
-# extend:合并另一列表(等价 +=)
-fruits.extend(["葡萄", "西瓜"])
-```
-
-### 知识点 3.2 删:`pop` `remove` `clear`
+### BREAK IT: 重写 `__init__` 忘调 super → 父类属性丢失
 
 ```python
-fruits = ["苹果", "香蕉", "橘子", "葡萄"]
+class Dog(Animal):
+    def __init__(self, name, breed):
+        # 忘记 super().__init__(name) ← BREAK IT!
+        self.breed = breed
 
-# pop:按索引删除,返回被删元素
-last = fruits.pop()         # 删末尾 "葡萄"
-first = fruits.pop(0)       # 删索引 0 "苹果"
-
-# remove:按值删第一个匹配项
-fruits.remove("香蕉")       # 删 "香蕉"
-# fruits.remove("不存在的值")  ← ValueError!
-
-# clear:清空整个列表
-# fruits.clear()
+dog = Dog("旺财", "柯基")
+print(dog.name)  # AttributeError! Dog 没有 name 属性
 ```
 
-### 知识点 3.3 改 + 查:`sort` `index` `count`
-
-```python
-nums = [3, 1, 4, 1, 5]
-nums.sort()                 # 原地排序,原列表改变 → [1, 1, 3, 4, 5]
-nums.sort(reverse=True)     # 降序 → [5, 4, 3, 1, 1]
-
-# 判断是否存在
-if 3 in nums:
-    print("找到了")
-
-# 第一次出现的索引
-idx = nums.index(3)          # 2
-
-# 计数
-cnt = nums.count(1)          # 2
-```
-
-> 🔴 教学红线(`sort()` 返回 None): 学员常写 `sorted_nums = nums.sort()` 然后 `print(sorted_nums)` 得到 `None`。**`sort()` 是原地排序,返回 `None`**,要直接看 `nums`。如需保留原列表用 `sorted(nums)`。
+---
 
 ## 4. 当堂练 2(25 分钟)
 
-- 练习 3: `in_class/practice03.py` —— 累加求总分/最高/最低(不用 sum/max)(⭐⭐⭐,15 分钟)
-- 练习 4: `in_class/practice04.py` —— `in` 运算符判断用户名是否重复(⭐⭐⭐,15 分钟)
-
-> 巡场重点: 练习 3 学员常把 `highest = 0` 而不是 `scores[0]`,负数分数时出错;练习 4 看学员是否 `if new_user in users` 而不是手写循环。
+- 练习 3: `in_class/practice03.py` —— 继承+重写+`super().方法()`(⭐⭐⭐,12 分钟)
+- 练习 4: `in_class/practice04.py` —— 动物园体系(Animal→Dog/Cat + 多态)(⭐⭐⭐,13 分钟)
 
 ---
 
-## 5. 第三讲(15 分钟) —— 字典 CRUD
+## 5. 第三讲(15 分钟) —— MRO + isinstance 反模式
 
-### 知识点 5.1 字典:带 key 的快递柜
+### 知识点 5.1 MRO(Method Resolution Order)
 
-```python
-# 创建
-stu = {"name": "小明", "age": 18, "city": "成都"}
-empty_dict = {}
+查找顺序:**子类 → 父类 → 父类的父类 → object**。
+可看 `ClassName.__mro__`。
 
-# 取值(两种方式)
-print(stu["name"])       # 小明
-# print(stu["phone"])    # ❌ KeyError!
-print(stu.get("phone", "未填写"))   # 未填写 ← get 有默认值,不报错
-```
+### 知识点 5.2 isinstance / issubclass
 
-> 口诀:**列表用索引(0,1,2...)找元素;字典用 key 找 value**。
+- `isinstance(obj, cls)` 判断对象是否是某类实例
+- **反模式**:用 isinstance 做类型分发 → 应该用多态
 
-### 知识点 5.2 增 / 改 / 删
+### BREAK IT: 用 isinstance 做分发的"扩展噩梦"
 
 ```python
-stu = {"name": "小明", "age": 18}
-
-# 增:直接给新 key 赋值
-stu["city"] = "成都"
-
-# 改:覆盖原有 key 的值
-stu["age"] = 19
-
-# 删:pop
-stu.pop("city")
-
-# 清空
-# stu.clear()
+# 反模式代码(给学员 5 分钟找错):
+def show_pay(emp):
+    if isinstance(emp, Manager):
+        return emp.base + emp.bonus
+    elif isinstance(emp, Sales):
+        return emp.base + emp.commission
+    # 每加一个新员工类型都要改这个函数! ← BUG!
 ```
 
-### 知识点 5.3 遍历字典:`keys()` `values()` `items()`
-
-```python
-stu = {"name": "小明", "age": 18, "city": "成都"}
-
-for key in stu:
-    print(key)                  # name age city(遍历 key)
-
-for key in stu.keys():
-    print(key)
-
-for value in stu.values():
-    print(value)                # 小明 18 成都
-
-for key, value in stu.items():
-    print(f"{key}: {value}")   # 最强迭代方式
-```
-
-> `items()` 是字典最强的迭代方式 —— 同时拿到 key 和 value,**必须掌握**。
+---
 
 ## 6. 当堂练 3(25 分钟)
 
-- 练习 5: `in_class/practice05.py` —— 简易购物车菜单(添加/删除/退出)(⭐⭐⭐⭐,20 分钟)
-- 练习 6: `in_class/practice06.py` —— 嵌套列表 + f-string 格式化学生信息(⭐⭐⭐⭐,20 分钟)
-
-> 巡场重点: 练习 5 看学员写的是函数式的还是脚本式的,引导函数式封装;练习 6 看学员是否用 f-string 拼接多个字段,还是用 `+` 累加。
+- 练习 5: `in_class/practice05.py` —— Employee+Manager+Sales(⭐⭐⭐⭐,15 分钟)
+- 练习 6: `in_class/practice06.py` —— MRO + isinstance 反模式(⭐⭐⭐⭐,13 分钟)
 
 ---
 
-## 7. 小项目:通讯录 v1(45 分钟)
+## 7. 小项目:员工薪资系统(45 分钟)
 
-- 项目: `mini_project/` 新建 `contact_book_v1.py`
-- 要求:用**字典**存储通讯录,菜单循环:
-  1. 添加联系人(name → phone)
-  2. 查找联系人(按 name 查 phone)
-  3. 删除联系人
-  4. 查看全部联系人
-  0. 退出
-- 核心数据结构:`contacts = {"小明": "13800138000", "小红": "13900139000"}`
-
-> 巡场重点: 学员常忘了处理"查无此人"的边界(用 `if name in contacts` 或 `contacts.get(name, "未找到")`);第二个常见 bug 是"空通讯录查看全部"要给出友好提示而不是啥也不显示。
+- 项目: `mini_project/` 新建 `employee_pay.py`
+- 要求:
+  1. `Employee` 基类:`name` + `base_salary` + `pay()` 返回 base_salary
+  2. `Manager(Employee)`:新增 `bonus`,**重写** `pay()` = base + bonus
+  3. `Sales(Employee)`:新增 `commission`,**重写** `pay()` = base + commission
+  4. 用 `super().__init__()` 调用父类构造
+  5. 写 `show_pay(emp)` 打印 `emp.name + emp.pay()`(**多态**)
+  6. 用 `isinstance 检查:禁止！`
 
 ---
 
 ## 8. 总结(5 分钟)
 
-- **本日错 3 件事**(课后教师把真实错例填进 `teacher_notes.md`):
-  1. `list.sort()` 返回 `None`,学员误以为它返回新列表
-  2. 字典 `d[key]` 不存在时 `KeyError`,应当用 `d.get(key, 默认值)`
-  3. 删除列表元素时修改了正在遍历的列表(边遍历边删导致跳元素)
-- **作业说明**: `homework/task01.py`(BMI 计算器循环输入)、`homework/task02.py`(水仙花数 + 循环)、`homework/task03.py`(猜数字游戏),下节课前 10 分钟复盘。
+- **本日错 3 件事**:
+  1. 子类重写 `__init__` 忘调 `super().__init__()` → 父类属性丢失
+  2. 用 `isinstance` 做类型分发 → 每加新类都改分发函数
+  3. 继承层级 > 3 层 → 应该用组合替代
+- **作业说明**: `homework/task01-03.py`。
 
 ---
 
-## 易错点
-
-1. **`list.sort()` 是原地排序**,返回 `None`,不要写 `sorted = lst.sort()`。
-2. **`d[key]` 找不到会 `KeyError`**,安全取值用 `d.get(key, default)`。
-3. **遍历列表时不要修改列表**(增删元素),会跳过元素;如需改动,遍历副本或倒序删。
-4. **`append(x)` 追加单个元素**,`extend([x, y])` 或 `+=` 合并另一个列表。
-5. **列表切片返回新列表**,不改变原列表;`sort()` 改变原列表,两个行为相反。
-
 ## 延伸题
 
-- **(Grocery List, CS50P Week3, ⭐)**: 输入菜名,统计每种菜出现次数,按大写字母序输出 —— 巩固字典 `counts[item] = counts.get(item, 0) + 1`。
-- **(Taqueria, CS50P Week3, ⭐⭐⭐)**: 外卖菜单查价 + 累加总价 —— 巩固字典 + while 菜单循环。
-- **(Scourgify, CS50P Week3, ⭐⭐⭐⭐)**: 读 CSV 清洗数据后写回 —— 为 Day13/16 文件+CSV 做铺垫。
+- PyNative Ex13-15(⭐⭐⭐):Bus/Vehicle 继承体系。
+- PyNative Ex16(⭐⭐⭐):Dog/Cat 多态。

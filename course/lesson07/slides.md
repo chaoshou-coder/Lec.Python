@@ -1,256 +1,187 @@
-# Day07 · 文件 I/O + 异常
+# Day07 · OOP 多态+契约 (L3)
 
 > 本节时长: 6 小时(约 6 节 × 45 分钟)
-> 前置: Day01-06(print/input/变量/字符串/分支/循环/函数/列表字典)
-> 关键问题: 让程序**持久化数据到磁盘**,并学会用异常处理让程序
-> **不因报错就崩溃**
+> 前置: Day01-06(print/input/变量/字符串/分支/循环/函数/列表字典/
+> OOP 封装/继承)
+> 关键问题: 同一种操作要处理多种类型,if-elif 越改越痛 ——
+> 能不能让"新增类型"**无需修改核心函数**即可接入?
+> 叙事锚点: 电商订单系统 v2 — Payment(abc) 支付系统
+> 教学法: 本节是 NCDL(负案例驱动学习)的完整落地
 
 ---
 
-## 0. 引入(5 分钟)
+## 0. 引入(10 分钟)(NCDL 三步之"先展示痛点")
 
-- **破冰 + 抽问**(2 分钟): "前 6 天写的程序,一关掉窗口,数据
-  全丢了 —— 怎么让数据留下来?"引出**文件 I/O**:程序 ↔ 硬盘
-  之间的桥梁。
-- **赏玩 demo**(3 分钟): 当场写一个"日记本",运行两次 —— 第二次
-  能读到第一次写的内容,学员瞬间理解"持久化"三字的分量。
+- **痛点演示**(5 分钟): 给出 120 行 `pay(payment_type, amount)` if-else 代码。
+  要求:新增 Apple Pay。
+  学员发现:要在核心函数里加新分支 → **改一处动全身**。
+- **重构预告**(3 分钟): 今天要让 "新增支付方式 = 添加一个文件"。
+- **微项目预告**(2 分钟): 今天终极产出 —— `checkout()` 只有 4 行,3 种支付即插即用。
 
 ---
 
-## 1. 第一讲(15 分钟) —— 文件读写基础
+## 1. 第一讲(15 分钟) —— 鸭子类型:Python 的多态哲学
 
-### 知识点 1.1 `open()` 与文件模式
+### 知识点 1.1 "像鸭子就是鸭子"
 
-1. `open(路径, 模式)` 打开文件,返回文件对象。
-2. 三种基础模式:`'r'` 读(默认)、`'w'` 写(覆盖)、`'a'` 追加。
-3. 读完、写完都要 `close()`,否则数据可能丢。
+> "If it walks like a duck and quacks like a duck, it's a duck."
+
+- 不需要继承同一个父类
+- 只需要对象有同名方法
+- Python 是动态类型,天然支持
+
+### 知识点 1.2 为什么 Python 不需要"声明接口"
+
+对比:
+- Java/C#:必须先 `implements IPayment` → 编译器强制
+- Python:跑起来再说 → 运行时才报错
+
+### BREAK IT: Python 鸭子类型的代价
 
 ```python
-# 写文件(覆盖)
-f = open("a.txt", "w", encoding="utf-8")
-f.write("第一行\n")
-f.write("第二行\n")
-f.close()               # 不关可能丢数据
+class BrokenAlipay:
+    # 漏写 execute 方法!
+    pass
 
-# 读文件
-f = open("a.txt", "r", encoding="utf-8")
-content = f.read()      # 一次性读完全部
-print(content)
-f.close()
+def checkout(total, payment):
+    return payment.execute(total)  # AttributeError! 运行到这里才报错
+
+checkout(99, BrokenAlipay())  # 可能过了好几天才跑到这一行!
 ```
 
-> 口诀:**写 `'w'` 会覆盖,追加用 `'a'`,读完记得 `close()`**。
-
-### 知识点 1.2 `read()` / `readline()` / `readlines()`
-
-```python
-f = open("a.txt", "r", encoding="utf-8")
-
-f.read()        # 整个文件 → 一个字符串
-f.readline()    # 只读一行 → 字符串
-f.readlines()   # 全部读入 → 每行作为字符串的列表
-
-f.close()
-```
-
-### 知识点 1.3 `with` 上下文管理(推荐写法)
-
-`with` 块结束时**自动调用 `close()`**,即便中间报错也会关,
-永不漏写。
-
-```python
-# 最佳写法
-with open("a.txt", "r", encoding="utf-8") as f:
-    content = f.read()
-# 出 with 块,f 已自动关闭
-print(content)
-```
-
-> 🔴 教学红线(`encoding`): Windows 上中文文件默认 `gbk`,
-> Mac/Linux 是 `utf-8`,跨平台要**显式写
-> `encoding="utf-8"`**,否则遇到中文就 `UnicodeDecodeError`。
-
-## 2. 当堂练 1(20 分钟)
-
-- 练习 1: `in_class/practice01.py` —— 写 3 行日记再读出来
-  (⭐⭐,8 分钟)
-- 练习 2: `in_class/practice02.py` —— `readlines()` 逐行打印
-  课表(⭐⭐⭐,12 分钟)
-
-> 巡场重点: 学员常漏写 `encoding="utf-8"`,在中文路径电脑上直接
-> 报错。巡场先检查这一行。
+学员体会:**鸭子类型的弱点 —— bug 难追溯**。
 
 ---
 
-## 3. 第二讲(15 分钟) —— JSON 读写
+## 2. 当堂练 1(15 分钟)
 
-### 知识点 3.1 为何需要 JSON
+- 练习 1: `in_class/practice01.py` —— 不写继承也能多态(⭐⭐,10 分钟)
+- 练习 2: `in_class/practice02.py` —— Day06 employee 多态重写(⭐⭐⭐,12 分钟)
 
-纯文本 `"apple,banana,orange"` 无法表达**结构化数据**(列表/
-字典嵌套)。JSON(JavaScript Object Notation)是程序之间交换数
-据的"通用语言"。Python 内置 `json` 模块。
+---
 
-### 知识点 3.2 `json.dump` / `json.load`(文件) 与
-`json.dumps` / `json.loads`(字符串)
+## 3. 第二讲(15 分钟) —— abc.ABC:把契约写进代码
+
+### 知识点 3.1 用 `abc.ABC` + `@abstractmethod` 锁定接口
 
 ```python
-import json
+import abc
 
-data = {
-    "name": "小明",
-    "scores": [90, 85, 92],
-    "is_vip": True
-}
-
-# 写入 JSON 文件
-with open("data.json", "w", encoding="utf-8") as f:
-    json.dump(data, f, ensure_ascii=False, indent=2)
-
-# 读取 JSON 文件
-with open("data.json", "r", encoding="utf-8") as f:
-    loaded = json.load(f)
-print(loaded["scores"])     # [90, 85, 92]
+class Payment(abc.ABC):
+    @abc.abstractmethod
+    def execute(self, amount): ...
 ```
 
-- `ensure_ascii=False`:中文不转 `\uXXXX`。
-- `indent=2`:美化缩进,人可读。
+- 继承 `abc.ABC` → 类成为抽象基类
+- `@abstractmethod` 装饰 → 子类必须实现,否则**实例化时报错**
+- 错误提前:从"运行中"提前到"实例化时"
 
-> 🔴 教学误区(JSON ≠ Python dict): JSON 里 `true/false/null`,
-> Python 里 `True/False/None`。`json.dump` 自动转换,但手拼 JSON
-> 文件时用错必崩。
+### 知识点 3.2 抽象类 vs 鸭子类型的取舍
 
-## 4. 当堂练 2(25 分钟)
+| | 鸭子类型 | abc.ABC |
+|---|---|---|
+| 哲学 | "跑起来再说" | "先签合同" |
+| 报错时机 | 运行中 | 实例化时 |
+| 适用 | 个人脚本 | 团队协作 |
+| 学习曲线 | 低 | 中 |
 
-- 练习 3: `in_class/practice03.py` —— 把通讯录字典写成 JSON
-  再读回(⭐⭐⭐,12 分钟)
-- 练习 4: `in_class/practice04.py` —— 用 `json.loads()` 解析
-  API 返回的 JSON 字符串(⭐⭐⭐,13 分钟)
-
-> 巡场重点: `json.load`(文件) vs `json.loads`(字符串)的 `s` 是
-> 新手高频混用,提前在白板上画对照表。
+**推荐**: 团队项目用 abc,除非你有充分理由不用。
 
 ---
 
-## 5. 第三讲(15 分钟) —— 异常处理
+## 4. BREAK IT 核心环节(45 分钟)
 
-### 知识点 5.1 为何 try-except
+### Break It 1(15 分钟):漏写抽象方法
 
-程序遇到错误会**崩溃退出**。`try-except` 让我们"抓住"错误,
-决定下一步,而不是直接死掉。
-
-### 知识点 5.2 `try` / `except` / `else` / `finally`
-
+给学员"不完整"的 Alipay 子类:
 ```python
-try:
-    num = int(input("请输入整数:"))
-    result = 100 / num
-except ValueError:
-    print("输入的不是整数!")
-except ZeroDivisionError:
-    print("不能除以 0!")
-else:
-    print("计算结果是:", result)    # 没异常才跑
-finally:
-    print("无论有无异常都执行")    # 常用来关文件/清理资源
+class Alipay(Payment):
+    # 漏写 execute 方法!
+    pass
+
+alipay = Alipay()  # TypeError! 立刻报错
 ```
 
-### 知识点 5.3 常见异常速查
+学员对比 Day06:漏写时**运行中才报错**,可能找不到 bug 在哪。
 
-| 异常 | 触发场景 |
-|---|---|
-| `FileNotFoundError` | `open()` 文件不存在 |
-| `ValueError` | `int("abc")` 转换失败 |
-| `TypeError` | `"hello" + 1` 类型不匹配 |
-| `KeyError` | 访问字典不存在的 key |
-| `IndexError` | 访问列表越界索引 |
-| `json.JSONDecodeError` | `json.loads("")` 解析非法字符串|
+### Break It 2(15 分钟):用 if-elif 绕过契约
 
-> 口诀:**`try` 里放危险代码,`except` 按类型分流,`else` 无错才跑,
-> `finally` 必定执行**。
+给学员一份"能跑"的 checkout(内含 if-elif),要求找出 3 个坏味道:
+1. 每新增一种支付方式都要改核心函数
+2. 违反"开闭原则"
+3. 函数体越来越长
 
-## 6. 当堂练 3(25 分钟)
+学员亲手用多态替换 if-elif,感受差异。
 
-- 练习 5: `in_class/practice05.py` —— 给除法器加异常防护,
-  输错 3 次退出(⭐⭐⭐,12 分钟)
-- 练习 6: `in_class/practice06.py` —— 读 JSON 文件,处理
-  `FileNotFoundError` + `JSONDecodeError`(⭐⭐⭐⭐,13 分钟)
+### Break It 3(15 分钟):忘记继承 abc.ABC
 
-> 巡场重点: 学员常把 `except:`(裸 except)写一切,强调**必须指定
-> 异常类型**,否则会吞掉真正的 Bug。
-
----
-
-## 7. 小项目:日记本持久化(45 分钟)
-
-- 项目: `mini_project/` 新建 `diary.py`
-- 需求:
-  1. 启动时读取 `diary.json`(不存在则用空列表)。
-  2. 让用户输入一段日记,追加进列表,立刻写回文件。
-  3. 输入 `quit` 时退出,并把全部日记打印出来。
-  4. 所有文件操作套 `try-except`,崩不了。
-
+给学员一段"忘记继承 abc.ABC"的代码:
 ```python
-import json, os
-
-FILE = "diary.json"
-
-def load():
-    if not os.path.exists(FILE):
-        return []
-    with open(FILE, "r", encoding="utf-8") as f:
-        return json.load(f)
-
-def save(diary):
-    with open(FILE, "w", encoding="utf-8") as f:
-        json.dump(diary, f, ensure_ascii=False, indent=2)
-
-# 主循环(学员补完)
-diary = load()
-while True:
-    line = input("写日记(quit 退出):")
-    if line == "quit":
-        break
-    diary.append(line)
-    save(diary)
-print("你的日记:", diary)
+class Payment:  # 没有 abc.ABC!
+    @abc.abstractmethod
+    def execute(self, amount): ...
 ```
 
-> 巡场重点: `json.load` 读空文件报 `JSONDecodeError`,提示学员
-> 判空或用 `try` 跳过。
+学员跑起来"能跑",但漏写 execute 不会报错。
+讨论:为什么 Python 不强制 abc? → 引出鸭子类型哲学。
 
 ---
 
-## 8. 总结(5 分钟)
+## 5. 当堂练 2(25 分钟)
 
-- **本日错 3 件事**(课后教师把真实错例填进 `teacher_notes.md`):
-  1. 漏写 `encoding="utf-8"`,中文路径报错
-  2. 混淆 `json.load`(文件)和 `json.loads`(字符串)
-  3. 裸 `except:` 吞掉真正的 Bug
-- **作业说明**: `homework/task01.py`(文件复制器)、
-  `homework/task02.py`(JSON 通讯录升级版)、
-  `homework/task03.py`(异常防护的除法器),下节课前 10 分钟复盘。
+- 练习 3: `in_class/practice03.py` —— abc.ABC + @abstractmethod 基础(⭐⭐⭐,13 分钟)
+- 练习 4: `in_class/practice04.py` —— Plugin(abc.ABC) 插件系统(⭐⭐⭐⭐,15 分钟)
 
 ---
 
-## 易错点
+## 6. 第三讲(10 分钟) —— 接口概念(团队协作契约)
 
-1. **`'w'` 模式会覆盖原文件**,`open("a.txt","w")` 瞬间清空 ——
-   想追加用 `'a'`。
-2. **`encoding="utf-8"` 必显式写**,跨平台中文乱码/报错是高频
-   Bug。
-3. **`json.load` 读文件,`json.loads` 读字符串**,末尾的 `s` 不是
-   typo,是 file vs string 的区分。
-4. **裸 `except:` 会吞掉所有异常**,包括 `Ctrl+C`,永远指定具体
-   异常类型。
-5. **出 `with` 块文件已关**,再 `f.write()` 报
-   `ValueError: I/O operation on closed file`。
+### 知识点 6.1 接口 = 只包含抽象方法的抽象类
+
+- Python 没有 `interface` 关键字
+- 用"全抽象方法的 ABC"模拟接口
+- 多人协作时:架构师定义接口,开发者各自实现
+
+### 知识点 6.2 接口 vs 抽象类的区别
+
+| | 接口 | 抽象类 |
+|---|---|---|
+| 方法 | 全部抽象 | 可以有普通方法 |
+| 属性 | 通常没有 | 可以有 |
+| 用途 | "能做什么"契约 | "是什么"共性 |
+
+---
+
+## 7. 当堂练 3(20 分钟)
+
+- 练习 5: `in_class/practice05.py` —— 给定的 checkout() 骨架 + 学员补全(⭐⭐⭐⭐,15 分钟)
+- 练习 6: `in_class/practice06.py` —— 接口:多人协作契约(⭐⭐⭐⭐⭐,15 分钟)
+
+---
+
+## 8. 小项目:Payment 支付系统(45 分钟)
+
+- 项目: `mini_project/` 新建 `payment_system.py`
+- 要求:
+  1. `Payment(abc.ABC)` + `execute(amount)` 抽象方法
+  2. 三个子类:`Alipay` / `WeChatPay` / `ApplePay`
+  3. `checkout(cart_total, payment)` 函数 ≤4 行,无 if-elif
+  4. 单元测试:每种支付都能正常 checkout
+  5. 新增 ApplePay 只需添加一个文件
+
+---
+
+## 9. 总结(5 分钟)
+
+- **本日错 3 件事**:
+  1. 漏写 `@abstractmethod` 装饰器 → 方法变成普通方法,没契约效果
+  2. 用 isinstance 做"补救检查" → 说明多态设计还有问题
+  3. 混淆"继承 abc.ABC"与"继承普通类" → 抽象方法不是实现
+- **作业说明**: `homework/task01-03.py`。
+
+---
 
 ## 延伸题
 
-- **(CS50P Week8 IO, ⭐⭐)**: 用 `readlines()` 读一份英文文本,
-  统计单词数/行数/字符数 —— 巩固文件读取 + 字符串分割。
-- **(CS50P Week8 Shirt, ⭐⭐⭐)**: 把多张 CSV 数据合并为一张
-  报表 —— 巩固 JSON/文件 I/O。
-- **(Real Python Exception, ⭐⭐⭐)**: 写一个"安全除法"函数,
-  接受任意输入,遇到非数字/除零返回 `None` 而不是抛异常 ——
-  巩固异常类型分流。
+- PyNative Ex18(⭐⭐⭐⭐):Shape(ABC) + Circle/Rectangle。
+- GeeksforGeeks OOP(⭐⭐⭐⭐):abc.ABC 实现。

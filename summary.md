@@ -56,9 +56,11 @@ Lec.Python/
 
 ## 59 天总进度
 
-> v2.2.0: Day01-04 压缩为 1 天,OOP 扩展为 3 天(封装/继承/抽象)。总课程 59 天。
+> v2.3.0(2026-07-14): Day01-04 压缩为 1 天,OOP 扩展为 4 天(封装/继承/多态+契约/组合)。总课程 60 天。
+> 教学法:双层覆盖(叙事锚点+语法独立样本)、NCDL(负案例驱动)、消费者函数门控。
 > 课时分配按优先级: AI 应用(10d) > 爬虫(7d) > LLM(7d) > ML(7d) > DL(6d)。
 > 非 Python 知识(数学/网络/系统)列为前置,详见 `PREREQUISITES.md`。
+> OOP 详细设计见 `dev/skills/06_OOP_教学方案设计.md`。
 
 ### Module 0: Python 核心 + 数据处理(Day 1-16)
 
@@ -68,102 +70,103 @@ Lec.Python/
 | 02 | 函数入门 | `def` 四种形式 `return` | 6 / 2 / 🎯 工具函数库 |
 | 03 | 列表与字典 | CRUD:`append`/`pop`/`items()`/推导式 | 6 / 2 / 🎯 通讯录 v1 |
 | 04 | 文件 I/O + 异常 | `with`/`JSON`/`try`-`except` | 5 / 2 / 🎯 日记本持久化 |
-| 05 | **OOP 封装** | `class`/`__init__`/`self`/`@property`/`__str__` | 6 / 2 / 🎯 Student 类 |
-| 06 | **OOP 继承** | 单继承/`super()`/方法重写/多态/`isinstance` | 6 / 2 / 🎯 动物继承体系 |
-| 07 | **OOP 抽象** | `abc.ABC`/`@abstractmethod`/接口/魔术方法 | 6 / 2 / 🎯 形状面积计算器 |
-| 08 | 模块与高级特性 | 包/生成器/装饰器/`import` | 6 / 3 /  |
-| 09 | **阶段复习①** | Day01-08 综合 | 综合 / 综合 / 🌟 购物车(函数+OOP 版) |
-| 10 | NumPy 基础 | 数组/广播/向量化 | 6 / 3 / 🎯 矩阵运算 |
-| 11 | NumPy 进阶 | 线性代数/随机数/统计 | 6 / 3 /  |
-| 12 | Pandas 基础 | Series/DataFrame/索引/过滤 | 6 / 3 / 🎯 数据探索 |
-| 13 | Pandas 进阶 | 分组/合并/透视/清洗 | 6 / 3 /  |
-| 14 | 数据可视化 | 折线/柱状/散点/热力图 | 6 / 2 / 🎯 数据报告配图 |
-| 15 | 数据摄取 | CSV/JSON/Excel/SQL/API | 5 / 2 / 🎯 多源数据整合 |
-| 16 | **阶段复习②(EDA 项目)** | Module 0 综合 | 综合 / 综合 / 🌟 EDA 分析报告 |
+| 05 | **OOP 封装 (L1)** | `class`/`__init__`/`self`/`@property`/`__str__`/类属性 | 6 / 2 / 🎯 BankAccount(property 校验) |
+| 06 | **OOP 继承 (L2)** | 单继承/`super()`/方法重写/MRO/`isinstance` | 6 / 2 / 🎯 Employee→Manager/Sales 薪资 |
+| 07 | **OOP 多态+契约 (L3)** | 鸭子类型/`abc.ABC`/`@abstractmethod`/接口 | 6 / 2 / 🎯 Payment(abc) 支付系统(NCDL 驱动) |
+| 08 | **OOP 组合+Pythonic (L4)** | 组合优于继承/`__add__`/`__len__`/`__iter__`/`__eq__` | 6 / 2 / 🎯 ShoppingCart.__add__ + Order 聚合项目 |
+| 09 | 模块/生成器/装饰器 | 包/生成器/装饰器/`import`(原 Day08 内容) | 6 / 3 /  |
+| 10 | **阶段复习①** | Day01-09 综合 | 综合 / 综合 / 🌟 购物车(函数+OOP 版) |
+| 11 | NumPy 基础 | 数组/广播/向量化 | 6 / 3 / 🎯 矩阵运算 |
+| 12 | NumPy 进阶 | 线性代数/随机数/统计 | 6 / 3 /  |
+| 13 | Pandas 基础 | Series/DataFrame/索引/过滤 | 6 / 3 / 🎯 数据探索 |
+| 14 | Pandas 进阶 | 分组/合并/透视/清洗 | 6 / 3 /  |
+| 15 | 数据可视化 | 折线/柱状/散点/热力图 | 6 / 2 / 🎯 数据报告配图 |
+| 16 | 数据摄取 | CSV/JSON/Excel/SQL/API | 5 / 2 / 🎯 多源数据整合 |
+| 17 | **阶段复习②(EDA 项目)** | Module 0 综合 | 综合 / 综合 / 🌟 EDA 分析报告 |
 
-### Module 1: 机器学习(Day 17-23)
-
-| Day | 主题 | 关键新增 | 项目 |
-|---|---|---|---|
-| 17 | ML 概念与工作流 | 监督/无监督/过拟合/`train_test_split` | 手写数字探索 |
-| 18 | 数据预处理 | 缩放/编码/缺失值/`ColumnTransformer` | 数据集清洗 |
-| 19 | 线性回归+梯度下降 | MSE/SGD 直觉 | 房价预测 |
-| 20 | 逻辑回归+树模型 | Sigmoid/决策树/随机森林 | 泰坦尼克预测 |
-| 21 | 梯度提升+SVM | XGBoost 残差拟合/核技巧直觉 | Kaggle 入门赛 |
-| 22 | 聚类+降维 | K-Means/PCA/t-SNE | 客户分群 |
-| 23 | 模型评估+流水线 | ROC-AUC/交叉验证/`Pipeline`/`GridSearchCV` | 多模型对比 |
-
-### Module 2: 深度学习(Day 24-29)
+### Module 1: 机器学习(Day 18-24)
 
 | Day | 主题 | 关键新增 | 项目 |
 |---|---|---|---|
-| 24 | 神经网络基础 | 感知机/激活函数/前向传播 | 手写感知机 |
-| 25 | **反向传播⚡深入** | 链式法则/SGD/Adam | 手动 BP 实现 |
-| 26 | PyTorch 基础 | tensor/autograd/`nn.Module`/`DataLoader` | NumPy→PyTorch |
-| 27 | 训练循环 | optimizer/loss/epoch/验证 | MNIST 训练 |
-| 28 | CNN+RNN+正则化 | 卷积/池化/LSTM/Dropout | 图像分类器 |
-| 29 | 迁移学习+DL 项目 | 预训练/冻结/微调 | CIFAR-10 |
+| 18 | ML 概念与工作流 | 监督/无监督/过拟合/`train_test_split` | 手写数字探索 |
+| 19 | 数据预处理 | 缩放/编码/缺失值/`ColumnTransformer` | 数据集清洗 |
+| 20 | 线性回归+梯度下降 | MSE/SGD 直觉 | 房价预测 |
+| 21 | 逻辑回归+树模型 | Sigmoid/决策树/随机森林 | 泰坦尼克预测 |
+| 22 | 梯度提升+SVM | XGBoost 残差拟合/核技巧直觉 | Kaggle 入门赛 |
+| 23 | 聚类+降维 | K-Means/PCA/t-SNE | 客户分群 |
+| 24 | 模型评估+流水线 | ROC-AUC/交叉验证/`Pipeline`/`GridSearchCV` | 多模型对比 |
 
-### Module 3: NLP 与 Transformer(Day 30-34)
-
-| Day | 主题 | 关键新增 | 项目 |
-|---|---|---|---|
-| 30 | 文本预处理+表示 | 分词/BoW/TF-IDF/词嵌入 | 文档相似度 |
-| 31 | 序列模型 for text | RNN/LSTM | 字符级文本生成 |
-| 32 | **注意力机制⚡深入** | Q/K/V/缩放点积/多头注意力 | 手动 attention |
-| 33 | Transformer+预训练模型 | BERT/GPT/T5 架构选型 | Transformer 解剖 |
-| 34 | Hugging Face 实战 | `pipeline`/`AutoModel`/`Tokenizer` | 情感分析 |
-
-### Module 4: LLM 微调(Day 35-41)
+### Module 2: 深度学习(Day 25-30)
 
 | Day | 主题 | 关键新增 | 项目 |
 |---|---|---|---|
-| 35 | LLM 生态+HF 工具链 | 模型谱系/transformers/peft | 模型选型 |
-| 36 | 分词与数据准备 | chat template/指令格式 | 构建微调数据集 |
-| 37 | LoRA/QLoRA | 低秩分解/`LoraConfig` | LoRA 入门 |
-| 38 | 训练实操 | `Trainer`/`TrainingArguments` | 微调对话模型 |
-| 39 | RLHF/DPO 基础 | 奖励模型/PPO/DPO 概念 | 对齐论文精读 |
-| 40 | 评测 | 困惑度/人工评测/`evaluate` | 模型评测 |
-| 41 | 部署 | 量化/GGUF/Ollama 推理 | Ollama 部署 |
+| 25 | 神经网络基础 | 感知机/激活函数/前向传播 | 手写感知机 |
+| 26 | **反向传播⚡深入** | 链式法则/SGD/Adam | 手动 BP 实现 |
+| 27 | PyTorch 基础 | tensor/autograd/`nn.Module`/`DataLoader` | NumPy→PyTorch |
+| 28 | 训练循环 | optimizer/loss/epoch/验证 | MNIST 训练 |
+| 29 | CNN+RNN+正则化 | 卷积/池化/LSTM/Dropout | 图像分类器 |
+| 30 | 迁移学习+DL 项目 | 预训练/冻结/微调 | CIFAR-10 |
 
-### Module 5: Web 爬虫(Day 42-48)
-
-| Day | 主题 | 关键新增 | 项目 |
-|---|---|---|---|
-| 42 | HTTP+requests | 方法/头/状态码/`Session` | 基础爬虫 |
-| 43 | HTML 解析+正则 | BeautifulSoup/CSS 选择器/`re` | 结构化数据提取 |
-| 44 | 动态页面 | Playwright 无头浏览器 | 动态网站爬取 |
-| 45 | Scrapy | spider/item/pipeline | 全站爬取 |
-| 46 | API+反爬 | REST API/认证/限速/代理 | 大规模数据采集 |
-| 47 | 数据存储+并发 | SQLite/`asyncio`/`aiohttp` | 万级数据采集 |
-
-### Module 6: AI 应用开发(Day 49-58)
+### Module 3: NLP 与 Transformer(Day 31-35)
 
 | Day | 主题 | 关键新增 | 项目 |
 |---|---|---|---|
-| 49 | 环境管理+FastAPI | venv/`requirements`/`FastAPI` 路由 | API 服务骨架 |
-| 50 | LLM API+Prompt 工程 | OpenAI SDK/流式调用/CoT | AI 对话 API |
-| 51 | Embedding+向量检索 | 嵌入模型/FAISS/Chroma | 向量知识库 |
-| 52 | RAG 全流程 | 分块/检索/重排序/生成 | 文档问答系统 |
-| 53 | Agent 框架 | LangChain/LlamaIndex 工具调用 | Agent 实战 |
-| 54 | UI+Docker | Streamlit/`Dockerfile` | 应用容器化 |
-| 55 | 部署+监控 | 云平台/健康检查 | 上线部署 |
-| 56 | **选题+开发启动** | 4 方向选 1 | 作品开发 |
-| 57 | **作品冲刺** | 开发+文档 | 作品开发 |
-| 58 | **期末答辩** | Demo+问答+互评 | 答辩评审 |
+| 31 | 文本预处理+表示 | 分词/BoW/TF-IDF/词嵌入 | 文档相似度 |
+| 32 | 序列模型 for text | RNN/LSTM | 字符级文本生成 |
+| 33 | **注意力机制⚡深入** | Q/K/V/缩放点积/多头注意力 | 手动 attention |
+| 34 | Transformer+预训练模型 | BERT/GPT/T5 架构选型 | Transformer 解剖 |
+| 35 | Hugging Face 实战 | `pipeline`/`AutoModel`/`Tokenizer` | 情感分析 |
+
+### Module 4: LLM 微调(Day 36-42)
+
+| Day | 主题 | 关键新增 | 项目 |
+|---|---|---|---|
+| 36 | LLM 生态+HF 工具链 | 模型谱系/transformers/peft | 模型选型 |
+| 37 | 分词与数据准备 | chat template/指令格式 | 构建微调数据集 |
+| 38 | LoRA/QLoRA | 低秩分解/`LoraConfig` | LoRA 入门 |
+| 39 | 训练实操 | `Trainer`/`TrainingArguments` | 微调对话模型 |
+| 40 | RLHF/DPO 基础 | 奖励模型/PPO/DPO 概念 | 对齐论文精读 |
+| 41 | 评测 | 困惑度/人工评测/`evaluate` | 模型评测 |
+| 42 | 部署 | 量化/GGUF/Ollama 推理 | Ollama 部署 |
+
+### Module 5: Web 爬虫(Day 43-49)
+
+| Day | 主题 | 关键新增 | 项目 |
+|---|---|---|---|
+| 43 | HTTP+requests | 方法/头/状态码/`Session` | 基础爬虫 |
+| 44 | HTML 解析+正则 | BeautifulSoup/CSS 选择器/`re` | 结构化数据提取 |
+| 45 | 动态页面 | Playwright 无头浏览器 | 动态网站爬取 |
+| 46 | Scrapy | spider/item/pipeline | 全站爬取 |
+| 47 | API+反爬 | REST API/认证/限速/代理 | 大规模数据采集 |
+| 48 | 数据存储+并发 | SQLite/`asyncio`/`aiohttp` | 万级数据采集 |
+
+### Module 6: AI 应用开发(Day 50-59)
+
+| Day | 主题 | 关键新增 | 项目 |
+|---|---|---|---|
+| 50 | 环境管理+FastAPI | venv/`requirements`/`FastAPI` 路由 | API 服务骨架 |
+| 51 | LLM API+Prompt 工程 | OpenAI SDK/流式调用/CoT | AI 对话 API |
+| 52 | Embedding+向量检索 | 嵌入模型/FAISS/Chroma | 向量知识库 |
+| 53 | RAG 全流程 | 分块/检索/重排序/生成 | 文档问答系统 |
+| 54 | Agent 框架 | LangChain/LlamaIndex 工具调用 | Agent 实战 |
+| 55 | UI+Docker | Streamlit/`Dockerfile` | 应用容器化 |
+| 56 | 部署+监控 | 云平台/健康检查 | 上线部署 |
+| 57 | **选题+开发启动** | 4 方向选 1 | 作品开发 |
+| 58 | **作品冲刺** | 开发+文档 | 作品开发 |
+| 59 | **期末答辩** | Demo+问答+互评 | 答辩评审 |
 
 ---
 
 ## 六年段"知识闭环图"(需要逐 Day 形成笔记)
 
 ```
-Module 0 (Day 1-16)    Python 核心 + 数据基础: 变量/函数/OOP(3d)/NumPy/Pandas
-Module 1 (Day 17-23)   机器学习: 监督/无监督/评估/流水线
-Module 2 (Day 24-29)   深度学习: NN/BP⚡/PyTorch/CNN/RNN
-Module 3 (Day 30-34)   NLP 与 Transformer: Attention⚡/BERT/GPT/HF 实战
-Module 4 (Day 35-41)   LLM 微调: LoRA/训练/评测/部署
-Module 5 (Day 42-48)   爬虫: HTTP/解析/Scrapy/反爬/并发
-Module 6 (Day 49-58)   AI 应用: FastAPI/RAG/Agent/部署 ★重点
+Module 0 (Day 1-17)    Python 核心 + 数据基础: 变量/函数/OOP(4d L1-L4)/NumPy/Pandas
+Module 1 (Day 18-24)   机器学习: 监督/无监督/评估/流水线
+Module 2 (Day 25-30)   深度学习: NN/BP⚡/PyTorch/CNN/RNN
+Module 3 (Day 31-35)   NLP 与 Transformer: Attention⚡/BERT/GPT/HF 实战
+Module 4 (Day 36-42)   LLM 微调: LoRA/训练/评测/部署
+Module 5 (Day 43-49)   爬虫: HTTP/解析/Scrapy/反爬/并发
+Module 6 (Day 50-59)   AI 应用: FastAPI/RAG/Agent/部署 ★重点
 ```
 
 ---
@@ -171,12 +174,12 @@ Module 6 (Day 49-58)   AI 应用: FastAPI/RAG/Agent/部署 ★重点
 ## 验收点
 
 ### 阶段测
-- Day 09: 购物车项目(函数+OOP 版)完整可跑
-- Day 16: EDA 项目(数据清洗+可视化+洞察)交付
-- Day 23: ML 端到端项目(Kaggle 竞赛/California Housing 预测)
-- Day 38: DL vs ML 对比报告 + CIFAR-10 分类器
+- Day 10: 购物车项目(函数+OOP 版)完整可跑
+- Day 17: EDA 项目(数据清洗+可视化+洞察)交付
+- Day 24: ML 端到端项目(Kaggle 竞赛/California Housing 预测)
+- Day 39: DL vs ML 对比报告 + CIFAR-10 分类器
 
-### 期末作品(Day 56-58 四选一)
+### 期末作品(Day 57-59 四选一)
 - **AI 应用方向**: RAG+Agent 智能助手完整可跑
 - **LLM 微调方向**: 垂直领域模型微调→评测→部署
 - **数据+爬虫方向**: 大规模数据采集→清洗→分析平台
