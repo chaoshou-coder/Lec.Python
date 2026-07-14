@@ -60,7 +60,7 @@ Lec.Python/
 │   ├── homework/      ← task01.py ~ taskNN.py (课后作业/选做)
 │   ├── mini_project/  ← small project every 2–3 days
 │   └── assets/        ← materials
-├── student-notebooks/   ← Day 1-19 学生版 Jupyter Notebook(自学用, ~900 cells, h3+h4, 执行跟踪, 趁热打铁)
+├── student-notebooks/   ← Day 1-20 学生版 Jupyter Notebook(自学用, ~1500 cells, h3+h4, 8 步趁热打铁)
 ├── weekly_projects/                       ← 3 medium projects = SHIPPING CORE
 │   ├── week01_shopping_cart/  week02_library_manager/  week03_ecommerce_order_v2/
 ├── dev/                 ← DEV convenience + ephemeral (not shipping)
@@ -72,21 +72,21 @@ Lec.Python/
 └── .versions/           ← LOCAL timestamp backups, gitignored
 ```
 
-### Six modules (pedagogical spine)
+### Six modules(pedagogical spine)
 
 ```
-Module 0 (Day 1-16)   Python Core + Data Foundations
-Module 1 (Day 17-23)  Machine Learning (scikit-learn)
-Module 2 (Day 24-29)  Deep Learning (PyTorch)
-Module 3 (Day 30-34)  NLP & Transformers
-Module 4 (Day 35-41)  LLM Fine-tuning (Hugging Face + LoRA)
-Module 5 (Day 42-48)  Web Scraping
-Module 6 (Day 49-58)  AI Application Development (RAG/Agent/Deploy)
+Module 0 (Day 1-17)   Python Core + Data Foundations(含 OOP 4 天)
+Module 1 (Day 18-24)  Machine Learning(scikit-learn)
+Module 2 (Day 25-30)  Deep Learning(PyTorch)
+Module 3 (Day 31-35)  NLP & Transformers
+Module 4 (Day 36-42)  LLM Fine-tuning(Hugging Face + LoRA)
+Module 5 (Day 43-49)  Web Scraping
+Module 6 (Day 50-59)  AI Application Development(RAG/Agent/Deploy)
 ```
 
-- **Stage review days**: Day 10, 17, 39, 59(期末答辩).
-- **Emphasis**: AI Application (10d) > Web Scraping (7d) > LLM (7d) > ML (8d) > DL (6d).
-- **Terminal deliverable**: Student-chosen capstone (4 directions: AI App / LLM Fine-tuning / Data+Scraping / ML Engineering).
+- **Stage review days**: Day 13(购物车项目), 17(EDA 项目), 35(ML+DL 对比), 59(期末答辩).
+- **Emphasis**: AI Application(10d) > Web Scraping(7d) > LLM(7d) > ML(8d) > DL(6d).
+- **Terminal deliverable**: Student-chosen capstone(4 directions: AI App / LLM Fine-tuning / Data+Scraping / ML Engineering).
 
 ### Three-layer project system
 
@@ -100,19 +100,20 @@ Exercises are reinforced by a cumulative project ladder:
 
 Each weekly project ships a `README.md` with a验收 checklist.
 
-### OOP 4-day ladder (Day 05–08)
+### OOP 4-day ladder(Day 07–10)
 
 OOP 占 4 天,按 L1–L4 认知递进,详见 `dev/skills/06_OOP_教学方案设计.md`:
 
 | Day | Level | 主题 | 关键新增 | 门控任务 |
 |---|---|---|---|---|
-| 05 | L1 | 封装 | `class`/`__init__`/`self`/`@property`/`__str__`/`类属性` | `BankAccount`(property 校验余额) |
-| 06 | L2 | 继承 | 单继承/`super()`/方法重写/MRO/`isinstance` | `Animal` 继承体系 + `Employee→Manager/Sales` |
-| 07 | L3 | 多态+契约 | 鸭子类型/`abc.ABC`/`@abstractmethod`/接口 | `Payment(abc)` 支付系统(NCDL 驱动) |
-| 08 | L4 | 组合+Pythonic | 组合优于继承/`__add__`/`__len__`/`__iter__`/`__eq__` | `ShoppingCart.__add__` + `Order` 聚合 |
+| 07 | L1 | 封装 | `class`/`__init__`/`self`/`@property`/`__str__`/`类属性` | `BankAccount`(property 校验余额) |
+| 08 | L2 | 继承 | 单继承/`super()`/方法重写/MRO/`isinstance` | `Animal` 继承体系 + `Employee→Manager/Sales` |
+| 09 | L3 | 多态+契约 | 鸭子类型/`abc.ABC`/`@abstractmethod`/接口 | `Payment(abc)` 支付系统(NCDL 驱动) |
+| 10 | L4 | 组合+Pythonic | 组合优于继承/`__add__`/`__len__`/`__iter__`/`__eq__` | `ShoppingCart.__add__` + `Order` 聚合 |
 
 **业务叙事锚点**:电商订单系统贯穿 4 天,从"散落的 dict"演进到"可合并的购物车"。
 **语法点独立样本**:MRO/`isinstance` 反模式等无法嵌入电商系统的语法点,用最小示例单独演示。
+**NCDL 负案例**:Day09 含 4 段 Break It 实测(漏写方法/@abstractmethod 空操作/忘继承 abc/子类漏实现)。
 
 ### Lesson directory ↔ Day mapping (important)
 
@@ -170,19 +171,20 @@ Constraints:
 - Test section has **≥ 2 cases** covering boundaries (empty input / zero / negative / single element).
 - Each exercise is tagged **当堂练**(in-class) or **选做**(optional) in the lesson's README.md.
 
-### Per-Day syntax boundary (the rule most often broken)
+### Per-Day syntax boundary(the rule most often broken)
 
 | Days | Forbidden |
 |---|---|
 | Day01 | **`def`** and **`class`** |
-| Day02–04 | **`class`** (def allowed) |
-| Day05–17 | — (all core Python allowed; no libs beyond NumPy/Pandas until Day 10) |
+| Day02 | **`class`** (def 已教,class 未教) |
+| Day03–06 | — (all core Python allowed; no external libs) |
+| Day07–17 | — (OOP allowed; no libs beyond NumPy/Pandas until Day 14) |
 | Day18–25 | — (scikit-learn allowed, no PyTorch) |
 | Day26–31 | — (PyTorch allowed, no HF/transformers) |
 | Day32–43 | — (Hugging Face allowed, no LangChain) |
 | Day44–60 | — (all stdlib + data/AI libs allowed) |
 
-**Key corrections vs the old table**: Day02 teaches `def`(函数入门) — so `def` is only forbidden on Day01. Day05 starts OOP 封装 — so `class` is allowed from Day05 onward. An exercise authored for Day04 must not contain `class`; a Day02 exercise must not contain `def`. Always cross-check the target lesson's topic in `summary.md` before writing.
+**关键规则**:Day01 只学 print/input/变量/字符串/分支/循环,没有 def 和 class。Day02 教函数(def/return)。Day07 开始 OOP(class/继承)。Day14 开始 NumPy/Pandas。编写练习前必须对照 `summary.md` 确认当日知识点范围。
 
 ### Heading hierarchy (h3/h4 only)
 
@@ -203,41 +205,53 @@ Constraints:
 - 不再往下嵌套(不用 `#####`)
 - 解释用 **加粗** + 正文,不额外加标题层级
 
-### Loop structure per knowledge point (趁热打铁)
+### Loop structure per knowledge point(趁热打铁 8 步)
 
-Each complete knowledge point = a mini cycle:
+每个完整知识点 = 8 步循环(详见 `dev/skills/05_Jupyter_Notebook_排版规范.md`):
 
-1. **Concept md:** pain point(why) → analogy(life example) → explanation(what)
-2. **Example code:** per-line Chinese comments + execution trace(`# --- 执行过程 ---`)
-3. **Line-by-line breakdown md:** explain syntax and parameters
-4. **Socratic guidance md:** guiding questions(not direct answers)
-5. **Student code area:** `pass` placeholder
-6. **Reference answer:** complete runnable code + comments
+1. **Concept md:** 痛点(why) → 类比(life example) → 解释(what)
+2. **ASCII 内存图 md:** 文字画内存关系(可选但推荐)
+3. **Example code:** 每行中文注释 + 执行过程跟踪
+4. **逐行解剖 md:** 逐行解释语法和参数
+5. **常见错误 md:** ≥2 条易错点(错误现象 + 原因)
+6. **Socratic guidance md:** `> 问自己:` ≥3 个引导问题
+7. **Student code area:** `pass` 占位
+8. **Reference answer:** 完整可运行代码 + 注释
 
-### Execution trace
+### Execution trace format
 
-Every code cell must contain an execution trace comment(starting with `# --- 执行过程 ---`).
-
-**Format:**
 ```python
 # --- 执行过程 ---
 # 第 X 行 code:
 #   ① what happens first
 #   ② what happens next
+#   ③ final result
 ```
 
-**Why:** Students run code and only see the final output, don't know what happened in between.
+### Common errors format
 
-### Socratic guidance
-
-Every exercise must have guiding questions before the answer(leading students to think, not giving answers directly).
-
-**Example:**
+```markdown
+> **常见错误**
+> 1. **错误现象**:`TypeError: ...`
+>    **原因**:忘写 self 参数
+> 2. **错误现象**:`AttributeError: ...`
+>    **原因**:`self.name = name` 漏写
 ```
-> Ask yourself:
-> - Which concept from today does this exercise need?
-> - What does "XX" in the problem correspond to?
-> - If it errors, what to check?
+
+### NCDL Break It pattern
+
+对于容易理解错误的知识点,故意写错代码让学员读 Traceback:
+
+```python
+# ============ BREAK IT 演示 ============
+class BrokenAlipay:
+    pass  # 漏写 execute 方法!
+
+try:
+    checkout(99.0, BrokenAlipay())
+except AttributeError as e:
+    print(f"报错: {e}")
+# ============ END BREAK IT ============
 ```
 
 ### Universal teaching methods (全项目通用教学法)
@@ -269,7 +283,7 @@ The repo uses **git + timestamp backup** for versioning:
 # 2. git add / commit / push for versioned releases
 ```
 
-Current version: **v2.3.0** (2026-07-14) — 60 days / 6 modules / h3+h4 / execution trace / 趁热打铁 / OOP 4 天(L1-L4) / 双层覆盖+NCDL+消费者门控.
+Current version: **v3.0.0** (2026-07-14) — 60 days / 6 modules / h3+h4 / 8 步趁热打铁(ASCII图+常见错误+NCDL Break It) / OOP 4 天(Day07-10) / 双层覆盖+NCDL+消费者门控.
 
 ## Out of scope (don't do)
 
@@ -283,15 +297,15 @@ Current version: **v2.3.0** (2026-07-14) — 60 days / 6 modules / h3+h4 / execu
 
 | I need… | Read this |
 |---|---|
-| 59-day schedule + capability targets | `summary.md` |
+| 60-day schedule + capability targets | `summary.md` |
 | Teacher daily flow + grading breakdown | `README.md` |
 | Complete user guide(for teachers / students / self-learners) | `USER_GUIDE.md` |
 | Non-Python prerequisites (math/CS) | `PREREQUISITES.md` |
 | Per-lesson topic distribution | `course/lessonXX/README.md` |
 | Market course comparison / exercise pool | `references.md` |
 | Canonical exercise-file example | `course/lesson01/in_class/practice01.py` |
-| Day 1-19 student Jupyter Notebooks(h3+h4 / execution trace / 趁热打铁) | `student-notebooks/` |
-| Jupyter 排版规范(gold standard = Day 08 v6 + 7 踩过的坑) | `dev/skills/05_Jupyter_Notebook_排版规范.md` |
+| Day 1-20 student Jupyter Notebooks(h3+h4 / 8 步趁热打铁) | `student-notebooks/` |
+| Jupyter 排版规范 v3.0(gold standard = OOP Day08-10 + 8 步循环) | `dev/skills/05_Jupyter_Notebook_排版规范.md` |
 | 学习断层修复指南(6 个 P0 断层) | `dev/learning-gaps.md` |
 | 知识地图推理 / 学习顺序编排 / 试题集组织 | `dev/skills/01-04_*.md` |
 | OOP 4 天教学设计(L1-L4 / 双层覆盖/NCDL / 消费者门控) | `dev/skills/06_OOP_教学方案设计.md` |
