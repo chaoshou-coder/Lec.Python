@@ -3,9 +3,10 @@
 > 用途:所有 60 天课程的 Notebook 必须遵守的排版规范。
 > 适用场景:新 Notebook 制作、现有 Notebook 格式审查、自动化排版脚本。
 
-> **版本**:v3.0 (2026-07-14)
-> **以 OOP Day08-11 notebook 为 gold standard 重写**
-> **关键升级**:8 步趁热打铁循环 + ASCII 内存图 + NCDL Break It + 常见错误
+> **版本**:v3.1 (2026-07-15)
+> **以 Day02-11 notebook 为 gold standard 重写**
+> **关键升级**:8 步趁热打铁循环 + ASCII 内存图 + NCDL Break It + 常见错误 + per-Day边界清单
+> v3.1 新增:执行跟踪必须在 code cell 内(非 md)、执行跟踪 ≠ 逐行解剖、per-Day 禁止语法表
 
 ---
 
