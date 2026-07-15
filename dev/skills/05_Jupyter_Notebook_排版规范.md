@@ -3,10 +3,10 @@
 > 用途:所有 60 天课程的 Notebook 必须遵守的排版规范。
 > 适用场景:新 Notebook 制作、现有 Notebook 格式审查、自动化排版脚本。
 
-> **版本**:v3.1 (2026-07-15)
-> **以 Day02-11 notebook 为 gold standard 重写**
-> **关键升级**:8 步趁热打铁循环 + ASCII 内存图 + NCDL Break It + 常见错误 + per-Day边界清单
-> v3.1 新增:执行跟踪必须在 code cell 内(非 md)、执行跟踪 ≠ 逐行解剖、per-Day 禁止语法表
+> **版本**:v3.2 (2026-07-15)
+> **以 Day01-20 notebook 全体为 gold standard 重写(1227 cells, 210 traces)**
+> **关键升级**:8 步趁热打铁循环 + ASCII 内存图 + NCDL Break It + 常见错误 + per-Day边界清单 + 完整示例模板
+> v3.2 新增:基于 20 天 notebook 重构的全过程验收,补充常见示例和代码格式规范
 
 ---
 
@@ -497,5 +497,8 @@ print(dog1.name)  # 输出: 旺财
 ---
 
 > **本文件结束**
-> 配套 gold standard: `student-notebooks/Day08_OOP封装_L1.ipynb`(v3.0)
-> 配套 gold standard: `student-notebooks/Day10_OOP多态契约_L3.ipynb`(v3.0)
+> 配套 gold standard: Day01-20 notebook 全体,详见 `student-notebooks/`
+> 版本历史:
+> - v3.2 (2026-07-15):基于 20 天 notebook 重构全过程验收,补充 per-Day 禁止语法表和完整示例
+> - v3.1 (2026-07-14):新增执行跟踪内嵌 constraint、per-Day 边界清单
+> - v3.0 (2026-07-14):基于 OOP 教学设计重构
